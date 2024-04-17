@@ -6,6 +6,7 @@ import pioche
 import defausse
 import click
 import manche
+import random
 
 #variables intiales
 fin_partie = False
