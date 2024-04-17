@@ -6,10 +6,11 @@ import pioche
 import defausse
 import click
 import manche
+import math
 
 #variables intiales
 fin_partie = False
-
+print("coucou")
 p = pioche.Pioche()
 d = defausse.Defausse()
 
