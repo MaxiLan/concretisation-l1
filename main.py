@@ -13,7 +13,8 @@ fin_partie = False
 p = pioche.Pioche()
 d = defausse.Defausse()
 
-nb_joueurs = int(input("Combien de joueurs voulez vous ? "))
+# nb_joueurs = int(input("Combien de joueurs voulez vous ? "))
+nb_joueurs = 2
 
 partie = partie.Partie(nb_joueurs)
 
