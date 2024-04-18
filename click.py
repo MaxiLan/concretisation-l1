@@ -35,13 +35,14 @@ def click_pioche_defausse(joueur, p, d, ecran):
               if (25 + j * 130 < pos[0] <
                   135 + j * 130) and (30 + i * 175 < pos[1] < 190 + i * 175):
                 click_carte = True
-                aux = joueur.jeu_actuel[i][j]
-                joueur.jeu_actuel[i][j] = carte_select
-                joueur.jeu_actuel[i][j].etat = "ouverte"
-                d.ajout_carte(aux)
-                carte.cacher_carte(ecran, "defausse")
-                pygame.display.flip()
-                return True
+                if joueur.jeu_actuel[i][j].num!="42bis":
+                  aux = joueur.jeu_actuel[i][j]
+                  joueur.jeu_actuel[i][j] = carte_select
+                  joueur.jeu_actuel[i][j].etat = "ouverte"
+                  d.ajout_carte(aux)
+                  carte.cacher_carte(ecran, "defausse")
+                  pygame.display.flip()
+                  return True
 
     #CLICK PIOCHE !!!!
     elif (715 < pos[0] < 825 and 560 < pos[1] < 720):
@@ -65,13 +66,14 @@ def click_pioche_defausse(joueur, p, d, ecran):
             for j in range(4):
               if (25 + j * 130 < pos[0] <
                   135 + j * 130) and (30 + i * 175 < pos[1] < 190 + i * 175):
-                click_carte = True
-                aux = joueur.jeu_actuel[i][j]
-                joueur.jeu_actuel[i][j] = carte_select
-                joueur.jeu_actuel[i][j].etat = "ouverte"
-                d.ajout_carte(aux)
-                carte.cacher_carte(ecran, "pioche")
-                return True
+                if joueur.jeu_actuel[i][j].num!="42bis": 
+                  click_carte = True
+                  aux = joueur.jeu_actuel[i][j]
+                  joueur.jeu_actuel[i][j] = carte_select
+                  joueur.jeu_actuel[i][j].etat = "ouverte"
+                  d.ajout_carte(aux)
+                  carte.cacher_carte(ecran, "pioche")
+                  return True
 
           if (580 < pos[0] < 700) and (560 < pos[1] < 720):
             d.ajout_carte(carte_select)
