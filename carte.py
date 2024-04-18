@@ -9,12 +9,7 @@ class Carte:
   def affiche(self):  #affichage d'une carte
     print(self.num)
 
-def cacher_carte(ecran, carte):
-  img = pygame.image.load("images/42bis.png")
+def cacher_carte(ecran):
+  img = pygame.image.load("images/carte_selectionnee.png")
   img = pygame.transform.scale(img, (110, 160))
-
-  if carte=="pioche":
-    ecran.blit(img, (715, 375))
-  else:
-    ecran.blit(img, (580, 375))
-
+  ecran.blit(img, (715, 375))

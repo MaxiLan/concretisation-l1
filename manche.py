@@ -64,6 +64,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
   while not manche_fin:
     tour(joueur, pioche, defausse, ecran)
     defausse.affiche(ecran)
+    joueur.retrait_colonne(pioche)
     joueur.affiche_jeu(ecran) 
     pygame.display.flip()
     i_joueur = (i_joueur + 1) % len(tab_joueurs)

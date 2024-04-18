@@ -20,7 +20,7 @@ def click_pioche_defausse(joueur, p, d, ecran):
       ch = "images/" + str(carte_select.num) + ".png"
       img = pygame.image.load(ch)
       img = pygame.transform.scale(img, (110, 160))
-      ecran.blit(img, (580, 375))
+      ecran.blit(img, (715, 375))
       d.affiche(ecran)
       pygame.display.flip()
 
@@ -40,7 +40,7 @@ def click_pioche_defausse(joueur, p, d, ecran):
                   joueur.jeu_actuel[i][j] = carte_select
                   joueur.jeu_actuel[i][j].etat = "ouverte"
                   d.ajout_carte(aux)
-                  carte.cacher_carte(ecran, "defausse")
+                  carte.cacher_carte(ecran)
                   pygame.display.flip()
                   return True
 
@@ -72,13 +72,13 @@ def click_pioche_defausse(joueur, p, d, ecran):
                   joueur.jeu_actuel[i][j] = carte_select
                   joueur.jeu_actuel[i][j].etat = "ouverte"
                   d.ajout_carte(aux)
-                  carte.cacher_carte(ecran, "pioche")
+                  carte.cacher_carte(ecran)
                   return True
 
           if (580 < pos[0] < 700) and (560 < pos[1] < 720):
             d.ajout_carte(carte_select)
             d.affiche(ecran)
-            carte.cacher_carte(ecran, "pioche")
+            carte.cacher_carte(ecran)
             pygame.display.flip()
             click_defausse = True
             return retourne_cartes(joueur)
