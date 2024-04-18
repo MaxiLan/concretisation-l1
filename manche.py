@@ -15,6 +15,7 @@ def tour(joueur, pioche, defausse, ecran):
     defausse.affiche(ecran)
     pygame.display.flip()
     tour_finie = click.click_pioche_defausse(joueur, pioche, defausse, ecran)
+    
 
 
 def lancement_manche(pioche, defausse, tab_joueurs):

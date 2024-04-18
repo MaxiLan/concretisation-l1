@@ -46,13 +46,14 @@ def click_pioche_defausse(joueur, p, d, ecran):
 
                 #on échange les cartes
                 click_carte = True
-                aux = joueur.jeu_actuel[i][j]
-                joueur.jeu_actuel[i][j] = carte_select
-                joueur.jeu_actuel[i][j].etat = "ouverte"
-                d.ajout_carte(aux)
-                carte.cacher_carte(ecran, "defausse")
-                pygame.display.flip()
-                return True
+                if joueur.jeu_actuel[i][j].num!="42bis":
+                  aux = joueur.jeu_actuel[i][j]
+                  joueur.jeu_actuel[i][j] = carte_select
+                  joueur.jeu_actuel[i][j].etat = "ouverte"
+                  d.ajout_carte(aux)
+                  carte.cacher_carte(ecran, "defausse")
+                  pygame.display.flip()
+                  return True
 
     #sinon si le click est sur la pioche
     elif (LARGEUR-140< pos[0] < LARGEUR-30 and HAUTEUR-190< pos[1] < HAUTEUR-30):
@@ -95,6 +96,16 @@ def click_pioche_defausse(joueur, p, d, ecran):
           #si le click est sur la defausse
           if (LARGEUR-370 < pos[0] < LARGEUR-260) and (HAUTEUR-190 < pos[1] < HAUTEUR-30):
             #on met la carte sur la defausse
+                if joueur.jeu_actuel[i][j].num!="42bis": 
+                  click_carte = True
+                  aux = joueur.jeu_actuel[i][j]
+                  joueur.jeu_actuel[i][j] = carte_select
+                  joueur.jeu_actuel[i][j].etat = "ouverte"
+                  d.ajout_carte(aux)
+                  carte.cacher_carte(ecran, "pioche")
+                  return True
+
+          if (580 < pos[0] < 700) and (560 < pos[1] < 720):
             d.ajout_carte(carte_select)
             d.affiche(ecran)
             carte.cacher_carte(ecran, "pioche")
