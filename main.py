@@ -28,7 +28,7 @@ HAUTEUR = 1080 #750
 LARGEUR = 1920 #850
 pygame.init()
 clock = pygame.time.Clock()
-ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
+ecran = pygame.display.set_mode((LARGEUR, HAUTEUR), pygame.FULLSCREEN)
 ecran.fill("grey24")
 #INIT ECRAN
 

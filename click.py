@@ -19,7 +19,7 @@ def click_pioche_defausse(joueur, p, d, ecran):
     pos = pygame.mouse.get_pos()
 
     #si le click est sur la défausse
-    if (LARGEUR-370< pos[0] < LARGEUR-260) and (HAUTEUR-190 < pos[1] < HAUTEUR-30):
+    if (LARGEUR-270< pos[0] < LARGEUR-160) and (HAUTEUR-190 < pos[1] < HAUTEUR-30):
       
       #on retire deplace la carte de la defausse
       carte_select = d.retire_carte()
@@ -45,7 +45,7 @@ def click_pioche_defausse(joueur, p, d, ecran):
                   135 + j * 130) and (30 + i * 175 < pos[1] < 190 + i * 175):
 
                 #on échange les cartes
-                click_carte = True
+                #click_carte = True
                 if joueur.jeu_actuel[i][j].num!="42bis":
                   aux = joueur.jeu_actuel[i][j]
                   joueur.jeu_actuel[i][j] = carte_select
@@ -85,18 +85,7 @@ def click_pioche_defausse(joueur, p, d, ecran):
                   135 + j * 130) and (30 + i * 175 < pos[1] < 190 + i * 175):
 
                 #on echange les cartes
-                click_carte = True
-                aux = joueur.jeu_actuel[i][j]
-                joueur.jeu_actuel[i][j] = carte_select
-                joueur.jeu_actuel[i][j].etat = "ouverte"
-                d.ajout_carte(aux)
-                carte.cacher_carte(ecran, "pioche")
-                return True
-          
-          #si le click est sur la defausse
-          if (LARGEUR-370 < pos[0] < LARGEUR-260) and (HAUTEUR-190 < pos[1] < HAUTEUR-30):
-            #on met la carte sur la defausse
-                if joueur.jeu_actuel[i][j].num!="42bis": 
+                if joueur.jeu_actuel[i][j].num != "42bis":
                   click_carte = True
                   aux = joueur.jeu_actuel[i][j]
                   joueur.jeu_actuel[i][j] = carte_select
@@ -104,8 +93,9 @@ def click_pioche_defausse(joueur, p, d, ecran):
                   d.ajout_carte(aux)
                   carte.cacher_carte(ecran, "pioche")
                   return True
-
-          if (580 < pos[0] < 700) and (560 < pos[1] < 720):
+          
+          #si le click est sur la defausse
+          if (LARGEUR-270 < pos[0] < LARGEUR-160) and (HAUTEUR-190 < pos[1] < HAUTEUR-30):
             d.ajout_carte(carte_select)
             d.affiche(ecran)
             carte.cacher_carte(ecran, "pioche")
