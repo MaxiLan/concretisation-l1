@@ -22,12 +22,13 @@ for i in range(nb_joueurs):
   J = joueur.Joueur(i + 1)
   partie.tab_joueurs.append(J)
 
+
 #INIT ECRAN
-HAUTEUR = 750
-LARGEUR = 850
+HAUTEUR = 1080 #750
+LARGEUR = 1920 #850
 pygame.init()
 clock = pygame.time.Clock()
-ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
+ecran = pygame.display.set_mode((LARGEUR, HAUTEUR), pygame.FULLSCREEN)
 ecran.fill("grey24")
 #INIT ECRAN
 
