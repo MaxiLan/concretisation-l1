@@ -55,7 +55,7 @@ def fin_manche(J):
   return manche_finie
 
 
-def manche(tab_joueurs, pioche, defausse, ecran):
+def manche(tab_joueurs, pioche, defausse, ecran): 
   lancement_manche(pioche, defausse, tab_joueurs)
   i_joueur = 0
   joueur = tab_joueurs[i_joueur]
