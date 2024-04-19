@@ -107,7 +107,7 @@ def click_pioche_defausse(joueur, p, d, ecran):
             click_defausse = True
             
             #et on retourne une carte selectionnnée par le joueur (fonction ci-dessous)
-            return retourne_cartes(joueur)
+            return retourne_cartes(joueur, ecran)
 
   else:
     #sinon on renvoie False, et la fonction sera rappelée
@@ -115,7 +115,12 @@ def click_pioche_defausse(joueur, p, d, ecran):
 
 
 #fonction annexe (utilisée ci-dessus)
-def retourne_cartes(joueur):
+def retourne_cartes(joueur, ecran): 
+  HAUTEUR = ecran.get_height()
+  LARGEUR = ecran.get_width()
+  facteur = HAUTEUR/850
+  h_carte = 160 * facteur
+  l_carte = 110 * facteur
 
   carte_selectionner = False
   while not (carte_selectionner):
