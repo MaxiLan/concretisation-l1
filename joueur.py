@@ -27,7 +27,11 @@ class Joueur:
               self.jeu_actuel[i][j]=c
 
   def affiche_jeu(self, ecran):
-    
+    HAUTEUR = ecran.get_height()
+    LARGEUR = ecran.get_width()
+    facteur = HAUTEUR/850
+    h_carte = 160*facteur
+    l_carte = 110*facteur
     for i in range(3):
       for j in range(4):
         if (self.jeu_actuel[i][j].etat == "cachee"):
@@ -35,7 +39,7 @@ class Joueur:
         else:
           ch = "images/" + str(self.jeu_actuel[i][j].num) + ".png"
         img = pygame.image.load(ch)
-        img = pygame.transform.scale(img, (110, 160))
-        ecran.blit(img, (25 + j * 130, 30 + i * 175))
+        img = pygame.transform.scale(img, (l_carte, h_carte))
+        ecran.blit(img, (30 + j * l_carte+j*20, 30 + i * h_carte +i*15))
 
 
