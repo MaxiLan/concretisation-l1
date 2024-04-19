@@ -38,6 +38,7 @@ while not fin_partie:
       fin_partie = True
 
   manche.manche(partie.tab_joueurs, p, d, ecran)
+  
   partie.fin_partie()
   fin_partie = partie.partie_finie
   
