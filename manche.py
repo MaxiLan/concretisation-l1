@@ -78,7 +78,7 @@ def jeu_fin_manche(tab_joueurs,ecran):
       for i in range(3):
         for j in range(4):
           if joueur.jeu_actuel[i][j].etat!="ouverte":
-            joueur.jeu_actuel[i][j]="ouverte"
+            joueur.jeu_actuel[i][j].etat="ouverte"
       joueur.evol_score()
       ecran.fill("black")
 
@@ -93,7 +93,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
 
     #mise a jour ecran
     defausse.affiche(ecran)
-    joueur.retrait_colonne(pioche)
+    joueur.retrait_colonne(defausse)
     joueur.affiche_jeu(ecran) 
     pygame.display.flip() 
 
