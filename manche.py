@@ -31,7 +31,21 @@ def lancement_manche(pioche, defausse, tab_joueurs):
     while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
       abs = random.randint(0, 2)
       ord = random.randint(0, 3)
+
+      #A ENLEVER
     joueur.jeu_actuel[abs][ord].etat = "ouverte"
+    while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
+      abs = random.randint(0, 2)
+      ord = random.randint(0, 3)
+    joueur.jeu_actuel[abs][ord].etat = "ouverte"
+    while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
+        abs = random.randint(0, 2)
+        ord = random.randint(0, 3)
+
+    #A ENLEVER
+    joueur.jeu_actuel[abs][ord].etat = "ouverte"
+  
+
   defausse.ajout_carte(ma_carte)
   defausse.ajout_carte(pioche.cartes[0])
   pioche.cartes.pop(0)
@@ -45,7 +59,7 @@ def fin_manche(ind_joueur,tab_joueurs):
   while (manche_finie and i < 3):
     j = 0
     while (j < 4 and manche_finie):
-      if tab_joueurs[ind_joueur].jeu_actuel[i][j].etat == "ouverte":
+      if tab_joueurs[ind_joueur].jeu_actuel[i][j].etat == "cachee":
         manche_finie = False
       j += 1
     i += 1
@@ -59,8 +73,7 @@ def joueur_commence(tab_joueurs):
   return ind_j1
 
 
-def jeu_fin_manche(tab_joueurs):
-  if manche_finie:
+def jeu_fin_manche(tab_joueurs,ecran):
     for joueur in tab_joueurs:
       for i in range(3):
         for j in range(4):
@@ -86,14 +99,14 @@ def manche(tab_joueurs, pioche, defausse, ecran):
 
     manche_fin = fin_manche(i_joueur,tab_joueurs)#test fin de manche
     gagant=joueur
-
+    print(manche_fin)
     #changement de joueur pour la suite
     i_joueur = (i_joueur + 1) % len(tab_joueurs)
     joueur = tab_joueurs[i_joueur]
     pygame.time.wait(2000) #laisse le temps au joueur de voir son score
 
   #une fois qu'un joueur a retourné toute ses cartes il faut encore faire un tour :
-  for i in range(len(tab_joueur-1)):
+  for i in range(len(tab_joueurs)-1):
     print("coucou")
     tour(joueur, pioche, defausse, ecran)
     defausse.affiche(ecran)
@@ -105,7 +118,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
     pygame.time.wait(2000)
 
   #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
-  jeu_fin_manche(tab_joueurs)
+  jeu_fin_manche(tab_joueurs,ecran)
   return True
 
   

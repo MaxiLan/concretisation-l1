@@ -14,7 +14,7 @@ p = pioche.Pioche()
 d = defausse.Defausse()
 
 # nb_joueurs = int(input("Combien de joueurs voulez vous ? "))
-nb_joueurs = 2
+nb_joueurs = 2 # TEST
 
 partie = partie.Partie(nb_joueurs)
 
@@ -28,7 +28,7 @@ HAUTEUR =  750
 LARGEUR =  850
 pygame.init()
 clock = pygame.time.Clock()
-ecran = pygame.display.set_mode((LARGEUR, HAUTEUR),pygame.FULLSCREEN)
+ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
 ecran.fill("grey24")
 #INIT ECRAN
 
@@ -41,7 +41,7 @@ while not fin_partie:
   #manche.affiche_fin_manche()
   partie.mise_a_jour_score()
   print(partie.score)
-  fin_partie = partie.partie_finie()
+  #fin_partie = partie.fin_partie()
   
 
 pygame.quit()

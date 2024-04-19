@@ -21,7 +21,7 @@ class Defausse:
 
   def ajout_carte(self, carte):
     self.cartes.append(carte)
-  
     
+  
   def retire_carte(self):
     return self.cartes.pop()
