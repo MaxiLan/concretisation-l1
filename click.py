@@ -5,9 +5,13 @@ import pioche
 
 
 #choix entre pioche et défausse (1er et 2e click)
-def click_pioche_defausse(joueur, p, d, ecran):
+def click_pioche_defausse(joueur, p, d, ecran): 
   HAUTEUR = ecran.get_height()
   LARGEUR = ecran.get_width()
+  facteur = HAUTEUR/850
+  h_carte = 160 * facteur
+  l_carte = 110 * facteur
+
 
   click_carte = False
 
@@ -19,14 +23,14 @@ def click_pioche_defausse(joueur, p, d, ecran):
     pos = pygame.mouse.get_pos()
 
     #si le click est sur la défausse
-    if (LARGEUR-270< pos[0] < LARGEUR-160) and (HAUTEUR-190 < pos[1] < HAUTEUR-30):
+    if (LARGEUR- 2*l_carte - 50< pos[0] < LARGEUR-30-20-l_carte) and (HAUTEUR-30-h_carte < pos[1] < HAUTEUR-30):
       
       #on retire deplace la carte de la defausse
       carte_select = d.retire_carte()
       ch = "images/" + str(carte_select.num) + ".png"
       img = pygame.image.load(ch)
-      img = pygame.transform.scale(img, (110, 160))
-      ecran.blit(img, (715, 375))
+      img = pygame.transform.scale(img, (l_carte, h_carte))
+      ecran.blit(img, (LARGEUR - 30 - l_carte - 10 - l_carte//2, HAUTEUR-50-2*h_carte))
       d.affiche(ecran)
       pygame.display.flip()
 
@@ -41,8 +45,8 @@ def click_pioche_defausse(joueur, p, d, ecran):
           #on regarde si le click est sur une carte
           for i in range(3):
             for j in range(4):
-              if (25 + j * 130 < pos[0] <
-                  135 + j * 130) and (30 + i * 175 < pos[1] < 190 + i * 175):
+              #if (30 + j * 130 < pos[0] < 135 + j * 130) and (30 + i * 175 < pos[1] < 190 + i * 175):
+              if (30 + j * l_carte+j*20< pos[0] <30 + j * l_carte+j*20 + l_carte) and (30 + i * h_carte +i*15< pos[1] <  30 + i * h_carte +i*15 + h_carte):
 
                 #on échange les cartes
                 #click_carte = True
@@ -56,7 +60,7 @@ def click_pioche_defausse(joueur, p, d, ecran):
                   return True
 
     #sinon si le click est sur la pioche
-    elif (LARGEUR-140< pos[0] < LARGEUR-30 and HAUTEUR-190< pos[1] < HAUTEUR-30):
+    elif (LARGEUR-30-l_carte< pos[0] < LARGEUR-30 and HAUTEUR-30-h_carte< pos[1] < HAUTEUR-30):
       
       # on deplace la carte de la pioche
       carte_select = p.cartes[0]
@@ -65,8 +69,8 @@ def click_pioche_defausse(joueur, p, d, ecran):
       p.affiche(ecran)
       ch = "images/" + str(carte_select.num) + ".png"
       img = pygame.image.load(ch)
-      img = pygame.transform.scale(img, (110, 160))
-      ecran.blit(img, (715, 375))
+      img = pygame.transform.scale(img, (l_carte, h_carte))
+      ecran.blit(img, (LARGEUR - 30 - l_carte - 10 - l_carte//2, HAUTEUR-50-2*h_carte))
       pygame.display.flip()
 
       click_defausse = False
@@ -81,8 +85,8 @@ def click_pioche_defausse(joueur, p, d, ecran):
           #si le click est sur le jeu du joueur
           for i in range(3):
             for j in range(4):
-              if (25 + j * 130 < pos[0] <
-                  135 + j * 130) and (30 + i * 175 < pos[1] < 190 + i * 175):
+              if(30 + j * l_carte+j*20< pos[0] <30 + j * l_carte+j*20 + l_carte) and (30 + i * h_carte +i*15< pos[1] <  30 + i * h_carte +i*15 + h_carte):
+              #if (25 + j * 130 < pos[0] <135 + j * 130) and (30 + i * 175 < pos[1] < 190 + i * 175):
 
                 #on echange les cartes
                 if joueur.jeu_actuel[i][j].num != "42bis":
@@ -95,7 +99,7 @@ def click_pioche_defausse(joueur, p, d, ecran):
                   return True
           
           #si le click est sur la defausse
-          if (LARGEUR-270 < pos[0] < LARGEUR-160) and (HAUTEUR-190 < pos[1] < HAUTEUR-30):
+          if (LARGEUR- 2*l_carte - 50< pos[0] < LARGEUR-30-20-l_carte) and (HAUTEUR-30-h_carte < pos[1] < HAUTEUR-30):
             d.ajout_carte(carte_select)
             d.affiche(ecran)
             carte.cacher_carte(ecran)
@@ -113,8 +117,8 @@ def click_pioche_defausse(joueur, p, d, ecran):
 #fonction annexe (utilisée ci-dessus)
 def retourne_cartes(joueur):
 
-  carte_bien_valide = False
-  while not (carte_bien_valide):
+  carte_selectionner = False
+  while not (carte_selectionner):
     pygame.event.get()
     s = pygame.mouse.get_pressed()
 
@@ -122,10 +126,10 @@ def retourne_cartes(joueur):
       pos = pygame.mouse.get_pos()
       for i in range(3):
         for j in range(4):
-          if (25 + j * 130 < pos[0] < 135 + j * 130) and (30 + i * 175 < pos[1]
-                                                          < 190 + i * 175):
+          if(30 + j * l_carte+j*20< pos[0] <30 + j * l_carte+j*20 + l_carte) and (30 + i * h_carte +i*15< pos[1] <  30 + i * h_carte +i*15 + h_carte):
+          #if (25 + j * 130 < pos[0] < 135 + j * 130) and (30 + i * 175 < pos[1]< 190 + i * 175):
             if joueur.jeu_actuel[i][j].etat != "ouverte":
               joueur.jeu_actuel[i][j].etat = "ouverte"
-              carte_bien_valide = True
+              carte_selectionner = True
 
   return True
