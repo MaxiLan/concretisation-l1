@@ -40,6 +40,6 @@ class Joueur:
           ch = "images/" + str(self.jeu_actuel[i][j].num) + ".png"
         img = pygame.image.load(ch)
         img = pygame.transform.scale(img, (l_carte, h_carte))
-        ecran.blit(img, (30 + j * l_carte+j*20, 30 + i * h_carte +i*15))
+        ecran.blit(img, (30 + j * l_carte+j*20, 30 + i * h_carte +i*20))
 
 

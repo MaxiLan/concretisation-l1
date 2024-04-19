@@ -11,7 +11,7 @@ def click_pioche_defausse(joueur, p, d, ecran):
   facteur = HAUTEUR/850
   h_carte = 160 * facteur
   l_carte = 110 * facteur
-
+  affiche_aide(ecran, l_carte, h_carte)
 
   click_carte = False
   pygame.event.get()
@@ -137,3 +137,9 @@ def retourne_cartes(joueur, ecran):
               carte_selectionner = True
 
   return True
+
+def affiche_aide(ecran, l_carte, h_carte):
+  img = pygame.image.load("images/question.png")
+  img = pygame.transform.scale(img, (40, 40))
+  ecran.blit(img, (30, 30+3*15+3*h_carte + 10))
+  pygame.display.flip()
