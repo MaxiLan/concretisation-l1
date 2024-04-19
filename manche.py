@@ -15,8 +15,6 @@ def tour(joueur, pioche, defausse, ecran):
     defausse.affiche(ecran)
     pygame.display.flip()
     tour_finie = click.click_pioche_defausse(joueur, pioche, defausse, ecran)
-    
-
 
 def lancement_manche(pioche, defausse, tab_joueurs):
   ma_carte=carte.Carte(42)
@@ -40,34 +38,75 @@ def lancement_manche(pioche, defausse, tab_joueurs):
   pioche.cartes[0].etat = "ouverte"
 
 
-def fin_manche(J):
+def fin_manche(ind_joueur,tab_joueurs):
   #J est un joueur, on testera s'il a retourné toutes ses cartes ou non
   i = 0
   manche_finie = True
   while (manche_finie and i < 3):
     j = 0
     while (j < 4 and manche_finie):
-      if J.jeu_actuel[i][j].etat == "ouverte":
+      if tab_joueurs[ind_joueur].jeu_actuel[i][j].etat == "ouverte":
         manche_finie = False
       j += 1
     i += 1
-
   return manche_finie
 
+def joueur_commence(tab_joueurs):
+  ind_j1=0
+  for i in range(1,len(tab_joueurs)):
+    if tab_joueurs[i].score_individuel>tab_joueurs[ind_j1].score_individuel:
+      ind_j1=i
+  return ind_j1
+
+
+def jeu_fin_manche(tab_joueurs):
+  if manche_finie:
+    for joueur in tab_joueurs:
+      for i in range(3):
+        for j in range(4):
+          if joueur.jeu_actuel[i][j].etat!="ouverte":
+            joueur.jeu_actuel[i][j]="ouverte"
+      joueur.evol_score()
+      ecran.fill("black")
 
 def manche(tab_joueurs, pioche, defausse, ecran): 
   lancement_manche(pioche, defausse, tab_joueurs)
-  i_joueur = 0
+  i_joueur = joueur_commence(tab_joueurs)
   joueur = tab_joueurs[i_joueur]
   manche_fin = False
 
   while not manche_fin:
+    tour(joueur, pioche, defausse, ecran) #deroulement d'un tour
+
+    #mise a jour ecran
+    defausse.affiche(ecran)
+    joueur.retrait_colonne(pioche)
+    joueur.affiche_jeu(ecran) 
+    pygame.display.flip() 
+
+    manche_fin = fin_manche(i_joueur,tab_joueurs)#test fin de manche
+    gagant=joueur
+
+    #changement de joueur pour la suite
+    i_joueur = (i_joueur + 1) % len(tab_joueurs)
+    joueur = tab_joueurs[i_joueur]
+    pygame.time.wait(2000) #laisse le temps au joueur de voir son score
+
+  #une fois qu'un joueur a retourné toute ses cartes il faut encore faire un tour :
+  for i in range(len(tab_joueur-1)):
+    print("coucou")
     tour(joueur, pioche, defausse, ecran)
     defausse.affiche(ecran)
     joueur.retrait_colonne(pioche)
     joueur.affiche_jeu(ecran) 
     pygame.display.flip()
     i_joueur = (i_joueur + 1) % len(tab_joueurs)
-    manche_fin = fin_manche(joueur)
     joueur = tab_joueurs[i_joueur]
     pygame.time.wait(2000)
+
+  #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
+  jeu_fin_manche(tab_joueurs)
+  return True
+
+  
+  

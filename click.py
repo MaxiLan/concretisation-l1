@@ -14,7 +14,6 @@ def click_pioche_defausse(joueur, p, d, ecran):
 
 
   click_carte = False
-
   pygame.event.get()
   souris = pygame.mouse.get_pressed()
   
