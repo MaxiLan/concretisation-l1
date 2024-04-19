@@ -45,7 +45,7 @@ def fin_manche(ind_joueur,tab_joueurs):
   while (manche_finie and i < 3):
     j = 0
     while (j < 4 and manche_finie):
-      if tab_joueur[ind_joueur].jeu_actuel[i][j].etat == "ouverte":
+      if tab_joueurs[ind_joueur].jeu_actuel[i][j].etat == "ouverte":
         manche_finie = False
       j += 1
     i += 1
@@ -84,7 +84,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
     joueur.affiche_jeu(ecran) 
     pygame.display.flip() 
 
-    manche_fin = fin_manche(joueur)#test fin de manche
+    manche_fin = fin_manche(i_joueur,tab_joueurs)#test fin de manche
     gagant=joueur
 
     #changement de joueur pour la suite
@@ -94,6 +94,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
 
   #une fois qu'un joueur a retourné toute ses cartes il faut encore faire un tour :
   for i in range(len(tab_joueur-1)):
+    print("coucou")
     tour(joueur, pioche, defausse, ecran)
     defausse.affiche(ecran)
     joueur.retrait_colonne(pioche)

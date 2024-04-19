@@ -16,7 +16,13 @@ class Partie:
     for element in self.score:
       if element >= 100:
         result=True
+    return result
+    
+  def mise_a_jour_score(self):
+    for i in range (len(self.tab_joueurs)):
+      self.score.append(self.tab_joueurs[i].score_individuel)
 
+      
   def ajouter_joueur(self, J):
     self.tab_joueurs.append(J)
 

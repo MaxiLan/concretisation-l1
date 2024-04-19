@@ -4,7 +4,6 @@ import carte
 
 
 class Defausse:
-
   def __init__(self):
     self.cartes = []
 
