@@ -41,8 +41,24 @@ def lancement_manche(pioche, defausse, tab_joueurs):
     while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
         abs = random.randint(0, 2)
         ord = random.randint(0, 3)
-
+    joueur.jeu_actuel[abs][ord].etat = "ouverte"
+    while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
+      abs = random.randint(0, 2)
+      ord = random.randint(0, 3)
+    joueur.jeu_actuel[abs][ord].etat = "ouverte"
+    while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
+        abs = random.randint(0, 2)
+        ord = random.randint(0, 3)
+    while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
+      abs = random.randint(0, 2)
+      ord = random.randint(0, 3)
+    joueur.jeu_actuel[abs][ord].etat = "ouverte"
+    while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
+        abs = random.randint(0, 2)
+        ord = random.randint(0, 3)
     #A ENLEVER
+
+
     joueur.jeu_actuel[abs][ord].etat = "ouverte"
   
 
@@ -78,9 +94,14 @@ def jeu_fin_manche(tab_joueurs,ecran):
       for i in range(3):
         for j in range(4):
           if joueur.jeu_actuel[i][j].etat!="ouverte":
-            joueur.jeu_actuel[i][j]="ouverte"
+            joueur.jeu_actuel[i][j].etat="ouverte"
       joueur.evol_score()
-      ecran.fill("black")
+    ecran.fill("black")
+    font=pygame.font.Font(None, 24)
+    text=font.render("coucou",1, "white")
+    ecran.blit(text,(150,150))
+
+
 
 def manche(tab_joueurs, pioche, defausse, ecran): 
   lancement_manche(pioche, defausse, tab_joueurs)
@@ -93,7 +114,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
 
     #mise a jour ecran
     defausse.affiche(ecran)
-    joueur.retrait_colonne(pioche)
+    joueur.retrait_colonne(defausse)
     joueur.affiche_jeu(ecran) 
     pygame.display.flip() 
 

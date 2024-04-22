@@ -11,7 +11,7 @@ class Joueur:
     #pour faire évoluer les scores de chaque joueur
     for i in range(3):
       for j in range(4):
-        if self.jeu_actuel[i][j].num!="42bis" and self.jeu_actuel[i][j].etat=="ouverte":
+        if  str (self.jeu_actuel[i][j].num) != "42bis" :
           self.score_individuel += self.jeu_actuel[i][j].num
 
   def retrait_colonne(self,defausse):
@@ -21,6 +21,8 @@ class Joueur:
           for i in range(3):
               c=carte.Carte("42bis")
               c.etat="ouverte"
+
+              #ajouter les cartes de la colonne dans la defausse
               c_ajout_defausse=self.jeu_actuel[i][j]
               defausse.cartes.append(c_ajout_defausse)
               self.jeu_actuel[i][j]=c

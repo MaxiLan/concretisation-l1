@@ -1,8 +1,6 @@
 import pygame
 
 class Carte:
-
-
   def __init__(self, numero):
     self.etat = "cachee"  #ouverte cachée ou invisible =(colonne disparue)
     self.num = numero  #numéro de carte

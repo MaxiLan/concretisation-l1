@@ -24,8 +24,8 @@ for i in range(nb_joueurs):
 
 
 #INIT ECRAN
-HAUTEUR =  750
-LARGEUR =  850
+HAUTEUR =  950
+LARGEUR =  1050
 pygame.init()
 clock = pygame.time.Clock()
 ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))

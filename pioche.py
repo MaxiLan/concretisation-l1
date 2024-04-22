@@ -42,6 +42,6 @@ class Pioche:
                        LARGEUR - 25 - 150 + i + 1))
     """
     ecran.blit(img, (LARGEUR - 30 - l_carte, HAUTEUR - 30 - h_carte))
-
+  
   def melange(self):
     random.shuffle(self.cartes)
