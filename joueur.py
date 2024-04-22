@@ -21,6 +21,8 @@ class Joueur:
           for i in range(3):
               c=carte.Carte("42bis")
               c.etat="ouverte"
+
+              #ajouter les cartes de la colonne dans la defausse
               c_ajout_defausse=self.jeu_actuel[i][j]
               defausse.cartes.append(c_ajout_defausse)
               self.jeu_actuel[i][j]=c
