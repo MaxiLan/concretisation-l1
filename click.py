@@ -114,10 +114,7 @@ def click_pioche_defausse(joueur, p, d, ecran):
           #si le click est sur la defausse
           if (LARGEUR- 2*l_carte - 50< pos[0] < LARGEUR-30-20-l_carte) and (HAUTEUR-30-h_carte < pos[1] < HAUTEUR-30):
             
-            if souris_sur_aide(ecran, h_carte):
-              affiche_aide(ecran, h_carte, section=3) 
-            else:
-              cache_aide(ecran,l_carte ,h_carte)
+           
 
             d.ajout_carte(carte_select)
             d.affiche(ecran)
@@ -142,7 +139,11 @@ def retourne_cartes(joueur, ecran):
   l_carte = 110 * facteur
 
   carte_selectionner = False
-  while not (carte_selectionner):
+  while not (carte_selectionner): 
+    if souris_sur_aide(ecran, h_carte):
+      affiche_aide(ecran, h_carte, section=3) 
+    else:
+      cache_aide(ecran,l_carte ,h_carte)
     pygame.event.get()
     s = pygame.mouse.get_pressed()
 
