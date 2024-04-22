@@ -11,8 +11,8 @@ def click_pioche_defausse(joueur, p, d, ecran):
   facteur = HAUTEUR/850
   h_carte = 160 * facteur
   l_carte = 110 * facteur
-  affiche_aide(ecran,  h_carte)
-  sourisSurAide(ecran, h_carte)
+  #affiche_aide(ecran,  h_carte)
+  #sourisSurAide(ecran, h_carte)
 
   click_carte = False
   pygame.event.get()
@@ -139,28 +139,28 @@ def retourne_cartes(joueur, ecran):
 
   return True
 
-def affiche_aide(ecran, h_carte, section):
-  img = pygame.image.load("images/question.png")
-  img = pygame.transform.scale(img, (40, 40))
+# def affiche_aide(ecran, h_carte, section):
+#   img = pygame.image.load("images/question.png")
+#   img = pygame.transform.scale(img, (40, 40))
   
-  objet_texte = pygame.font.Font()
+#   objet_texte = pygame.font.Font()
 
-  if section==0:
-    texte="Prenez une carte de la défausse ou de la pioche"
-  elif section==1:
-    texte="Echangez avec une de vos cartes ou posez-là dans la defausse"
-  elif section==2:
-    texte=""
-  ecran.blit(img, (30, 30+3*15+3*h_carte + 10))
-  pygame.display.flip()
+#   if section==0:
+#     texte="Prenez une carte de la défausse ou de la pioche"
+#   elif section==1:
+#     texte="Echangez avec une de vos cartes ou posez-là dans la defausse"
+#   elif section==2:
+#     texte=""
+#   ecran.blit(img, (30, 30+3*15+3*h_carte + 10))
+#   pygame.display.flip()
 
-def souris_sur_aide(ecran, h_carte):
-  pos = pygame.mouse.get_pos()
-  if (30<pos[0]<30+40) and (30+3*15+3*h_carte + 10<pos[1]<30+3*15+3*h_carte + 10+40):
-    return True
-  else:
-    return False
+# def souris_sur_aide(ecran, h_carte):
+#   pos = pygame.mouse.get_pos()
+#   if (30<pos[0]<30+40) and (30+3*15+3*h_carte + 10<pos[1]<30+3*15+3*h_carte + 10+40):
+#     return True
+#   else:
+#     return False
 
-    #texte = pygame.font.Font()
-    #ecran.blit(texte.render("coucou", True, "black"), (30,30+3*15+3*h_carte + 10 +40))
+#     #texte = pygame.font.Font()
+#     #ecran.blit(texte.render("coucou", True, "black"), (30,30+3*15+3*h_carte + 10 +40))
         

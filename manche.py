@@ -88,19 +88,29 @@ def joueur_commence(tab_joueurs):
       ind_j1=i
   return ind_j1
 
+def affichage_fin_manche(tab_joueurs,ecran):
+  font=pygame.font.Font(None, 45)
+  text=font.render("RESULTATS MANCHE: ",1,"white")
+  ecran.blit(text,(30,30))
+  i=1
+  for joueurs in tab_joueurs:
+      text=font.render("Score joueur n°"+str(joueurs.nom)+" : " +str(joueurs.score_individuel),1, "white")
+      ecran.blit(text,(150,150+i))
+      pygame.display.flip()
+      i=i+25
 
 def jeu_fin_manche(tab_joueurs,ecran):
+  #ACTUALISATION DE TOUT LES JEUX DES SCORES= ON RETOURNE TOUE LES CARTES DU JEU
     for joueur in tab_joueurs:
       for i in range(3):
         for j in range(4):
           if joueur.jeu_actuel[i][j].etat!="ouverte":
             joueur.jeu_actuel[i][j].etat="ouverte"
       joueur.evol_score()
-    ecran.fill("black")
-    font=pygame.font.Font(None, 24)
-    text=font.render("coucou",1, "white")
-    ecran.blit(text,(150,150))
-
+    
+    ecran.fill("grey24")
+    affichage_fin_manche(tab_joueurs,ecran)
+    
 
 
 def manche(tab_joueurs, pioche, defausse, ecran): 
