@@ -6,20 +6,10 @@ import pioche
 import defausse
 import click
 import manche
+import accueil
 
 #variables intiales
 fin_partie = False
-
-
-# nb_joueurs = int(input("Combien de joueurs voulez vous ? "))
-nb_joueurs = 2 # TEST
-
-partie = partie.Partie(nb_joueurs)
-
-for i in range(nb_joueurs):
-  J = joueur.Joueur(i + 1)
-  partie.tab_joueurs.append(J)
-
 
 #INIT ECRAN
 HAUTEUR =  950
@@ -29,6 +19,16 @@ clock = pygame.time.Clock()
 ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
 ecran.fill("grey24")
 #INIT ECRAN
+
+
+nb_joueurs = accueil.affiche_accueil(ecran)
+
+partie = partie.Partie(nb_joueurs)
+
+for i in range(nb_joueurs):
+  J = joueur.Joueur(i + 1)
+  partie.tab_joueurs.append(J)
+
 
 p = pioche.Pioche(ecran)
 d = defausse.Defausse()
