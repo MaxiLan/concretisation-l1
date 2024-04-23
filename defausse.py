@@ -10,14 +10,10 @@ class Defausse:
   def affiche(self, ecran):
     HAUTEUR = ecran.get_height()
     LARGEUR = ecran.get_width()
-    facteur = HAUTEUR/850
-    h_carte = 160 * facteur
-    l_carte = 110 * facteur
-
     ch = "images/" + str(self.cartes[-1].num) + ".png"
     img = pygame.image.load(ch)
-    img = pygame.transform.scale(img, (l_carte, h_carte))
-    ecran.blit(img, (LARGEUR - 30 - 20 - 2*l_carte, HAUTEUR - h_carte - 30))
+    img = pygame.transform.scale(img, (self.cartes[0].largeur, self.cartes[0].hauteur))
+    ecran.blit(img, (LARGEUR - 50 - 2*self.cartes[0].largeur, HAUTEUR - self.cartes[0].hauteur - 30))
 
   def ajout_carte(self, carte):
     self.cartes.append(carte)

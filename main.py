@@ -10,8 +10,6 @@ import manche
 #variables intiales
 fin_partie = False
 
-p = pioche.Pioche()
-d = defausse.Defausse()
 
 # nb_joueurs = int(input("Combien de joueurs voulez vous ? "))
 nb_joueurs = 2 # TEST
@@ -32,6 +30,8 @@ ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
 ecran.fill("grey24")
 #INIT ECRAN
 
+p = pioche.Pioche(ecran)
+d = defausse.Defausse()
 while not fin_partie:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
