@@ -6,11 +6,18 @@ import carte
 
 def tour(joueur, pioche, defausse, ecran):
   #réalise le tour d'un joueur
+  ecran.fill("grey24")
   tour_finie = click.click_pioche_defausse(joueur, pioche, defausse, ecran)
-
+  
   while not tour_finie:
     #tant que son tour n'est finie, son jeu reste affiché
-    
+    pygame.display.flip()
+    carte.cacher_carte(ecran,defausse.cartes[0])
+    font=pygame.font.Font(None, 35)
+    text=font.render("Joueur n°"+str(joueur.nom),1, "white")
+    ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
+    pygame.display.flip()
+
     joueur.affiche_jeu(ecran)
     pioche.affiche(ecran)
     defausse.affiche(ecran)
@@ -127,10 +134,10 @@ def manche(tab_joueurs, pioche, defausse, ecran):
   
   
   while not manche_fin:
-    font=pygame.font.Font(None, 35)
-    text=font.render("Joueur n°"+str(i_joueur+1),1, "white")
-    ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
-    pygame.display.flip()
+    # font=pygame.font.Font(None, 35)
+    # text=font.render("Joueur n°"+str(i_joueur+1),1, "white")
+    # ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
+    # pygame.display.flip()
     tour(joueur, pioche, defausse, ecran) #deroulement d'un tour
 
     #mise a jour ecran
@@ -153,7 +160,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
     print("coucou")
     tour(joueur, pioche, defausse, ecran)
     defausse.affiche(ecran)
-    joueur.retrait_colonne(pioche)
+    joueur.retrait_colonne(pioche,ecran)
     joueur.affiche_jeu(ecran) 
     pygame.display.flip()
     i_joueur = (i_joueur + 1) % len(tab_joueurs)

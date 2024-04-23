@@ -130,7 +130,6 @@ def click_pioche_defausse(joueur, p, d, ecran):
 def retourne_cartes(joueur, ecran): 
   HAUTEUR = ecran.get_height()
   LARGEUR = ecran.get_width()
-
   carte_selectionner = False
   while not (carte_selectionner): 
     if souris_sur_aide(ecran, joueur.jeu_actuel[0][0].hauteur): # joueur.jeu_atuel[0] NOUS PERMET DE RECUPERER LA TAILLE D'UNE CARTE CHOIX ARBITRAIRE D'UNE CARTE
