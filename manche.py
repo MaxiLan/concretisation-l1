@@ -17,6 +17,11 @@ def tour(joueur, pioche, defausse, ecran):
     pygame.display.flip()
     tour_finie = click.click_pioche_defausse(joueur, pioche, defausse, ecran)
 
+
+def fin_tour(ecran):
+  
+
+
 def lancement_manche(pioche, defausse, tab_joueurs,ecran):
   ma_carte=carte.Carte(42,ecran)
   pioche.melange()
@@ -138,6 +143,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
     gagant=joueur
     print(manche_fin)
     #changement de joueur pour la suite
+    change_tour(ecran, )
     i_joueur = (i_joueur + 1) % len(tab_joueurs)
     joueur = tab_joueurs[i_joueur]
     pygame.time.wait(2000) #laisse le temps au joueur de voir son score
