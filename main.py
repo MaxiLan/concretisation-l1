@@ -26,7 +26,7 @@ HAUTEUR =  950
 LARGEUR =  1050
 pygame.init()
 clock = pygame.time.Clock()
-ecran = pygame.display.set_mode((LARGEUR, HAUTEUR),pygame.FULLSCREEN)
+ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
 pygame.display.set_caption("SKYJO")
 ecran.fill("grey24")
 #INIT ECRAN
