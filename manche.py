@@ -68,9 +68,12 @@ def fin_manche(ind_joueur,tab_joueurs):
 
 def joueur_commence(tab_joueurs):
   ind_j1=0
+  print("score",tab_joueurs[0].score_individuel)
   for i in range(1,len(tab_joueurs)):
+    print("score",tab_joueurs[i].score_individuel)
     if tab_joueurs[i].score_individuel>tab_joueurs[ind_j1].score_individuel:
       ind_j1=i
+  print(ind_j1)
   return ind_j1
 
 def affichage_fin_manche(tab_joueurs,ecran):
@@ -99,7 +102,10 @@ def jeu_fin_manche(tab_joueurs,ecran):
 
 def manche(tab_joueurs, pioche, defausse, ecran): 
   lancement_manche(pioche, defausse, tab_joueurs,ecran)
+  for joueur in tab_joueurs:
+    joueur.evol_score()
   i_joueur = joueur_commence(tab_joueurs)
+  print(i_joueur)
   joueur = tab_joueurs[i_joueur]
   manche_fin = False
   

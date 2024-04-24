@@ -245,15 +245,6 @@ def voir_autre_jeu(ecran,tab_joueurs,i_joueur):
       img = pygame.image.load(ch)
       img = pygame.transform.scale(img, (50,50))
       ecran.blit(img, (ecran.get_width()-80, 30))
-    """
-    click_croix=True
-    pygame.time.wait(250)
-    ch = "images/loupe.png"
-    img = pygame.image.load(ch)
-    img = pygame.transform.scale(img, (50,50))
-    ecran.blit(img, (ecran.get_width()-80, 30))
-  return click_croix
-    """
       pygame.display.flip()
     
     elif ((LARGEUR//8 < pos[0] < LARGEUR//8+80) and (130+(3*tab_joueurs[0].jeu_actuel[0][0].hauteur//2 < pos[1] < 180+(3*tab_joueurs[0].jeu_actuel[0][0].hauteur//2) ) ) ):
