@@ -4,27 +4,31 @@ import random
 import carte
 
 
-def tour(joueur, pioche, defausse, ecran):
+def tour(joueur, pioche, defausse, ecran,tab_joueurs):
   #réalise le tour d'un joueur
   ecran.fill("grey24")
-  tour_finie = click.click_pioche_defausse(joueur, pioche, defausse, ecran)
-  
-  while not tour_finie:
+  print(joueur)
+  tour_fini=click.click_pioche_defausse(joueur,pioche,defausse,ecran,tab_joueurs)
+  while not tour_fini:
+    ch = "images/loupe.png"
+    img = pygame.image.load(ch)
+    img = pygame.transform.scale(img, (50,50))
+    ecran.blit(img, (ecran.get_width()-80, 30))
     #tant que son tour n'est finie, son jeu reste affiché
     pygame.display.flip()
     carte.cacher_carte(ecran,defausse.cartes[0])
     font=pygame.font.Font(None, 35)
     text=font.render("Joueur n°"+str(joueur.nom),1, "white")
     ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
-    pygame.display.flip()
-
+    #pygame.display.flip()
     joueur.affiche_jeu(ecran)
     pioche.affiche(ecran)
     defausse.affiche(ecran)
     pygame.display.flip()
-    tour_finie = click.click_pioche_defausse(joueur, pioche, defausse, ecran)
+    tour_fini = click.click_pioche_defausse(joueur, pioche, defausse, ecran,tab_joueurs)
 
 def lancement_manche(pioche, defausse, tab_joueurs,ecran):
+  
   ma_carte=carte.Carte(42,ecran)
   pioche.melange()
   for joueur in tab_joueurs:
@@ -133,7 +137,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
     # text=font.render("Joueur n°"+str(i_joueur+1),1, "white")
     # ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
     # pygame.display.flip()
-    tour(joueur, pioche, defausse, ecran) #deroulement d'un tour
+    tour(joueur, pioche, defausse, ecran,tab_joueurs) #deroulement d'un tour
 
     #mise a jour ecran
     defausse.affiche(ecran)
@@ -151,8 +155,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
 
   #une fois qu'un joueur a retourné toute ses cartes il faut encore faire un tour :
   for i in range(len(tab_joueurs)-1):
-    print("coucou")
-    tour(joueur, pioche, defausse, ecran)
+    tour(joueur, pioche, defausse, ecran,tab_joueurs)
     defausse.affiche(ecran)
     joueur.retrait_colonne(pioche,ecran)
     joueur.affiche_jeu(ecran) 

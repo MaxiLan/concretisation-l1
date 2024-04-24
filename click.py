@@ -5,7 +5,9 @@ import pioche
 
 
 #choix entre pioche et défausse (1er et 2e click)
-def click_pioche_defausse(joueur, p, d, ecran): 
+def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs): 
+
+  print("je devrais pas etre la ")
   HAUTEUR = ecran.get_height()
   LARGEUR = ecran.get_width()
   click_carte = False
@@ -120,7 +122,11 @@ def click_pioche_defausse(joueur, p, d, ecran):
             
             #et on retourne une carte selectionnnée par le joueur (fonction ci-dessous)
             return retourne_cartes(joueur, ecran)
-
+    elif ( ecran.get_width()-80< pos[0] < ecran.get_width()-30) and (30 < pos[1] < 80):
+        click_croix=False
+        while not click_croix:
+          click_croix=voir_autre_jeu(ecran,tab_joueurs)
+      
   else:
     #sinon on renvoie False, et la fonction sera rappelée
     return False
@@ -188,3 +194,31 @@ def souris_sur_aide(ecran, h_carte):
     return True
   else:
     return False
+
+def voir_autre_jeu(ecran,tab_joueurs):
+
+  click_croix=False
+  ecran.fill("grey24")
+  ch = "images/fermer.png"
+  pygame.time.wait(200)
+  img = pygame.image.load(ch)
+  img = pygame.transform.scale(img, (30,30))
+  ecran.blit(img, (ecran.get_width()-80, 30))
+  pygame.display.flip()
+  pygame.event.get()
+  souris = pygame.mouse.get_pressed()
+  if souris[0]:
+    pos = pygame.mouse.get_pos()
+    while not ((ecran.get_width()-80 < pos[0] < ecran.get_width()-50) and (30 < pos[1] < 60)):   
+      ecran.fill("blue")
+      ch = "images/fermer.png"
+      img = pygame.image.load(ch)
+      img = pygame.transform.scale(img, (50,50))
+      ecran.blit(img, (ecran.get_width()-80, 30))
+    click_croix=True
+    pygame.time.wait(250)
+    ch = "images/loupe.png"
+    img = pygame.image.load(ch)
+    img = pygame.transform.scale(img, (50,50))
+    ecran.blit(img, (ecran.get_width()-80, 30))
+  return click_croix
