@@ -8,22 +8,24 @@ def tour(joueur, pioche, defausse, ecran,tab_joueurs):
   #réalise le tour d'un joueur
   ecran.fill("grey24")
   tour_fini=click.click_pioche_defausse(joueur,pioche,defausse,ecran,tab_joueurs)
-  while not tour_fini:
-    ch = "images/loupe.png"
-    img = pygame.image.load(ch)
-    img = pygame.transform.scale(img, (50,50))
-    ecran.blit(img, (ecran.get_width()-80, 30))
-    #tant que son tour n'est finie, son jeu reste affiché
-    pygame.display.flip()
-    carte.cacher_carte(ecran,defausse.cartes[0])
-    font=pygame.font.Font(None, 35)
-    text=font.render("Joueur n°"+str(joueur.nom),1, "white")
-    ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
-    joueur.affiche_jeu(ecran)
-    pioche.affiche(ecran)
-    defausse.affiche(ecran)
-    pygame.display.flip()
+  
+  ch = "images/loupe.png"
+  img = pygame.image.load(ch)
+  img = pygame.transform.scale(img, (50,50))
+  ecran.blit(img, (ecran.get_width()-80, 30))
+  #tant que son tour n'est pas fini, son jeu reste affiché
+  carte.cacher_carte(ecran,defausse.cartes[0])
+  font=pygame.font.Font(None, 35)
+  text=font.render("Joueur n°"+str(joueur.nom),1, "white")
+  ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
+    
+  joueur.affiche_jeu(ecran)
+  pioche.affiche(ecran)
+  defausse.affiche(ecran)
+  pygame.display.flip()
+  while not tour_fini:  
     tour_fini = click.click_pioche_defausse(joueur, pioche, defausse, ecran,tab_joueurs)
+  
 
 
 def lancement_manche(pioche, defausse, tab_joueurs,ecran):
@@ -68,12 +70,9 @@ def fin_manche(ind_joueur,tab_joueurs):
 
 def joueur_commence(tab_joueurs):
   ind_j1=0
-  print("score",tab_joueurs[0].score_individuel)
   for i in range(1,len(tab_joueurs)):
-    print("score",tab_joueurs[i].score_individuel)
     if tab_joueurs[i].score_individuel>tab_joueurs[ind_j1].score_individuel:
       ind_j1=i
-  print(ind_j1)
   return ind_j1
 
 def affichage_fin_manche(tab_joueurs,ecran):

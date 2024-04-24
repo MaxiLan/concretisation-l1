@@ -37,9 +37,7 @@ while not fin_partie:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       fin_partie = True
-  print("je suis la")
   manche.manche(partie.tab_joueurs, p, d, ecran)
-  print("ici aussi")
   partie.mise_a_jour_score()
   print(partie.score)
   fin_partie = partie.fin_partie()

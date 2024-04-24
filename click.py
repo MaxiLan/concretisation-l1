@@ -90,14 +90,13 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
 
         pygame.event.get()
         s = pygame.mouse.get_pressed()
-
         if s[0]:
           pos = pygame.mouse.get_pos()
 
           #si le click est sur le jeu du joueur
           for i in range(3):
             for j in range(4):
-              if(30 + j * d.cartes[0].largeur+j*20< pos[0] <30 + j * d.cartes[0].largeur+j*20 + d.cartes[0].largeur) and (30 + i * d.cartes[0].hauteur +i*15< pos[1] <  30 + i * d.cartes[0].hauteur +i*15 + d.cartes[0].hauteur):
+              if (30 + j * d.cartes[0].largeur+j*20< pos[0] <30 + j * d.cartes[0].largeur+j*20 + d.cartes[0].largeur) and (30 + i * d.cartes[0].hauteur +i*15< pos[1] <  30 + i * d.cartes[0].hauteur +i*15 + d.cartes[0].hauteur):
 
                 #on echange les cartes
                 if joueur.jeu_actuel[i][j].num != "42bis":
@@ -111,9 +110,6 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
           
           #si le click est sur la defausse
           if (LARGEUR- 2*d.cartes[0].largeur - 50< pos[0] < LARGEUR-50-d.cartes[0].largeur) and (HAUTEUR-30-d.cartes[0].hauteur < pos[1] < HAUTEUR-30):
-            
-           
-
             d.ajout_carte(carte_select)
             d.affiche(ecran)
             carte.cacher_carte(ecran,d.cartes[0])
@@ -128,8 +124,7 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
         while not click_croix:
           pygame.time.wait(150)
           click_croix,i_joueur=voir_autre_jeu(ecran,tab_joueurs,i_joueur)
-          
-      
+ 
   else:
     #sinon on renvoie False, et la fonction sera rappelée
     return False
@@ -188,7 +183,7 @@ def cache_aide(ecran, l_carte, h_carte):
 
   rect = pygame.Rect(30,30+3*15+3*h_carte + 10 +40, 4*l_carte+140, 30)
   pygame.draw.rect(ecran, "grey24", rect)
-  pygame.display.flip()
+  #pygame.display.flip()
 
 
 def souris_sur_aide(ecran, h_carte):
@@ -216,9 +211,6 @@ def affiche_page_autre_joueur(ecran,tab_joueurs):
   img = pygame.transform.scale(img, (80,50))
   img=pygame.transform.rotate(img,180)
   ecran.blit(img,(LARGEUR//4 + 4 *(tab_joueurs[0].jeu_actuel[0][0].largeur)+50, 130+(3*tab_joueurs[0].jeu_actuel[0][0].hauteur//2)))
-
-
-  
 
 
 def voir_autre_jeu(ecran,tab_joueurs,i_joueur):
