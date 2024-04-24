@@ -25,6 +25,7 @@ def tour(joueur, pioche, defausse, ecran,tab_joueurs):
   pygame.display.flip()
   while not tour_fini:  
     tour_fini = click.click_pioche_defausse(joueur, pioche, defausse, ecran,tab_joueurs)
+    
   
 
 
@@ -110,12 +111,8 @@ def manche(tab_joueurs, pioche, defausse, ecran):
   
   
   while not manche_fin:
-    # font=pygame.font.Font(None, 35)
-    # text=font.render("Joueur n°"+str(i_joueur+1),1, "white")
-    # ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
-    # pygame.display.flip()
+    
     tour(joueur, pioche, defausse, ecran,tab_joueurs) #deroulement d'un tour
-
     #mise a jour ecran
     defausse.affiche(ecran)
     joueur.retrait_colonne(defausse,ecran)

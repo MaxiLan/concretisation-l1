@@ -124,6 +124,10 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
         while not click_croix:
           pygame.time.wait(150)
           click_croix,i_joueur=voir_autre_jeu(ecran,tab_joueurs,i_joueur)
+        joueur.affiche_jeu(ecran)
+        p.affiche(ecran)
+        d.affiche(ecran)
+        pygame.display.flip()
  
   else:
     #sinon on renvoie False, et la fonction sera rappelée
@@ -183,7 +187,7 @@ def cache_aide(ecran, l_carte, h_carte):
 
   rect = pygame.Rect(30,30+3*15+3*h_carte + 10 +40, 4*l_carte+140, 30)
   pygame.draw.rect(ecran, "grey24", rect)
-  #pygame.display.flip()
+  pygame.display.flip()
 
 
 def souris_sur_aide(ecran, h_carte):

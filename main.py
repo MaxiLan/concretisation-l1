@@ -39,7 +39,6 @@ while not fin_partie:
       fin_partie = True
   manche.manche(partie.tab_joueurs, p, d, ecran)
   partie.mise_a_jour_score()
-  print(partie.score)
   fin_partie = partie.fin_partie()
   
 
