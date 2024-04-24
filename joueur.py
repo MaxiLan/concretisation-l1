@@ -42,6 +42,7 @@ class Joueur:
 
 
   def affiche_jeu_vision_ext(self,ecran):
+    print("coucou je fais pas mon taf")
     HAUTEUR = ecran.get_height()
     LARGEUR = ecran.get_width()
     for i in range(3):
@@ -52,5 +53,5 @@ class Joueur:
           ch = "images/" + str(self.jeu_actuel[i][j].num) + ".png"
         img = pygame.image.load(ch)
         img = pygame.transform.scale(img, (self.jeu_actuel[i][j].largeur, self.jeu_actuel[i][j].hauteur))
-        ecran.blit(img,(LARGEUR//4 + j * self.jeu_actuel[i][j].largeur+j*20, 30 + i * self.jeu_actuel[i][j].hauteur +i*20))
+        ecran.blit(img,(LARGEUR//4 + j * self.jeu_actuel[i][j].largeur+j*20-30, 130 + i * self.jeu_actuel[i][j].hauteur +i*20))
 

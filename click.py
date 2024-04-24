@@ -122,10 +122,13 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
             
             #et on retourne une carte selectionnnée par le joueur (fonction ci-dessous)
             return retourne_cartes(joueur, ecran)
-    elif ( ecran.get_width()-80< pos[0] < ecran.get_width()-30) and (30 < pos[1] < 80):
+    elif (ecran.get_width()-80< pos[0] < ecran.get_width()-30) and (30 < pos[1] < 80):
         click_croix=False
+        i_joueur=0 #arbitraire
         while not click_croix:
-          click_croix=voir_autre_jeu(ecran,tab_joueurs)
+          pygame.time.wait(150)
+          click_croix,i_joueur=voir_autre_jeu(ecran,tab_joueurs,i_joueur)
+          
       
   else:
     #sinon on renvoie False, et la fonction sera rappelée
@@ -172,7 +175,7 @@ def affiche_aide(ecran, h_carte, section):
     texte="Echangez avec une de vos cartes ou posez la dans la défausse"
   elif section==3:
     texte="Retournez maintenant une carte"
-    
+  
 
   ecran.blit(objet_texte.render(texte, True, "white"), (30,30+3*15+3*h_carte + 10 +40))
   pygame.display.flip()
@@ -195,26 +198,54 @@ def souris_sur_aide(ecran, h_carte):
   else:
     return False
 
-def voir_autre_jeu(ecran,tab_joueurs):
-
-  click_croix=False
+def affiche_page_autre_joueur(ecran,tab_joueurs):
+  HAUTEUR = ecran.get_height()
+  LARGEUR = ecran.get_width()
   ecran.fill("grey24")
   ch = "images/fermer.png"
-  pygame.time.wait(200)
   img = pygame.image.load(ch)
   img = pygame.transform.scale(img, (30,30))
   ecran.blit(img, (ecran.get_width()-80, 30))
-  pygame.display.flip()
+
+  ch="images/suiv.png"
+  img=pygame.image.load(ch)
+  img = pygame.transform.scale(img, (80,50))
+  ecran.blit(img,(LARGEUR//8, 130+(3*tab_joueurs[0].jeu_actuel[0][0].hauteur//2)))
+  ch="images/suiv.png"
+  img=pygame.image.load(ch)
+  img = pygame.transform.scale(img, (80,50))
+  img=pygame.transform.rotate(img,180)
+  ecran.blit(img,(LARGEUR//4 + 4 *(tab_joueurs[0].jeu_actuel[0][0].largeur)+50, 130+(3*tab_joueurs[0].jeu_actuel[0][0].hauteur//2)))
+
+
+  
+
+
+def voir_autre_jeu(ecran,tab_joueurs,i_joueur):
+  HAUTEUR = ecran.get_height()
+  LARGEUR = ecran.get_width()
+  click_croix=False
+  affiche_page_autre_joueur(ecran,tab_joueurs)
   pygame.event.get()
   souris = pygame.mouse.get_pressed()
+  tab_joueurs[i_joueur].affiche_jeu_vision_ext(ecran)
+  font=pygame.font.Font(None, 35)
+  text=font.render("Joueur n°"+str(i_joueur+1),1, "white")
+  ecran.blit(text,(LARGEUR//4 + tab_joueurs[i_joueur].jeu_actuel[0][0].largeur+20-30+tab_joueurs[i_joueur].jeu_actuel[0][0].largeur//2,150 + 3 * tab_joueurs[0].jeu_actuel[0][0].hauteur +3*20))
+
+  pygame.display.flip()
+
+  #si on clique sur la croix
   if souris[0]:
     pos = pygame.mouse.get_pos()
-    while not ((ecran.get_width()-80 < pos[0] < ecran.get_width()-50) and (30 < pos[1] < 60)):   
-      ecran.fill("blue")
-      ch = "images/fermer.png"
+    if ((ecran.get_width()-80 < pos[0] < ecran.get_width()-50) and (30 < pos[1] < 60)):  
+      click_croix=True
+      ecran.fill("grey24")
+      ch = "images/loupe.png"
       img = pygame.image.load(ch)
       img = pygame.transform.scale(img, (50,50))
       ecran.blit(img, (ecran.get_width()-80, 30))
+    """
     click_croix=True
     pygame.time.wait(250)
     ch = "images/loupe.png"
@@ -222,3 +253,14 @@ def voir_autre_jeu(ecran,tab_joueurs):
     img = pygame.transform.scale(img, (50,50))
     ecran.blit(img, (ecran.get_width()-80, 30))
   return click_croix
+    """
+      pygame.display.flip()
+    
+    elif ((LARGEUR//8 < pos[0] < LARGEUR//8+80) and (130+(3*tab_joueurs[0].jeu_actuel[0][0].hauteur//2 < pos[1] < 180+(3*tab_joueurs[0].jeu_actuel[0][0].hauteur//2) ) ) ):
+      i_joueur=(i_joueur-1)%len(tab_joueurs)
+     
+    elif ((LARGEUR//4 + 4 *(tab_joueurs[0].jeu_actuel[0][0].largeur)+50 < pos[0] < LARGEUR//4 + 4 *(tab_joueurs[0].jeu_actuel[0][0].largeur)+130) and (130+(3*tab_joueurs[0].jeu_actuel[0][0].hauteur//2 < pos[1] < 180+(3*tab_joueurs[0].jeu_actuel[0][0].hauteur//2) ) ) ):
+      i_joueur=(i_joueur+1)%len(tab_joueurs)
+     
+
+  return click_croix,i_joueur
