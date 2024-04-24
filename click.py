@@ -7,7 +7,6 @@ import pioche
 #choix entre pioche et défausse (1er et 2e click)
 def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs): 
 
-  print("je devrais pas etre la ")
   HAUTEUR = ecran.get_height()
   LARGEUR = ecran.get_width()
   click_carte = False
@@ -72,6 +71,7 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
       carte_select = p.cartes[0]
       carte_select.etat = "ouverte"
       p.cartes.pop(0)
+      p.est_vide(d)
       p.affiche(ecran)
       ch = "images/" + str(carte_select.num) + ".png"
       img = pygame.image.load(ch)

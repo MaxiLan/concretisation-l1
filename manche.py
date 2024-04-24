@@ -7,7 +7,6 @@ import carte
 def tour(joueur, pioche, defausse, ecran,tab_joueurs):
   #réalise le tour d'un joueur
   ecran.fill("grey24")
-  print(joueur)
   tour_fini=click.click_pioche_defausse(joueur,pioche,defausse,ecran,tab_joueurs)
   while not tour_fini:
     ch = "images/loupe.png"
@@ -20,7 +19,6 @@ def tour(joueur, pioche, defausse, ecran,tab_joueurs):
     font=pygame.font.Font(None, 35)
     text=font.render("Joueur n°"+str(joueur.nom),1, "white")
     ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
-    #pygame.display.flip()
     joueur.affiche_jeu(ecran)
     pioche.affiche(ecran)
     defausse.affiche(ecran)
@@ -44,33 +42,6 @@ def lancement_manche(pioche, defausse, tab_joueurs,ecran):
     while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
       abs = random.randint(0, 2)
       ord = random.randint(0, 3)
-
-      #A ENLEVER
-    # joueur.jeu_actuel[abs][ord].etat = "ouverte"
-    # while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
-    #   abs = random.randint(0, 2)
-    #   ord = random.randint(0, 3)
-    # joueur.jeu_actuel[abs][ord].etat = "ouverte"
-    # while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
-    #     abs = random.randint(0, 2)
-    #     ord = random.randint(0, 3)
-    # joueur.jeu_actuel[abs][ord].etat = "ouverte"
-    # while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
-    #   abs = random.randint(0, 2)
-    #   ord = random.randint(0, 3)
-    # joueur.jeu_actuel[abs][ord].etat = "ouverte"
-    # while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
-    #     abs = random.randint(0, 2)
-    #     ord = random.randint(0, 3)
-    # while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
-    #   abs = random.randint(0, 2)
-    #   ord = random.randint(0, 3)
-    # joueur.jeu_actuel[abs][ord].etat = "ouverte"
-    # while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
-    #     abs = random.randint(0, 2)
-    #     ord = random.randint(0, 3)
-    #A ENLEVER
-
 
     joueur.jeu_actuel[abs][ord].etat = "ouverte"
 
@@ -148,11 +119,10 @@ def manche(tab_joueurs, pioche, defausse, ecran):
 
     manche_fin = fin_manche(i_joueur,tab_joueurs)#test fin de manche
     gagant=joueur
-    print(manche_fin)
     #changement de joueur pour la suite
     i_joueur = (i_joueur + 1) % len(tab_joueurs)
     joueur = tab_joueurs[i_joueur]
-    pygame.time.wait(2000) #laisse le temps au joueur de voir son score
+    pygame.time.wait(500) #laisse le temps au joueur de voir son score
 
   #une fois qu'un joueur a retourné toute ses cartes il faut encore faire un tour :
   for i in range(len(tab_joueurs)-1):

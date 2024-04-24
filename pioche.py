@@ -42,3 +42,10 @@ class Pioche:
   
   def melange(self):
     random.shuffle(self.cartes)
+
+  def est_vide(self, defausse):
+    if len(self.cartes)==0:
+      while len(defausse.cartes)>1:
+        self.cartes.append(defausse.cartes.pop(1))
+
+      self.melange()
