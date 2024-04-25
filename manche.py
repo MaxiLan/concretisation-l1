@@ -120,7 +120,6 @@ def jeu_fin_manche(tab_joueurs,ecran,gagnant):
       if gagnant.score_individuel>=joueur.score_individuel:
         gagnant.score_individuel=gagnant.score_individuel*2
     ecran.fill("grey24")
-    affichage_fin_manche(tab_joueurs,ecran)
 
 
 
@@ -148,7 +147,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
     
     #test si fin de manche
     manche_fin = fin_manche(i_joueur,tab_joueurs)
-    gagant=joueur
+    gagnant=joueur
 
     #changement de joueur pour la suite
     i_joueur = (i_joueur + 1) % len(tab_joueurs)
@@ -167,12 +166,8 @@ def manche(tab_joueurs, pioche, defausse, ecran):
     joueur = tab_joueurs[i_joueur]
     pygame.time.wait(2000)
 
-<<<<<<< HEAD
   #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
   jeu_fin_manche(tab_joueurs,ecran,gagnant)
-=======
-  #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts 
-  #et afficher les gagnants
-  jeu_fin_manche(tab_joueurs,ecran)
->>>>>>> d40b06014d33a01e7383aecc11c91f3ffeee5d26
+  affichage_fin_manche(tab_joueurs,ecran)
+
   return True
