@@ -11,11 +11,12 @@ class Joueur:
     """
     Fait évoluer le score de chaque joueur
     """
+    self.score_individuel=0
     for i in range(3):
       for j in range(4):
         if  str (self.jeu_actuel[i][j].num) != "42bis" and self.jeu_actuel[i][j].etat!="cachee":
           self.score_individuel += self.jeu_actuel[i][j].num
-
+          
   def retrait_colonne(self,defausse,ecran):
     """
     Retire une colonne si elle remplie du même nombre
