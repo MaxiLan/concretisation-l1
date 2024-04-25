@@ -103,6 +103,7 @@ def affichage_fin_manche(tab_joueurs,ecran):
       ecran.blit(text,(150,150+i))
       pygame.display.flip()
       i=i+25
+  
 
 def jeu_fin_manche(tab_joueurs,ecran,i_joueur):
     """
@@ -118,7 +119,7 @@ def jeu_fin_manche(tab_joueurs,ecran,i_joueur):
             tab_joueurs[n_joueur].jeu_actuel[i][j].etat="ouverte"
       tab_joueurs[n_joueur].evol_score()
       if tab_joueurs[i_joueur].score_individuel>=tab_joueurs[n_joueur].score_individuel and i_joueur != n_joueur:
-        gagnant.score_individuel=gagnant.score_individuel*2
+        tab_joueurs[i_joueur].score_individuel=tab_joueurs[i_joueur].score_individuel*2
     ecran.fill("grey24")
     
 
