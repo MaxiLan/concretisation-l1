@@ -12,7 +12,8 @@ def tour(joueur, pioche, defausse, ecran,tab_joueurs):
   #réalise le tour d'un joueur
   ecran.fill("grey24")
   tour_fini=False
-  
+  joueur.evol_score()
+  print("nom:",joueur.nom+1,"score: ",joueur.score_individuel)
   ch = "images/loupe.png"
   img = pygame.image.load(ch)
   img = pygame.transform.scale(img, (50,50))
@@ -117,7 +118,10 @@ def jeu_fin_manche(tab_joueurs,ecran,i_joueur):
         for j in range(4):
           if tab_joueurs[n_joueur].jeu_actuel[i][j].etat!="ouverte":
             tab_joueurs[n_joueur].jeu_actuel[i][j].etat="ouverte"
-      tab_joueurs[n_joueur].evol_score()
+
+      if n_joueur!=i_joueur:
+        tab_joueurs[n_joueur].evol_score()
+        print(tab_joueurs[n_joueur].score_individuel)
       if tab_joueurs[i_joueur].score_individuel>=tab_joueurs[n_joueur].score_individuel and i_joueur != n_joueur:
         tab_joueurs[i_joueur].score_individuel=tab_joueurs[i_joueur].score_individuel*2
     ecran.fill("grey24")
@@ -131,6 +135,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
   for joueur in tab_joueurs:
     joueur.evol_score()
   i_joueur = joueur_commence(tab_joueurs)
+  
   joueur = tab_joueurs[i_joueur]
   manche_fin = False
   
@@ -169,5 +174,5 @@ def manche(tab_joueurs, pioche, defausse, ecran):
   #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
   jeu_fin_manche(tab_joueurs,ecran,i_gagnant)
   affichage_fin_manche(tab_joueurs,ecran)
-
+  pygame.time.wait(7000)
   return True
