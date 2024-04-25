@@ -4,8 +4,10 @@ import defausse
 import pioche
 
 
-#choix entre pioche et défausse (1er et 2e click)
-def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs): 
+def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
+  """
+  Permet au joueur de choisir ses cartes à jouer
+  """
 
   HAUTEUR = ecran.get_height()
   LARGEUR = ecran.get_width()
@@ -25,7 +27,7 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
     #si le click est sur la défausse
     if (LARGEUR- 2*d.cartes[0].largeur - 50< pos[0] < LARGEUR-50-d.cartes[0].largeur) and (HAUTEUR-30-d.cartes[0].hauteur < pos[1] < HAUTEUR-30):
       
-      #on deplace la carte de la defausse
+      #on déplace la carte de la defausse
       carte_select = d.retire_carte()
       ch = "images/" + str(carte_select.num) + ".png"
       img = pygame.image.load(ch)
@@ -54,7 +56,6 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
               if (30 + j * d.cartes[0].largeur+j*20< pos[0] <30 + j * d.cartes[0].largeur+j*20 + d.cartes[0].largeur) and (30 + i * d.cartes[0].hauteur +i*15< pos[1] <  30 + i * d.cartes[0].hauteur +i*15 + d.cartes[0].hauteur):
 
                 #on échange les cartes
-                #click_carte = True
                 if joueur.jeu_actuel[i][j].num!="42bis":
                   aux = joueur.jeu_actuel[i][j]
                   joueur.jeu_actuel[i][j] = carte_select
@@ -80,7 +81,8 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
       pygame.display.flip()
 
       click_defausse = False
-      #on attend le choix du joueur (jouer sur son jeu ou sur la defausse)
+
+      #on attend le choix du joueur (jouer sur son jeu ou sur la défausse)
       while not (click_carte or click_defausse): 
 
         if souris_sur_aide(ecran, d.cartes[0].hauteur):
@@ -116,8 +118,10 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
             pygame.display.flip()
             click_defausse = True
             
-            #et on retourne une carte selectionnnée par le joueur (fonction ci-dessous)
+            #on retourne une carte selectionnnée par le joueur
             return retourne_cartes(joueur, ecran)
+    
+    #si le joueur clique sur la loupe 
     elif (ecran.get_width()-80< pos[0] < ecran.get_width()-30) and (30 < pos[1] < 80):
         click_croix=False
         i_joueur=0 #arbitraire
@@ -134,13 +138,17 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
     return False
 
 
-#fonction annexe (utilisée ci-dessus)
 def retourne_cartes(joueur, ecran): 
+  """
+  Retourne une carte dans le jeu du joueur
+  """
   HAUTEUR = ecran.get_height()
   LARGEUR = ecran.get_width()
   carte_selectionner = False
-  while not (carte_selectionner): 
-    if souris_sur_aide(ecran, joueur.jeu_actuel[0][0].hauteur): # joueur.jeu_atuel[0] NOUS PERMET DE RECUPERER LA TAILLE D'UNE CARTE CHOIX ARBITRAIRE D'UNE CARTE
+
+  while not (carte_selectionner):
+  #joueur.jeu_actuel[0] nous permet de récuperer la taille d'une carte  (CHOIX ARBITRAIRE D'UNE CARTE)
+    if souris_sur_aide(ecran, joueur.jeu_actuel[0][0].hauteur):
       affiche_aide(ecran, joueur.jeu_actuel[0][0].hauteur, section=3) 
     else:
       cache_aide(ecran,joueur.jeu_actuel[0][0].largeur ,joueur.jeu_actuel[0][0].hauteur)
@@ -152,7 +160,6 @@ def retourne_cartes(joueur, ecran):
       for i in range(3):
         for j in range(4):
           if(30 + j * joueur.jeu_actuel[0][0].largeur+j*20< pos[0] <30 + j * joueur.jeu_actuel[0][0].largeur+j*20 +joueur.jeu_actuel[0][0].largeur) and (30 + i * joueur.jeu_actuel[0][0].hauteur +i*15< pos[1] <  30 + i * joueur.jeu_actuel[0][0].hauteur +i*15 + joueur.jeu_actuel[0][0].hauteur):
-          #if (25 + j * 130 < pos[0] < 135 + j * 130) and (30 + i * 175 < pos[1]< 190 + i * 175):
             if joueur.jeu_actuel[i][j].etat != "ouverte":
               joueur.jeu_actuel[i][j].etat = "ouverte"
               carte_selectionner = True
@@ -161,10 +168,13 @@ def retourne_cartes(joueur, ecran):
 
 
 def affiche_aide(ecran, h_carte, section):
+  """
+  Affiche de l'aide si le joueur place sa souris sur le point d'intérrogation
+  """
   img = pygame.image.load("images/question.png")
   img = pygame.transform.scale(img, (40, 40))
   ecran.blit(img, (30, 30+3*15+3*h_carte + 10))
-  objet_texte = pygame.font.Font(None, 28)
+  objet_texte = pygame.font.Font(None, 32)
 
   if section==0:
     texte="Prenez une carte de la défausse ou de la pioche"
@@ -181,6 +191,9 @@ def affiche_aide(ecran, h_carte, section):
 
 
 def cache_aide(ecran, l_carte, h_carte):
+  """
+  Cache l'aide si le joueur a enlevé sa souris de l'aide
+  """
   img = pygame.image.load("images/question.png")
   img = pygame.transform.scale(img, (40, 40))
   ecran.blit(img, (30, 30+3*15+3*h_carte + 10))
@@ -191,6 +204,9 @@ def cache_aide(ecran, l_carte, h_carte):
 
 
 def souris_sur_aide(ecran, h_carte):
+  """
+  Renvoie vrai si la souris se trouve sur l'aide, faux sinon
+  """
   pos = pygame.mouse.get_pos()
   if (30<pos[0]<30+40) and (30+3*15+3*h_carte + 10<pos[1]<30+3*15+3*h_carte + 10+40):
     return True
@@ -198,6 +214,9 @@ def souris_sur_aide(ecran, h_carte):
     return False
 
 def affiche_page_autre_joueur(ecran,tab_joueurs):
+  """
+  Affiche l'écran qui permet de voir les autres jeux des joueurs
+  """
   HAUTEUR = ecran.get_height()
   LARGEUR = ecran.get_width()
   ecran.fill("grey24")
@@ -218,6 +237,9 @@ def affiche_page_autre_joueur(ecran,tab_joueurs):
 
 
 def voir_autre_jeu(ecran,tab_joueurs,i_joueur):
+  """
+  Affiche les jeux des autres joueurs
+  """
   HAUTEUR = ecran.get_height()
   LARGEUR = ecran.get_width()
   click_croix=False

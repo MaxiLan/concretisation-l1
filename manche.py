@@ -5,6 +5,10 @@ import carte
 
 
 def tour(joueur, pioche, defausse, ecran,tab_joueurs):
+  """
+  Réalise le tour d'un joueur
+  """
+
   #réalise le tour d'un joueur
   ecran.fill("grey24")
   tour_fini=click.click_pioche_defausse(joueur,pioche,defausse,ecran,tab_joueurs)
@@ -30,7 +34,10 @@ def tour(joueur, pioche, defausse, ecran,tab_joueurs):
 
 
 def lancement_manche(pioche, defausse, tab_joueurs,ecran):
-  
+  """
+  Prépare le début de la manche  (mélange, distribution de la pioche et retourne
+  des cartes au hasard)
+  """
   ma_carte=carte.Carte(42,ecran)
   pioche.melange()
   for joueur in tab_joueurs:
@@ -57,6 +64,10 @@ def lancement_manche(pioche, defausse, tab_joueurs,ecran):
 
 
 def fin_manche(ind_joueur,tab_joueurs):
+  """
+  Renvoie vrai si la manche est terminée,
+  i.e. un joueur a retourné toutes ses cartes
+  """
   #J est un joueur, on testera s'il a retourné toutes ses cartes ou non
   i = 0
   manche_finie = True
@@ -70,6 +81,9 @@ def fin_manche(ind_joueur,tab_joueurs):
   return manche_finie
 
 def joueur_commence(tab_joueurs):
+  """
+  Renvoie l'indice du joueur ayant la plus au score au départ
+  """
   ind_j1=0
   for i in range(1,len(tab_joueurs)):
     if tab_joueurs[i].score_individuel>tab_joueurs[ind_j1].score_individuel:
@@ -77,6 +91,9 @@ def joueur_commence(tab_joueurs):
   return ind_j1
 
 def affichage_fin_manche(tab_joueurs,ecran):
+  """
+  Affiche les scores des joueurs à la fin de la manche
+  """
   font=pygame.font.Font(None, 45)
   text=font.render("RESULTATS MANCHE: ",1,"white")
   ecran.blit(text,(30,30))
@@ -88,45 +105,54 @@ def affichage_fin_manche(tab_joueurs,ecran):
       i=i+25
 
 def jeu_fin_manche(tab_joueurs,ecran):
-  #ACTUALISATION DE TOUT LES JEUX DES SCORES= ON RETOURNE TOUE LES CARTES DU JEU
-    for joueur in tab_joueurs:
-      for i in range(3):
-        for j in range(4):
-          if joueur.jeu_actuel[i][j].etat!="ouverte":
-            joueur.jeu_actuel[i][j].etat="ouverte"
-      joueur.evol_score()
-    ecran.fill("grey24")
-    affichage_fin_manche(tab_joueurs,ecran)
+  """
+  Avant de finir la manche, retourne les cartes de tous les joueurs
+  pour pouvoir calculer les scores
+  """
+  for joueur in tab_joueurs:
+    for i in range(3):
+      for j in range(4):
+        if joueur.jeu_actuel[i][j].etat!="ouverte":
+          joueur.jeu_actuel[i][j].etat="ouverte"
+    joueur.evol_score()
+  ecran.fill("grey24")
+  affichage_fin_manche(tab_joueurs,ecran)
     
 
 
 def manche(tab_joueurs, pioche, defausse, ecran): 
+  """
+  Réalise une manche entière
+  """
   lancement_manche(pioche, defausse, tab_joueurs,ecran)
   for joueur in tab_joueurs:
     joueur.evol_score()
   i_joueur = joueur_commence(tab_joueurs)
-  print(i_joueur)
   joueur = tab_joueurs[i_joueur]
   manche_fin = False
   
   
   while not manche_fin:
-    
-    tour(joueur, pioche, defausse, ecran,tab_joueurs) #deroulement d'un tour
-    #mise a jour ecran
+    #déroulement d'un tour
+    tour(joueur, pioche, defausse, ecran,tab_joueurs)    
+
+    #mise à jour de l'écran
     defausse.affiche(ecran)
     joueur.retrait_colonne(defausse,ecran)
     joueur.affiche_jeu(ecran) 
     pygame.display.flip() 
-
-    manche_fin = fin_manche(i_joueur,tab_joueurs)#test fin de manche
+    
+    #test si fin de manche
+    manche_fin = fin_manche(i_joueur,tab_joueurs)
     gagant=joueur
+
     #changement de joueur pour la suite
     i_joueur = (i_joueur + 1) % len(tab_joueurs)
     joueur = tab_joueurs[i_joueur]
-    pygame.time.wait(500) #laisse le temps au joueur de voir son score
+    #laisse le temps au joueur de voir son score
+    pygame.time.wait(500)
 
-  #une fois qu'un joueur a retourné toute ses cartes il faut encore faire un tour :
+  #une fois qu'un joueur a retourné toute ses cartes il faut encore faire un tour
   for i in range(len(tab_joueurs)-1):
     tour(joueur, pioche, defausse, ecran,tab_joueurs)
     defausse.affiche(ecran)
@@ -137,9 +163,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
     joueur = tab_joueurs[i_joueur]
     pygame.time.wait(2000)
 
-  #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
+  #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts 
+  #et afficher les gagnants
   jeu_fin_manche(tab_joueurs,ecran)
   return True
-
-  
-  

@@ -2,7 +2,7 @@ import pygame
 
 class Carte:
   
-  def __init__(self, numero,ecran):
+  def __init__(self, numero, ecran):
     HAUTEUR = ecran.get_height()
     LARGEUR = ecran.get_width()
     facteur = HAUTEUR/850
@@ -11,10 +11,11 @@ class Carte:
     self.hauteur=160 * facteur
     self.largeur=110 * facteur
 
-  def affiche(self):  #affichage d'une carte
-    print(self.num)
 
-def cacher_carte(ecran,carte):
+def cacher_carte(ecran, carte):
+  """
+  Recouvre l'emplacement "carte en main"
+  """
   x = ecran.get_width() - 40 - carte.largeur - carte.largeur//2
   y = ecran.get_height() - 50 - 2 * carte.hauteur
   img = pygame.image.load("images/carte_selectionnee.png")
