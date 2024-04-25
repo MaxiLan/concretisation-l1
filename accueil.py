@@ -1,12 +1,15 @@
 import pygame
 
 def affiche_accueil(ecran):
+  """
+  Affiche le titre et permet de choisir le nombre de joueur
+  """
   nb_joueurs = 2
 
   nb_choisi = False
 
   while not nb_choisi:  
-    ecran.fill("grey24")
+    ecran.fill((26, 50, 120))
     affiche_elements(ecran, nb_joueurs)
     nb_joueurs, nb_choisi = click(ecran, nb_joueurs)
 
@@ -14,6 +17,9 @@ def affiche_accueil(ecran):
 
 
 def affiche_elements(ecran, nb_joueurs):
+  """
+  Affiche tous les éléments nécessaires pour l'accueil'
+  """
   H = ecran.get_height()
   L = ecran.get_width()
   milieu_l = L // 2
@@ -52,6 +58,9 @@ def affiche_elements(ecran, nb_joueurs):
 
 
 def click(ecran, nb_joueurs): 
+  """
+  Change le nombre de joueur selon s'il clique si + ou -
+  """
   H = ecran.get_height()
   L = ecran.get_width()
   milieu_l = L // 2
@@ -69,7 +78,7 @@ def click(ecran, nb_joueurs):
         click_souris = True
         if nb_joueurs<8:
           nb_joueurs += 1
-        pygame.time.wait(150)
+        pygame.time.wait(200)
         return nb_joueurs, False
 
 
@@ -77,7 +86,7 @@ def click(ecran, nb_joueurs):
         click_souris = True
         if nb_joueurs>2:
           nb_joueurs -= 1
-        pygame.time.wait(150)
+        pygame.time.wait(200)
         return nb_joueurs, False
 
 
@@ -85,8 +94,3 @@ def click(ecran, nb_joueurs):
         click_souris = True
         pygame.time.wait(250)
         return nb_joueurs, True
-
-
-
-
-        
