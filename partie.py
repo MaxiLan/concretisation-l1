@@ -7,7 +7,7 @@ class Partie:
     self.nb_joueurs = nb_joueurs
     self.tab_joueurs = []
     # 1 pour partie finie, 0 pour partie en cours
-
+    
     self.manche_finie = False
     self.score = []
 

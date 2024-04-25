@@ -87,14 +87,17 @@ def affichage_fin_manche(tab_joueurs,ecran):
       pygame.display.flip()
       i=i+25
 
-def jeu_fin_manche(tab_joueurs,ecran):
+def jeu_fin_manche(tab_joueurs,ecran,gagnant):
   #ACTUALISATION DE TOUT LES JEUX DES SCORES= ON RETOURNE TOUE LES CARTES DU JEU
+    gagnant.evol_score()
     for joueur in tab_joueurs:
       for i in range(3):
         for j in range(4):
           if joueur.jeu_actuel[i][j].etat!="ouverte":
             joueur.jeu_actuel[i][j].etat="ouverte"
       joueur.evol_score()
+      if gagnant.score_individuel>=joueur.score_individuel:
+        gagnant.score_individuel=gagnant.score_individuel*2
     ecran.fill("grey24")
     affichage_fin_manche(tab_joueurs,ecran)
     
@@ -138,7 +141,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
     pygame.time.wait(2000)
 
   #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
-  jeu_fin_manche(tab_joueurs,ecran)
+  jeu_fin_manche(tab_joueurs,ecran,gagnant)
   return True
 
   

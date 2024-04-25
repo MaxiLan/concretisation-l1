@@ -122,7 +122,7 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
         click_croix=False
         i_joueur=0 #arbitraire
         while not click_croix:
-          pygame.time.wait(150)
+          pygame.time.wait(100)
           click_croix,i_joueur=voir_autre_jeu(ecran,tab_joueurs,i_joueur)
         joueur.affiche_jeu(ecran)
         p.affiche(ecran)
