@@ -62,7 +62,7 @@ def click_pioche_defausse(joueur, p, d, ecran,tab_joueurs):
                   joueur.jeu_actuel[i][j].etat = "ouverte"
                   d.ajout_carte(aux)
                   carte.cacher_carte(ecran,d.cartes[0])
-                  pygame.display.flip()
+                  #pygame.display.flip()
                   return True
 
     #sinon si le click est sur la pioche

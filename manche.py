@@ -11,7 +11,7 @@ def tour(joueur, pioche, defausse, ecran,tab_joueurs):
 
   #réalise le tour d'un joueur
   ecran.fill("grey24")
-  tour_fini=click.click_pioche_defausse(joueur,pioche,defausse,ecran,tab_joueurs)
+  tour_fini=False
   
   ch = "images/loupe.png"
   img = pygame.image.load(ch)
@@ -104,23 +104,22 @@ def affichage_fin_manche(tab_joueurs,ecran):
       pygame.display.flip()
       i=i+25
 
-
-def jeu_fin_manche(tab_joueurs,ecran,gagnant):
+def jeu_fin_manche(tab_joueurs,ecran,i_joueur):
     """
     Avant de finir la manche, retourne les cartes de tous les joueurs
     pour pouvoir calculer les scores
     """
-    gagnant.evol_score()
-    for joueur in tab_joueurs:
+    tab_joueurs[i_joueur].evol_score()
+
+    for n_joueur in range (len(tab_joueurs)):
       for i in range(3):
         for j in range(4):
-          if joueur.jeu_actuel[i][j].etat!="ouverte":
-            joueur.jeu_actuel[i][j].etat="ouverte"
-      joueur.evol_score()
-      if gagnant.score_individuel>=joueur.score_individuel:
+          if tab_joueurs[n_joueur].jeu_actuel[i][j].etat!="ouverte":
+            tab_joueurs[n_joueur].jeu_actuel[i][j].etat="ouverte"
+      tab_joueurs[n_joueur].evol_score()
+      if tab_joueurs[i_joueur].score_individuel>=tab_joueurs[n_joueur].score_individuel and i_joueur != n_joueur:
         gagnant.score_individuel=gagnant.score_individuel*2
     ecran.fill("grey24")
-
 
 
 def manche(tab_joueurs, pioche, defausse, ecran): 
@@ -147,7 +146,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
     
     #test si fin de manche
     manche_fin = fin_manche(i_joueur,tab_joueurs)
-    gagnant=joueur
+    i_gagnant=i_joueur
 
     #changement de joueur pour la suite
     i_joueur = (i_joueur + 1) % len(tab_joueurs)
@@ -167,7 +166,7 @@ def manche(tab_joueurs, pioche, defausse, ecran):
     pygame.time.wait(2000)
 
   #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
-  jeu_fin_manche(tab_joueurs,ecran,gagnant)
+  jeu_fin_manche(tab_joueurs,ecran,i_gagnant)
   affichage_fin_manche(tab_joueurs,ecran)
 
   return True
