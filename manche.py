@@ -12,13 +12,13 @@ def tour(joueur,partie, ecran):
   #réalise le tour d'un joueur
   ecran.fill("grey24")
   tour_fini=False
-  joueur.evol_score()
+  partie.carte_en_main="images/carte_selectionnee.png"
   ch = "images/loupe.png"
   img = pygame.image.load(ch)
   img = pygame.transform.scale(img, (50,50))
   ecran.blit(img, (ecran.get_width()-80, 30))
   #tant que son tour n'est pas fini, son jeu reste affiché
-  carte.cacher_carte(ecran,partie.defausse.cartes[0])
+  carte.cacher_carte(ecran,partie)
   font=pygame.font.Font(None, 35)
   text=font.render("Joueur n°"+str(joueur.nom),1, "white")
   ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
@@ -56,9 +56,10 @@ def lancement_manche(partie,ecran):
     joueur.jeu_actuel[abs][ord].etat = "ouverte"
 
   #AFFICHAGE des le debut de l'emplacement "carte en main" 
-  carte.cacher_carte(ecran,ma_carte)
+  
   partie.defausse.ajout_carte(ma_carte)
   partie.defausse.ajout_carte(partie.pioche.cartes[0])
+  carte.cacher_carte(ecran,partie)
   partie.pioche.cartes.pop(0)
   partie.pioche.cartes[0].etat = "ouverte"
 
@@ -115,10 +116,7 @@ def jeu_fin_manche(joueur,ecran):
       for j in range(4):
         if joueur.jeu_actuel[i][j].etat!="ouverte":
           joueur.jeu_actuel[i][j].etat="ouverte"
-
     ecran.fill("grey24")
-    
-
 
 
 def manche(partie, ecran): 

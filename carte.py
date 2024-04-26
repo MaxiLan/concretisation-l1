@@ -12,12 +12,13 @@ class Carte:
     self.largeur=110 * facteur
 
 
-def cacher_carte(ecran, carte):
+def cacher_carte(ecran, partie):
   """
   Recouvre l'emplacement "carte en main"
   """
-  x = ecran.get_width() - 40 - carte.largeur - carte.largeur//2
-  y = ecran.get_height() - 50 - 2 * carte.hauteur
-  img = pygame.image.load("images/carte_selectionnee.png")
-  img = pygame.transform.scale(img, (carte.largeur, carte.hauteur))
+  x = ecran.get_width() - 40 - partie.pioche.cartes[0].largeur - partie.pioche.cartes[0].largeur//2
+  y = ecran.get_height() - 50 - 2 * partie.pioche.cartes[0].hauteur
+  img = pygame.image.load(partie.carte_en_main)
+  img = pygame.transform.scale(img, (partie.pioche.cartes[0].largeur, partie.pioche.cartes[0].hauteur))
   ecran.blit(img, (x, y))
+  
