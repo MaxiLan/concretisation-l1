@@ -23,21 +23,19 @@ ecran.fill("grey24")
 
 nb_joueurs = accueil.affiche_accueil(ecran)
 
-partie = partie.Partie(nb_joueurs)
+partie = partie.Partie(nb_joueurs, ecran)
 
 for i in range(nb_joueurs):
   J = joueur.Joueur(i + 1)
   partie.tab_joueurs.append(J)
 
 
-p = pioche.Pioche(ecran)
-d = defausse.Defausse()
 while not fin_partie:
   for event in pygame.event.get():
     if event.type == pygame.QUIT:
       fin_partie = True
 
-  manche.manche(partie.tab_joueurs, p, d, ecran)
+  manche.manche(partie, ecran)
   partie.mise_a_jour_score()
   fin_partie = partie.fin_partie()
   

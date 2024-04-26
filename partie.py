@@ -1,11 +1,15 @@
 import joueur
 import random
+import pioche
+import defausse
 
 
 class Partie:
-  def __init__(self, nb_joueurs):
+  def __init__(self, nb_joueurs, ecran):
     self.nb_joueurs = nb_joueurs
     self.tab_joueurs = []
+    self.pioche = pioche.Pioche(ecran)
+    self.defausse = defausse.Defausse()
 
     self.manche_finie = False
     self.score = []
