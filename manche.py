@@ -9,7 +9,6 @@ def tour(joueur,partie, ecran):
   Réalise le tour d'un joueur
   """
 
-  #réalise le tour d'un joueur
   ecran.fill("grey24")
   tour_fini=False
   joueur.evol_score()
@@ -123,7 +122,32 @@ def jeu_fin_manche(tab_joueurs,ecran,i_joueur):
       if tab_joueurs[i_joueur].score_individuel>=tab_joueurs[n_joueur].score_individuel and i_joueur != n_joueur:
         tab_joueurs[i_joueur].score_individuel=tab_joueurs[i_joueur].score_individuel*2
     ecran.fill("grey24")
-    
+
+
+def continuer_partie(ecran, partie):
+  """
+  Relance une manche ou arrête la partie
+  """
+  cliquer = False
+  objet_font = pygame.font.Font(None, 30) 
+  print(objet_font.size("Cliquez pour continuer"), objet_font.size("Cliquez pour arrêtez"))
+  ecran.blit(objet_font.render("Cliquez pour continuer", True, "white"), (400, 400))
+  ecran.blit(objet_font.render("Cliquez pour arrêtez", True, "white"), (500, 500))
+  pygame.display.flip()
+
+  while not cliquer:
+    pygame.event.get()
+    s = pygame.mouse.get_pressed()
+
+    if s[0]:
+      pos = pygame.mouse.get_pos()
+
+      if (400<pos[0]<500) and (400<pos[1]<500):
+        cliquer = True
+        return True
+      elif (500<pos[0]<600) and (500<pos[1]<600):
+        cliquer = True
+        return False
 
 
 
@@ -174,4 +198,4 @@ def manche(partie, ecran):
   #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
   jeu_fin_manche(partie.tab_joueurs,ecran,i_gagnant)
   affichage_fin_manche(partie.tab_joueurs,ecran)
-  return True
+  return continuer_partie(ecran, partie)
