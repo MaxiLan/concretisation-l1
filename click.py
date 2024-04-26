@@ -8,7 +8,6 @@ def click_pioche_defausse(joueur,partie, ecran):
   """
   Permet au joueur de choisir ses cartes à jouer
   """
-
   HAUTEUR = ecran.get_height()
   LARGEUR = ecran.get_width()
   h = partie.defausse.cartes[0].hauteur

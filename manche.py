@@ -105,23 +105,17 @@ def affichage_fin_manche(tab_joueurs,ecran):
       i=i+25
   
 
-def jeu_fin_manche(tab_joueurs,ecran,i_joueur):
+def jeu_fin_manche(joueur,ecran):
     """
     Avant de finir la manche, retourne les cartes de tous les joueurs
     pour pouvoir calculer les scores
     """
-    tab_joueurs[i_joueur].evol_score()
+    joueur.evol_score()
+    for i in range(3):
+      for j in range(4):
+        if joueur.jeu_actuel[i][j].etat!="ouverte":
+          joueur.jeu_actuel[i][j].etat="ouverte"
 
-    for n_joueur in range (len(tab_joueurs)):
-      for i in range(3):
-        for j in range(4):
-          if tab_joueurs[n_joueur].jeu_actuel[i][j].etat!="ouverte":
-            tab_joueurs[n_joueur].jeu_actuel[i][j].etat="ouverte"
-
-      if n_joueur!=i_joueur:
-        tab_joueurs[n_joueur].evol_score()
-      if tab_joueurs[i_joueur].score_individuel>=tab_joueurs[n_joueur].score_individuel and i_joueur != n_joueur:
-        tab_joueurs[i_joueur].score_individuel=tab_joueurs[i_joueur].score_individuel*2
     ecran.fill("grey24")
     
 
@@ -153,6 +147,7 @@ def manche(partie, ecran):
     #test si fin de manche
     manche_fin = fin_manche(i_joueur,partie.tab_joueurs)
     i_gagnant=i_joueur
+    joueur.evol_score()
 
     #changement de joueur pour la suite
     i_joueur = (i_joueur + 1) % len(partie.tab_joueurs)
@@ -165,13 +160,17 @@ def manche(partie, ecran):
     tour(joueur, partie, ecran)
     partie.defausse.affiche(ecran)
     joueur.retrait_colonne(partie.pioche,ecran)
+    jeu_fin_manche(joueur,ecran)
     joueur.affiche_jeu(ecran) 
     pygame.display.flip()
     i_joueur = (i_joueur + 1) % len(partie.tab_joueurs)
     joueur = partie.tab_joueurs[i_joueur]
     pygame.time.wait(2000)
-
+  
+  for num_joueur in range (len(partie.tab_joueurs)):
+    if partie.tab_joueurs[i_gagnant].score_individuel>=partie.tab_joueurs[num_joueur].score_individuel and i_gagnant != num_joueur:
+        partie.tab_joueurs[i_gagnant].score_individuel=partie.tab_joueurs[i_gagnant].score_individuel*2
   #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
-  jeu_fin_manche(partie.tab_joueurs,ecran,i_gagnant)
+  ecran.fill("grey")
   affichage_fin_manche(partie.tab_joueurs,ecran)
   return True
