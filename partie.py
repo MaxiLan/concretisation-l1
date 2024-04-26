@@ -10,7 +10,7 @@ class Partie:
     self.tab_joueurs = []
     self.pioche = pioche.Pioche(ecran)
     self.defausse = defausse.Defausse()
-
+    self.carte_en_main="images/carte_selectionnee.png"
     self.manche_finie = False
     self.score = []
 
