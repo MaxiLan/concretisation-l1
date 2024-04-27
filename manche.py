@@ -38,6 +38,7 @@ def lancement_manche(partie,ecran):
   Prépare le début de la manche  (mélange, distribution de la pioche et retourne
   des cartes au hasard)
   """
+ 
   ma_carte=carte.Carte(42,ecran)
   partie.pioche.melange()
   for joueur in partie.tab_joueurs:
@@ -131,7 +132,7 @@ def manche(partie, ecran):
   joueur = partie.tab_joueurs[i_joueur]
   manche_fin = False
   
-  
+  pygame.time.wait(150)
   while not manche_fin:
     #déroulement d'un tour
     tour(joueur, partie, ecran)    
@@ -169,6 +170,6 @@ def manche(partie, ecran):
     if partie.tab_joueurs[i_gagnant].score_individuel>=partie.tab_joueurs[num_joueur].score_individuel and i_gagnant != num_joueur:
         partie.tab_joueurs[i_gagnant].score_individuel=partie.tab_joueurs[i_gagnant].score_individuel*2
   #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
-  ecran.fill("grey")
+  ecran.fill("grey24")
   affichage_fin_manche(partie.tab_joueurs,ecran)
   return True

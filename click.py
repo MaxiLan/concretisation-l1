@@ -1,5 +1,3 @@
-
-
 import pygame
 import carte
 import defausse
@@ -38,10 +36,6 @@ def click_pioche_defausse(joueur,partie, ecran):
       #on déplace la carte de la defausse
       carte_select = partie.defausse.retire_carte()
       partie.carte_en_main="images/" + str(carte_select.num) + ".png"
-      # ch = "images/" + str(carte_select.num) + ".png"
-      # img = pygame.image.load(ch)
-      # img = pygame.transform.scale(img, (l,h))
-      # ecran.blit(img, (LARGEUR - 40 - l- l//2, HAUTEUR-50-2*h))
       carte.cacher_carte(ecran,partie)
       partie.defausse.affiche(ecran)
       pygame.display.flip()
@@ -91,9 +85,6 @@ def click_pioche_defausse(joueur,partie, ecran):
       partie.pioche.est_vide(partie.defausse)
       partie.pioche.affiche(ecran)
       partie.carte_en_main= "images/" + str(carte_select.num) + ".png"
-      # img = pygame.image.load(ch)
-      # img = pygame.transform.scale(img, (l, h))
-      # ecran.blit(img, (LARGEUR - 40 - l- l//2, HAUTEUR-50-2*h))
       carte.cacher_carte(ecran,partie)
       pygame.display.flip()
 
@@ -125,9 +116,9 @@ def click_pioche_defausse(joueur,partie, ecran):
                   joueur.jeu_actuel[i][j].etat = "ouverte"
                   partie.defausse.ajout_carte(aux)
                   carte.cacher_carte(ecran, partie)
-                  #pygame.display.flip()
                   return True
-          
+          if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
+            test_appel_loupe(ecran,partie,joueur)
           #si le click est sur la defausse
           if (LARGEUR- 2*l- 50< pos[0] < LARGEUR-50-l) and (HAUTEUR-30-h< pos[1] < HAUTEUR-30):
             partie.carte_en_main="images/carte_selectionnee.png"
@@ -157,7 +148,6 @@ def test_appel_loupe(ecran,partie,joueur):
     pygame.time.wait(100)
     click_croix,i_joueur=voir_autre_jeu(ecran,partie.tab_joueurs,i_joueur)
 
-  #carte.cacher_carte(ecran,partie)
   font=pygame.font.Font(None, 35)
   text=font.render("Joueur n°"+str(joueur.nom),1, "white")
   ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
@@ -180,7 +170,6 @@ def retourne_cartes(joueur, ecran,partie):
   carte_selectionner = False
 
   while not (carte_selectionner):
-  #joueur.jeu_actuel[0] nous permet de récuperer la taille d'une carte  (CHOIX ARBITRAIRE D'UNE CARTE)
     if souris_sur_aide(ecran, h):
       affiche_aide(ecran, h, section=3) 
     else:
