@@ -38,7 +38,6 @@ def lancement_manche(partie,ecran):
   Prépare le début de la manche  (mélange, distribution de la pioche et retourne
   des cartes au hasard)
   """
- 
   ma_carte=carte.Carte(42,ecran)
   partie.pioche.melange()
   for joueur in partie.tab_joueurs:

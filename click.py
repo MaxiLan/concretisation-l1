@@ -151,7 +151,6 @@ def test_appel_loupe(ecran,partie,joueur):
   font=pygame.font.Font(None, 35)
   text=font.render("Joueur n°"+str(joueur.nom),1, "white")
   ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
-  partie.carte_en_main="images/carte_selectionnee.png"
   joueur.affiche_jeu(ecran)
   partie.pioche.affiche(ecran)
   partie.defausse.affiche(ecran)

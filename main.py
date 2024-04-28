@@ -22,7 +22,6 @@ ecran.fill("grey24")
 
 
 nb_joueurs = accueil.affiche_accueil(ecran)
-
 partie = partie.Partie(nb_joueurs, ecran)
 
 for i in range(nb_joueurs):
