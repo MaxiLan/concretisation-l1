@@ -161,7 +161,7 @@ def manche(partie, ecran):
   joueur = partie.tab_joueurs[i_joueur]
   manche_fin = False
   
-  
+  pygame.time.wait(150)
   while not manche_fin:
     #déroulement d'un tour
     tour(joueur, partie, ecran)    
