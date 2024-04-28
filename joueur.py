@@ -3,7 +3,7 @@ import carte
 class Joueur:
 
   def __init__(self, nom):
-    self.jeu_actuel = [[], [], []]
+    self.jeu_actuel = [[0,0,0,0], [0,0,0,0], [0,0,0,0]]
     self.nom = nom
     self.score_individuel = 0
 

@@ -5,8 +5,11 @@ import pygame
 
 class Pioche:
 
-  def __init__(self,ecran):
+  def __init__(self):
     self.cartes = []
+    
+
+  def rempli(self, ecran):
     #cartes de -1 à 12
     for i in range(-1, 13):
       for _ in range(10):
@@ -23,7 +26,10 @@ class Pioche:
       c = carte.Carte(-2,ecran)
       self.cartes.append(c)
 
-    self.taille = len(self.cartes)
+  
+  def vide(self):
+    self.cartes.clear()
+
 
   def affiche(self, ecran): 
     HAUTEUR = ecran.get_height()

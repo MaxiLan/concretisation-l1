@@ -37,25 +37,28 @@ def lancement_manche(partie,ecran):
   Prépare le début de la manche  (mélange, distribution de la pioche et retourne
   des cartes au hasard)
   """
-  ma_carte=carte.Carte(42,ecran)
+  partie.pioche.vide()
+  partie.pioche.rempli(ecran)
   partie.pioche.melange()
+  
   for joueur in partie.tab_joueurs:
     for i in range(3):
-      for _ in range(4):
-        joueur.jeu_actuel[i].append(partie.pioche.cartes[0])
-        partie.pioche.cartes.pop(0)
+      for j in range(4):
+        joueur.jeu_actuel[i][j] = partie.pioche.cartes.pop(0)
 
     abs = random.randint(0, 2)
     ord = random.randint(0, 3)
     joueur.jeu_actuel[abs][ord].etat = "ouverte"
-    while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
-      abs = random.randint(0, 2)
-      ord = random.randint(0, 3)
+    for _ in range(8):
+      while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
+        abs = random.randint(0, 2)
+        ord = random.randint(0, 3)
 
-    joueur.jeu_actuel[abs][ord].etat = "ouverte"
+      joueur.jeu_actuel[abs][ord].etat = "ouverte"
 
   #AFFICHAGE des le debut de l'emplacement "carte en main" 
   
+  ma_carte=carte.Carte(42,ecran)
   partie.defausse.ajout_carte(ma_carte)
   partie.defausse.ajout_carte(partie.pioche.cartes[0])
   carte.cacher_carte(ecran,partie)
@@ -80,6 +83,7 @@ def fin_manche(ind_joueur,tab_joueurs):
     i += 1
   return manche_finie
 
+
 def joueur_commence(tab_joueurs):
   """
   Renvoie l'indice du joueur ayant la plus au score au départ
@@ -90,19 +94,20 @@ def joueur_commence(tab_joueurs):
       ind_j1=i
   return ind_j1
 
-def affichage_fin_manche(tab_joueurs,ecran):
+
+def affichage_fin_manche(partie,ecran):
   """
   Affiche les scores des joueurs à la fin de la manche
   """
   font=pygame.font.Font(None, 45)
   text=font.render("RESULTATS MANCHE: ",1,"white")
   ecran.blit(text,(30,30))
-  i=1
-  for joueurs in tab_joueurs:
-      text=font.render("Score joueur n°"+str(joueurs.nom)+" : " +str(joueurs.score_individuel),1, "white")
-      ecran.blit(text,(150,150+i))
+  h=1
+  for i in range(len(partie.tab_joueurs)):
+      text=font.render("Score joueur n°"+str(i+1)+" : " +str(partie.score[i]),1, "white")
+      ecran.blit(text,(150,150+h))
       pygame.display.flip()
-      i=i+25
+      h=h+25
   
 
 def jeu_fin_manche(joueur,ecran):
@@ -122,13 +127,13 @@ def continuer_partie(ecran, partie):
   """
   Relance une manche ou arrête la partie
   """
-  cliquer = False
+  l_milieu = ecran.get_width() // 2
   objet_font = pygame.font.Font(None, 30) 
-  print(objet_font.size("Cliquez pour continuer"), objet_font.size("Cliquez pour arrêtez"))
-  ecran.blit(objet_font.render("Cliquez pour continuer", True, "white"), (400, 400))
-  ecran.blit(objet_font.render("Cliquez pour arrêtez", True, "white"), (500, 500))
+  ecran.blit(objet_font.render("Cliquez pour continuer", True, "white"), (l_milieu-228 - 50, 600))
+  ecran.blit(objet_font.render("Cliquez pour arrêtez", True, "white"), (l_milieu + 50, 600))
   pygame.display.flip()
 
+  cliquer = False
   while not cliquer:
     pygame.event.get()
     s = pygame.mouse.get_pressed()
@@ -136,13 +141,12 @@ def continuer_partie(ecran, partie):
     if s[0]:
       pos = pygame.mouse.get_pos()
 
-      if (400<pos[0]<500) and (400<pos[1]<500):
+      if (l_milieu-228 - 50<pos[0]<l_milieu - 50 ) and (600<pos[1]<620):
         cliquer = True
         return True
-      elif (500<pos[0]<600) and (500<pos[1]<600):
+      elif (l_milieu + 50<pos[0]<l_milieu + 50 + 200) and (600<pos[1]<620):
         cliquer = True
         return False
-
 
 
 def manche(partie, ecran): 
@@ -194,7 +198,9 @@ def manche(partie, ecran):
   for num_joueur in range (len(partie.tab_joueurs)):
     if partie.tab_joueurs[i_gagnant].score_individuel>=partie.tab_joueurs[num_joueur].score_individuel and i_gagnant != num_joueur:
         partie.tab_joueurs[i_gagnant].score_individuel=partie.tab_joueurs[i_gagnant].score_individuel*2
+
   #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
-  ecran.fill("grey")
-  affichage_fin_manche(partie.tab_joueurs,ecran)
+  ecran.fill("grey24")
+  partie.mise_a_jour_score()
+  affichage_fin_manche(partie,ecran)
   return continuer_partie(ecran, partie)

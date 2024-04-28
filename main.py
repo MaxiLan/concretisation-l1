@@ -35,9 +35,10 @@ while not fin_partie:
     if event.type == pygame.QUIT:
       fin_partie = True
 
-  continuer = manche.manche(partie, ecran)
-  partie.mise_a_jour_score()
-  fin_partie = partie.fin_partie() and continuer
+  fin_partie = not manche.manche(partie, ecran)
+
+  if partie.fin_partie():
+    fin_partie = True
   
 
 pygame.quit()
