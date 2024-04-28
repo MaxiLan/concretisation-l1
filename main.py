@@ -16,7 +16,7 @@ HAUTEUR =  950
 LARGEUR =  1050
 pygame.init()
 clock = pygame.time.Clock()
-ecran = pygame.display.set_mode((LARGEUR, HAUTEUR),pygame.FULLSCREEN)
+ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
 pygame.display.set_caption("SKYJO")
 ecran.fill("grey24")
 
@@ -34,9 +34,10 @@ while not fin_partie:
     if event.type == pygame.QUIT:
       fin_partie = True
 
-  manche.manche(partie, ecran)
-  partie.mise_a_jour_score()
-  fin_partie = partie.fin_partie()
+  fin_partie = not manche.manche(partie, ecran)
+
+  if partie.fin_partie():
+    fin_partie = True
   
 
 pygame.quit()
