@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="fr-FR">
@@ -8,15 +7,158 @@
     <link rel="stylesheet" href="style.css">
     <title>Concrétisation</title>
   </head>
-
   <body>
     <header>
-      <h1>Skyjo</h1>
+      <a href="index.html"><h1>Skyjo</h1></a>
     </header>
-
+    <nav>
+      <a href="index.html">Le jeu</a> 
+      <a href="etapes.html">Le projet</a> 
+      <a href="fonctions.html">Les détails</a> 
+      <a href="nous.html">Nous</a> 
+    </nav>
     <main>
       <h2>Nos fichiers et fonctions</h2>
-        <p></p>
+      <p>
+      Les différentes fonctionnalités du jeu sont séparées en plusieurs fichiers.</p>
+
+      <ul>
+        <li>main.py</li>
+        <li>accueil.py</li>
+        <li>carte.py</li>
+        <li>joueur.py</li>
+        <li>pioche.py</li>
+        <li>defausse.py</li>
+        <li>partie.py</li>
+        <li>manche.py</li>
+        <li>click.py</li>
+      </ul>
+      
+      <p>Les structures de données utilisées (Carte, Pioche, Defausse, Joueur, Pa) sont sous forme de classe Python.</p>
+
+      <br>
+
+      <h3>main.py</h3>
+        <p>
+        Le fichier main.py contient les lignes de code principales.<br>
+        C'est ici qu'est affiché l'écran d'accueil et où la partie est lancée.
+        </p>
+
+      <h3>accueil.py</h3>
+        <p>
+        Le fichier accueil.html affiche, comme son nom l'indique, la page d'accueil du jeu.<br>
+        Le joueur indiquera le nombre de joueurs présents pour la partie, puis sélectionnnera "Cliquer pour commencer".
+        </p>
+
+      <h3>carte.py</h3>
+        <p>
+        Ce fichier contient la classe Carte, représentant donc une carte du jeu.<br>
+        Un objet carte a pour attribut :
+        <p>
+
+        <ul>
+          <li>hauteur : Hauteur de la carte, en fonction de la taille de l'écran</li>
+          <li>largeur : Largeur de la carte, en fonction de la taille de l'écran</li>
+          <li>num : Numéro inscrit sur la carte (de -2 à 12)</li>
+          <li>etat: Etat de la carte (ouverte ou cachée)</li>
+        </ul>
+
+        <p>
+        Il n'y a pas de méthode, seulement une fonction qui permet de recouvrir l'emplacement "carte en main".
+        </p>
+
+      <h3>joueur.py</h3>
+        <p>
+        joueur.py contient la classe représentant un joueur.<br>
+        Les attributs sont les suivants :
+        </p>
+
+        <ul>
+            <li>nom : Simplement le numéro du joueur</li>
+            <li>jeu_actuel : Matrice 3x4 representant le jeu du joueur</li>
+            <li>score_individuel : Score du joueur</li>
+        </ul>
+
+        <p>Ensuite, les méthodes :</p> 
+
+        <ul>
+            <li>evol_score() : Met à jour le score du joueur</li>
+            <li>retrait_colonne(defausse, ecran) : Retire une colonne si elle est rempli du même nombre</li>
+            <li>affiche_jeu(ecran) : Affiche le jeu du joueur à l'écran</li>
+            <li>affiche_jeu_vision_ext(ecran) : Affiche le jeu des autres joueurs si la loupe est sélectionnée</li>
+        </ul>
+
+      <h3>pioche.py</h3>
+        <p>
+        Comme son nom l'indique, on retrouve ici la classe de la pioche du jeu.<br>
+        Un seul attribut :
+        </p>   
+
+        <ul>
+            <li>cartes : Liste de cartes (on peut voir cela comme une pile)</li>
+        </ul>
+
+        <p>Les méthodes :</p>
+
+        <ul>
+          <li>rempli(ecran) : Rempli la pioche avec les 150 cartes du jeu</li>
+          <li>vide() : Vide la liste pour le début d'une manche</li>
+          <li>melange() : Mélange la pioche</li>
+          <li>affiche(ecran) : Affiche la pioche à l'écran (seulement la première carte)</li>
+          <li>est_vide(defausse) : Si la pioche est vide, ajoute les cartes de la défausse à la pioche</li>
+        </ul>
+
+      <h3>defausse.py</h3>
+        <p>        
+        Similaire à pioche.py, defausse.py contient la classe représentant la défausse du jeu.<br>
+        Un seul attribut également :
+        </p>
+
+        <ul>
+            <li>cartes : Liste de cartes</li>
+        </ul> 
+
+        <p>Des méthodes un peu différentes : <p>
+        <ul>
+          <li>affiche(ecran) : Affiche la défausse à l'écran (seulement la première carte)</li>
+          <li>ajout_carte(carte) : Ajoute une carte à la défausse</li>
+          <li>retire_carte() : Retire la première carte de la défausse</li>
+        </ul>
+
+
+      <h3>partie.py</h3>
+        <p>
+        Contient la classe Partie.<br>
+        Plusieurs attributs : 
+        </p>
+
+        <ul>
+            <li>nb_joueurs : Nombre de joueurs dans une partie</li>
+            <li>tab_joueurs : Tableau avec les différents joueurs de la partie</li>
+            <li>pioche : Pioche de la partie</li>
+            <li>defausse : Défausse de la partie</li>
+            <li>carte_en_main : Image affichée à l'emplacement "carte en main"</li>
+            <li>manche_finie : Booléen répresentant l'état de la manche actuelle</li>
+            <li>score : Tableau contenant les scores des joueurs</li>
+        </ul> 
+
+        <p>Les méthodes : <p>
+        <ul>
+          <li>fin_partie() : Si un joueur a atteint les 100 pts, renvoie vrai</li>
+          <li>mise_a_jour_score() : Met à jour les scores après une manche</li>
+          <li>ajouter_joueur(joueur) : Ajoute un joueur à l'attribut tab_joueurs</li>
+        </ul>
+
+      <h3>manche.py</h3>
+        <p>
+        C'est dans ce fichier que se déroule une manche entière.<br>
+        </p>
+
+      <h3>click.py</h3>
+        <p>
+
+        </p>
+
     </main>
   </body>
 

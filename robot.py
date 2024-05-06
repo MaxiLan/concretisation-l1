@@ -27,3 +27,7 @@ class Robot(joueur.Joueur):
     def retourne_hasard(self):
         coord=self.strategie.retourne_hasard(self)
         return coord
+
+    def retourne_carte(self,ecran):
+        coord=self.strategie.retourne_carte(self)
+        return coord
