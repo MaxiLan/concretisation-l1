@@ -44,8 +44,8 @@ def retourne_carte(partie, joueur, ecran):
   
   click = False
   while not click:
-    if isinstance(joueur,robot.Robot):
 
+    if isinstance(joueur,robot.Robot):
       pygame.time.wait(500)
       pos=joueur.retourne_carte()
       joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
