@@ -4,8 +4,7 @@ def affiche_accueil(ecran):
   """
   Affiche le titre et permet de choisir le nombre de joueur
   """
-  nb_joueurs = 2
-
+  nb_joueurs = 1
   nb_choisi = False
 
   while not nb_choisi:  
@@ -84,7 +83,7 @@ def click(ecran, nb_joueurs):
 
       if (milieu_l - 250 <pos[0]< milieu_l - 200) and (400<pos[1]<450):
         click_souris = True
-        if nb_joueurs>2:
+        if nb_joueurs>1:
           nb_joueurs -= 1
         pygame.time.wait(200)
         return nb_joueurs, False

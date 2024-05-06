@@ -2,13 +2,15 @@ import click
 import pygame
 import random
 import carte
-
+import robot
 
 def tour(joueur,partie, ecran):
   """
   Réalise le tour d'un joueur
   """
-
+  if isinstance(joueur, robot.Robot):
+    joueur.evol_carte_cachee()
+    print("yes")
   ecran.fill("grey24")
   tour_fini=False
   partie.carte_en_main="images/carte_selectionnee.png"
@@ -26,6 +28,7 @@ def tour(joueur,partie, ecran):
   partie.pioche.affiche(ecran)
   partie.defausse.affiche(ecran)
   pygame.display.flip()
+  
   while not tour_fini:  
     tour_fini = click.click_pioche_defausse(joueur,partie, ecran)
     
@@ -50,12 +53,10 @@ def lancement_manche(partie,ecran):
     abs = random.randint(0, 2)
     ord = random.randint(0, 3)
     joueur.jeu_actuel[abs][ord].etat = "ouverte"
-    for _ in range(8):
-      while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
+    while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
         abs = random.randint(0, 2)
         ord = random.randint(0, 3)
-
-      joueur.jeu_actuel[abs][ord].etat = "ouverte"
+    joueur.jeu_actuel[abs][ord].etat = "ouverte"
 
   #AFFICHAGE des le debut de l'emplacement "carte en main" 
   
