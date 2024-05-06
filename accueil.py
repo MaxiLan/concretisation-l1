@@ -5,20 +5,21 @@ def affiche_accueil(ecran):
   Affiche le titre et permet de choisir le nombre de joueur
   """
   nb_joueurs = 2
+  robot = False
 
   nb_choisi = False
 
   while not nb_choisi:  
     ecran.fill((26, 50, 120))
     affiche_elements(ecran, nb_joueurs)
-    nb_joueurs, nb_choisi = click(ecran, nb_joueurs)
+    nb_joueurs, nb_choisi= click(ecran, nb_joueurs)
 
   return nb_joueurs
 
 
 def affiche_elements(ecran, nb_joueurs):
   """
-  Affiche tous les éléments nécessaires pour l'accueil'
+  Affiche tous les éléments nécessaires pour l'accueil
   """
   H = ecran.get_height()
   L = ecran.get_width()
