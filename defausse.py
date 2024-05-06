@@ -4,8 +4,15 @@ import carte
 
 
 class Defausse:
-  def __init__(self):
+  def __init__(self,ecran):
+    HAUTEUR = ecran.get_height()
+    LARGEUR = ecran.get_width()
+    facteur = HAUTEUR/850
+    h=160 * facteur
+    l=110 * facteur
     self.cartes = []
+    self.ord= HAUTEUR-30-h
+    self.abs= LARGEUR- 2*l- 50
 
   def affiche(self, ecran):
     """

@@ -2,7 +2,7 @@ import pygame
 import carte
 import defausse
 import pioche
-
+import robot
 
 def click_pioche_defausse(joueur,partie, ecran):
   """
@@ -13,20 +13,34 @@ def click_pioche_defausse(joueur,partie, ecran):
   h = partie.defausse.cartes[0].hauteur
   l = partie.defausse.cartes[0].largeur
   click_carte = False
-  pygame.event.get()
-  souris = pygame.mouse.get_pressed()
-
+  
   if souris_sur_aide(ecran, h):
     affiche_aide(ecran, h, section=0)
   else:
     cache_aide(ecran, l,h)
   
+  if isinstance(joueur,robot.Robot):
+    pos = joueur.choix_pioche_def(partie)
+    pos[0]=pos[0]+10
+    pos[1]=pos[1]+10
+    pygame.time.wait(900)
+  else:
   #attend un click (sinon la fonction sera ré-executer) 
-  if souris[0]:
-    pos = pygame.mouse.get_pos()
+    pygame.event.get()
+    souris = pygame.mouse.get_pressed()
+    if souris[0]:
+      pos = pygame.mouse.get_pos()
+      
+    else:
+    #sinon on renvoie False, et la fonction sera rappelée
+      return False
 
     #si le click est sur la défausse
-    if (LARGEUR- 2*l- 50< pos[0] < LARGEUR-50-l) and (HAUTEUR-30-h< pos[1] < HAUTEUR-30):
+  if (LARGEUR- 2*l- 50< pos[0] < LARGEUR-50-l) and (HAUTEUR-30-h< pos[1] < HAUTEUR-30):
+    if isinstance(joueur,robot.Robot):
+      pygame.time.wait(100)
+      #pos = joueur.choix_placement_carte(partie)
+    else:
       pygame.event.get()
       s = pygame.mouse.get_pressed()
       if s[0]:
@@ -34,20 +48,32 @@ def click_pioche_defausse(joueur,partie, ecran):
         if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
           test_appel_loupe(ecran,partie,joueur)
       #on déplace la carte de la defausse
-      carte_select = partie.defausse.retire_carte()
-      partie.carte_en_main="images/" + str(carte_select.num) + ".png"
-      carte.cacher_carte(ecran,partie)
-      partie.defausse.affiche(ecran)
-      pygame.display.flip()
+    carte_select = partie.defausse.retire_carte()
+    partie.carte_en_main="images/" + str(carte_select.num) + ".png"
+    carte.cacher_carte(ecran,partie)
+    partie.defausse.affiche(ecran)
+    pygame.display.flip()
 
       #on attend la décision du joueur (carte à échanger)
-      while (not click_carte):
-
+    while (not click_carte):
+      if isinstance(joueur,robot.Robot):
+        pygame.time.wait(900)
+        pos=joueur.choix_placement_carte(carte_select,partie)
+        partie.carte_en_main="images/carte_selectionnee.png"
+        click_carte = True
+        partie.carte_en_main="images/carte_selectionnee.png"
+        aux = joueur.jeu_actuel[pos[0]][pos[1]]
+        joueur.jeu_actuel[pos[0]][pos[1]] = carte_select
+        joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
+        partie.defausse.ajout_carte(aux)
+        carte.cacher_carte(ecran,partie)
+        return True
+      else:
         if souris_sur_aide(ecran,h):
           affiche_aide(ecran,h, section=1)
         else:
           cache_aide(ecran,l, h)
-      
+        
         pygame.event.get()
         s = pygame.mouse.get_pressed()
 
@@ -55,10 +81,9 @@ def click_pioche_defausse(joueur,partie, ecran):
           pos = pygame.mouse.get_pos()
           
           #on regarde si le click est sur une carte
-          for i in range(3):
-            for j in range(4):
-              if (30 + j * l+j*20< pos[0] <30 + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
-
+      for i in range(3):
+        for j in range(4):
+          if (30 + j * l+j*20< pos[0] <30 + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
                 #on échange les cartes
                 if joueur.jeu_actuel[i][j].num!="42bis":
                   partie.carte_en_main="images/carte_selectionnee.png"
@@ -68,16 +93,22 @@ def click_pioche_defausse(joueur,partie, ecran):
                   partie.defausse.ajout_carte(aux)
                   carte.cacher_carte(ecran,partie)
                   return True
+      if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
+          test_appel_loupe(ecran,partie,joueur)
+
+    #sinon si le click est sur la pioche
+  elif (LARGEUR-30-l< pos[0] < LARGEUR-30 and HAUTEUR-30-h< pos[1] < HAUTEUR-30):
+      if isinstance(joueur,robot.Robot):
+        pygame.time.wait(900)
+      
+      else:
+        pygame.event.get()
+        s = pygame.mouse.get_pressed()
+        if s[0]:
+          pos = pygame.mouse.get_pos()
           if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
             test_appel_loupe(ecran,partie,joueur)
-    #sinon si le click est sur la pioche
-    elif (LARGEUR-30-l< pos[0] < LARGEUR-30 and HAUTEUR-30-h< pos[1] < HAUTEUR-30):
-      pygame.event.get()
-      s = pygame.mouse.get_pressed()
-      if s[0]:
-        pos = pygame.mouse.get_pos()
-        if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-          test_appel_loupe(ecran,partie,joueur)
+
       # on deplace la carte de la pioche
       carte_select = partie.pioche.cartes[0]
       carte_select.etat = "ouverte"
@@ -89,7 +120,6 @@ def click_pioche_defausse(joueur,partie, ecran):
       pygame.display.flip()
 
       click_defausse = False
-
       #on attend le choix du joueur (jouer sur son jeu ou sur la défausse)
       while not (click_carte or click_defausse): 
 
@@ -97,11 +127,39 @@ def click_pioche_defausse(joueur,partie, ecran):
           affiche_aide(ecran, h, section=2) 
         else:
           cache_aide(ecran,l, h)
+        if isinstance(joueur,robot.Robot):
+          pygame.time.wait(900)
+          pos=joueur.choix_placement_carte(carte_select,partie)
+          if pos[0]==-1:
+            partie.carte_en_main="images/carte_selectionnee.png"
+            partie.defausse.ajout_carte(carte_select)
+            partie.defausse.affiche(ecran)
+            carte.cacher_carte(ecran,partie)
+            pygame.display.flip()
+            click_defausse = True
+            pygame.time.wait(500)
 
-        pygame.event.get()
-        s = pygame.mouse.get_pressed()
-        if s[0]:
-          pos = pygame.mouse.get_pos()
+            pos=joueur.retourne_hasard()
+            joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
+            carte_selectionner = True
+            pygame.display.flip()
+            #on retourne une carte selectionnnée par le joueur
+            return True
+          else:
+            partie.carte_en_main="images/carte_selectionnee.png"
+            carte.cacher_carte(ecran,partie)
+            click_carte = True
+            aux = joueur.jeu_actuel[pos[0]][pos[1]]
+            joueur.jeu_actuel[pos[0]][pos[1]] = carte_select
+            joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
+            partie.defausse.ajout_carte(aux)
+           
+            return True
+        else:
+          pygame.event.get()
+          s = pygame.mouse.get_pressed()
+          if s[0]:
+            pos = pygame.mouse.get_pos()
           #si le click est sur le jeu du joueur
           for i in range(3):
             for j in range(4):
@@ -119,6 +177,7 @@ def click_pioche_defausse(joueur,partie, ecran):
                   return True
           if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
             test_appel_loupe(ecran,partie,joueur)
+          
           #si le click est sur la defausse
           if (LARGEUR- 2*l- 50< pos[0] < LARGEUR-50-l) and (HAUTEUR-30-h< pos[1] < HAUTEUR-30):
             partie.carte_en_main="images/carte_selectionnee.png"
@@ -133,12 +192,10 @@ def click_pioche_defausse(joueur,partie, ecran):
           
 
     #si le joueur clique sur la loupe 
-    elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
+  elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
         test_appel_loupe(ecran,partie,joueur)
  
-  else:
-    #sinon on renvoie False, et la fonction sera rappelée
-    return False
+  
 
 def test_appel_loupe(ecran,partie,joueur):
   click_croix=False

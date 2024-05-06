@@ -6,8 +6,8 @@ class Carte:
     HAUTEUR = ecran.get_height()
     LARGEUR = ecran.get_width()
     facteur = HAUTEUR/850
-    self.etat = "cachee"  #ouverte cachée ou invisible =(colonne disparue)
-    self.num = numero  #numéro de carte
+    self.etat = "cachee" 
+    self.num = numero 
     self.hauteur=160 * facteur
     self.largeur=110 * facteur
 

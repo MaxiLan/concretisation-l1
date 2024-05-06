@@ -6,6 +6,7 @@ def affiche_accueil(ecran):
   """
   nb_joueurs = 2
   nb_robots = 0
+  robot = False
 
   nb_choisi = False
 
@@ -91,7 +92,7 @@ def click(ecran, nb_joueurs, nb_robots):
 
       if (milieu_l - 250 <pos[0]< milieu_l - 200) and (400<pos[1]<450):
         click_souris = True
-        if nb_joueurs>2:
+        if nb_joueurs>1:
           nb_joueurs -= 1
         pygame.time.wait(200)
         return nb_joueurs, False
