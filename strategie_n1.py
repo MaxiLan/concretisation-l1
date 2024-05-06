@@ -113,6 +113,7 @@ class Strategie_n1:
         choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
         coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
         return  coord
+
     def retourne_carte(self,joueur):
         coord=[]
         for i in range(3):

@@ -1,0 +1,58 @@
+
+<!DOCTYPE html>
+
+<html lang="fr-FR">
+
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title>Concrétisation</title>
+  </head>
+  <body>
+    <header>
+      <a href="index.html"><h1>Skyjo</h1></a>
+    </header>
+    <nav>
+      <a href="index.html">Le jeu</a> 
+      <a href="etapes.html">Le projet</a> 
+      <a href="fonctions.html">Les détails</a> 
+      <a href="nous.html">Nous</a> 
+    </nav>
+    <main>
+      <h2>Nos fichiers et fonctions</h2>
+      <p>Les différentes fonctionnalités du jeu sont séparées en plusieurs fichiers</p>
+      <ul>
+        <li>main.py</li>
+        <li>accueil.py</li>
+        <li>carte.py</li>
+        <li>joueur.py</li>
+        <li>pioche.py</li>
+        <li>defausse.py</li>
+        <li>partie.py</li>
+        <li>manche.py</li>
+        <li>click.py</li>
+      </ul>
+
+      <br>
+
+      <h3>main.py</h3>
+        <p>Le fichier main.py contient les lignes de code principales.<br>
+          C'est ici qu'est affiché l'écran d'accueil et où la partie est lancée.
+        </p>
+
+      <h3>accueil.py</h3>
+        <p>Le fichier accueil.html affiche, comme son nom l'indique, la page d'accueil du jeu.<br>
+          Le joueur indiquera le nombre de joueurs présents pour la partie, puis sélectionnnera "Cliquer pour commencer".
+        </p>
+
+      <h3>carte.py</h3>
+      <h3>joueur.py</h3>
+      <h3>pioche.py</h3>
+      <h3>defausse.py</h3>
+      <h3>partie.py</h3>
+      <h3>manche.py</h3>
+      <h3>click.py</h3>
+    </main>
+  </body>
+
+</html>
