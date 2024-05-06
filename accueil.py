@@ -37,14 +37,14 @@ def affiche_elements(ecran, nb_joueurs, nb_robots):
   img = pygame.transform.scale(img, (50 , 50))
 
   ecran.blit(img, (milieu_l - 250, 400))
-  ecran.blit(img, (milieu_l - 100, 700))
+  ecran.blit(img, (milieu_l - 100, 650))
 
   #signe plus
   img = pygame.image.load("images/plus.png")
   img = pygame.transform.scale(img, (50 , 50))
 
   ecran.blit(img, (milieu_l + 200, 400))
-  ecran.blit(img, (milieu_l + 50, 700))
+  ecran.blit(img, (milieu_l + 50, 650))
 
   #commencer la partie
   rect = pygame.Rect(L-470, H-80, 454, 60)
@@ -87,7 +87,7 @@ def click(ecran, nb_joueurs, nb_robots):
         if nb_joueurs<8:
           nb_joueurs += 1
         pygame.time.wait(200)
-        return nb_joueurs, False
+        return nb_joueurs, False, nb_robots
 
 
       if (milieu_l - 250 <pos[0]< milieu_l - 200) and (400<pos[1]<450):
@@ -95,10 +95,26 @@ def click(ecran, nb_joueurs, nb_robots):
         if nb_joueurs>1:
           nb_joueurs -= 1
         pygame.time.wait(200)
-        return nb_joueurs, False
+        return nb_joueurs, False, nb_robots
+
+
+      if (milieu_l - 100<pos[0]<milieu_l) and (650<pos[1]<700):
+        click_souris = True
+        if nb_robots>0:
+          nb_robots -= 1
+        pygame.time.wait(200)
+        return nb_joueurs, False, nb_robots
+
+
+      if (milieu_l+50 <pos[0]< milieu_l+100) and (650<pos[1]<700):
+        click_souris = True
+        if nb_robots<nb_joueurs:
+          nb_robots+= 1
+        pygame.time.wait(200)
+        return nb_joueurs, False, nb_robots
 
 
       if (L-470<pos[0]<L-20) and (H-80<pos[1]<H-20):
         click_souris = True
         pygame.time.wait(250)
-        return nb_joueurs, True
+        return nb_joueurs, True, nb_robots

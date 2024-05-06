@@ -42,6 +42,10 @@ def retourne_carte(partie, joueur, ecran):
   
   click = False
   while not click:
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        pygame.quit()
+
     if isinstance(joueur,Robot):
       pygame.time.wait(500)
       pos=joueur.retourne_carte()
@@ -102,7 +106,6 @@ def lancement_manche(partie,ecran):
     retourne_carte(partie, joueur, ecran)
     
     pygame.display.flip()
-    click=True
     pygame.time.wait(1000)
 
   #affichage dès le debut de l'emplacement "carte en main" 
