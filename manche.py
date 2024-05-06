@@ -43,7 +43,7 @@ def retourne_carte(partie, joueur, ecran):
   l = partie.pioche.cartes[0].largeur
   
   click = False
-  while not click:
+  while not click: 
 
     if isinstance(joueur,robot.Robot):
       pygame.time.wait(500)

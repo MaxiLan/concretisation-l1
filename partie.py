@@ -40,5 +40,12 @@ class Partie:
     """
     self.tab_joueurs.append(J)
 
+
+  def ferme_fenetre(self):
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        pygame.quit()
+        exit()
+
   
 
