@@ -8,6 +8,7 @@ def click_pioche_defausse(joueur,partie, ecran):
   """
   Permet au joueur de choisir ses cartes à jouer
   """
+  partie.verifie_fermeture()
   HAUTEUR = ecran.get_height()
   LARGEUR = ecran.get_width()
   h = partie.defausse.cartes[0].hauteur
@@ -23,7 +24,7 @@ def click_pioche_defausse(joueur,partie, ecran):
     pos = joueur.choix_pioche_def(partie)
     pos[0]=pos[0]+10
     pos[1]=pos[1]+10
-    pygame.time.wait(900)
+    pygame.time.wait(300)
   else:
   #attend un click (sinon la fonction sera ré-executer) 
     pygame.event.get()
@@ -53,8 +54,9 @@ def click_pioche_defausse(joueur,partie, ecran):
 
       #on attend la décision du joueur (carte à échanger)
     while (not click_carte):
+      partie.verifie_fermeture()
       if isinstance(joueur,robot.Robot):
-        pygame.time.wait(900)
+        pygame.time.wait(300)
         pos=joueur.choix_placement_carte(carte_select,partie)
         partie.carte_en_main="images/carte_selectionnee.png"
         click_carte = True
@@ -116,6 +118,7 @@ def click_pioche_defausse(joueur,partie, ecran):
       click_defausse = False
       #on attend le choix du joueur (jouer sur son jeu ou sur la défausse)
       while not (click_carte or click_defausse): 
+        partie.verifie_fermeture()
 
         if souris_sur_aide(ecran, h):
           affiche_aide(ecran, h, section=2) 
@@ -196,6 +199,7 @@ def test_appel_loupe(ecran,partie,joueur):
   i_joueur=0 #arbitraire
   
   while not click_croix:
+    partie.verifie_fermeture()
     pygame.time.wait(100)
     click_croix,i_joueur=voir_autre_jeu(ecran,partie.tab_joueurs,i_joueur)
 
@@ -220,6 +224,7 @@ def retourne_cartes(joueur, ecran,partie):
   carte_selectionner = False
 
   while not (carte_selectionner):
+    partie.verifie_fermeture()
     if souris_sur_aide(ecran, h):
       affiche_aide(ecran, h, section=3) 
     else:

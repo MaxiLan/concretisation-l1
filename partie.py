@@ -2,6 +2,7 @@ import joueur
 import random
 import pioche
 import defausse
+import pygame
 
 
 class Partie:
@@ -41,7 +42,7 @@ class Partie:
     self.tab_joueurs.append(J)
 
 
-  def ferme_fenetre(self):
+  def verifie_fermeture(self):
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
         pygame.quit()

@@ -12,7 +12,6 @@ def tour(joueur,partie, ecran):
     joueur.evol_carte_cachee()
 
 
-
   ecran.fill("grey24")
   tour_fini=False
   partie.carte_en_main="images/carte_selectionnee.png"
@@ -244,9 +243,14 @@ def manche(partie, ecran):
     joueur = partie.tab_joueurs[i_joueur]
     pygame.time.wait(2000)
   
-  for num_joueur in range (len(partie.tab_joueurs)):
-    if partie.tab_joueurs[i_gagnant].score_individuel>=partie.tab_joueurs[num_joueur].score_individuel and i_gagnant != num_joueur:
-        partie.tab_joueurs[i_gagnant].score_individuel=partie.tab_joueurs[i_gagnant].score_individuel*2
+  gagne = True
+  i=0
+  while gagne:
+    if partie.tab_joueurs[i_gagnant].score_individuel>=partie.tab_joueurs[i].score_individuel and i_gagnant != i:
+        partie.tab_joueurs[i_gagnant].score_individuel *= 2
+        gagne = False
+    else:
+      i += 1
 
   #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
   ecran.fill("grey24")

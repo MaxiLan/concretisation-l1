@@ -38,14 +38,14 @@ def affiche_elements(ecran, nb_joueurs, nb_robots):
   img = pygame.transform.scale(img, (50 , 50))
 
   ecran.blit(img, (milieu_l - 250, 400))
-  ecran.blit(img, (milieu_l - 100, 650))
+  ecran.blit(img, (milieu_l - 250, 670))
 
   #signe plus
   img = pygame.image.load("images/plus.png")
   img = pygame.transform.scale(img, (50 , 50))
 
   ecran.blit(img, (milieu_l + 200, 400))
-  ecran.blit(img, (milieu_l + 50, 650))
+  ecran.blit(img, (milieu_l + 200, 670))
 
   #commencer la partie
   rect = pygame.Rect(L-470, H-80, 454, 60)
@@ -56,12 +56,11 @@ def affiche_elements(ecran, nb_joueurs, nb_robots):
   #nb joueurs
   objet_font2 = pygame.font.Font(None, 70)
   ecran.blit(objet_font2.render(str(nb_joueurs), True, "white"), (milieu_l - 15, 400))
-
   ecran.blit(objet_font1.render("Nombre de joueurs :", True, "white"), (milieu_l-169, 330))
 
   #robot
   ecran.blit(objet_font1.render("Nombre de robots : ", True, "white"), (milieu_l-169, 600))
-  ecran.blit(objet_font2.render(str(nb_robots), True, "white"), (milieu_l +170, 590))
+  ecran.blit(objet_font2.render(str(nb_robots), True, "white"), (milieu_l-15, 670))
 
   pygame.display.flip()
 
@@ -93,13 +92,13 @@ def click(ecran, nb_joueurs, nb_robots):
 
       if (milieu_l - 250 <pos[0]< milieu_l - 200) and (400<pos[1]<450):
         click_souris = True
-        if nb_joueurs>1:
+        if nb_joueurs>2:
           nb_joueurs -= 1
         pygame.time.wait(200)
         return nb_joueurs, False, nb_robots
 
 
-      if (milieu_l - 100<pos[0]<milieu_l) and (650<pos[1]<700):
+      if (milieu_l - 250<pos[0]<milieu_l - 200) and (670<pos[1]<720):
         click_souris = True
         if nb_robots>0:
           nb_robots -= 1
@@ -107,7 +106,7 @@ def click(ecran, nb_joueurs, nb_robots):
         return nb_joueurs, False, nb_robots
 
 
-      if (milieu_l+50 <pos[0]< milieu_l+100) and (650<pos[1]<700):
+      if (milieu_l+200 <pos[0]< milieu_l+250) and (670<pos[1]<720):
         click_souris = True
         if nb_robots<nb_joueurs:
           nb_robots+= 1
