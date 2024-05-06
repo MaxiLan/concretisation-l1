@@ -21,7 +21,7 @@ pygame.display.set_caption("SKYJO")
 ecran.fill("grey24")
 
 
-nb_joueurs = accueil.affiche_accueil(ecran)
+nb_joueurs, nb_robots = accueil.affiche_accueil(ecran)
 partie = partie.Partie(nb_joueurs, ecran)
 
 for i in range(nb_joueurs):

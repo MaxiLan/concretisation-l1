@@ -5,19 +5,19 @@ def affiche_accueil(ecran):
   Affiche le titre et permet de choisir le nombre de joueur
   """
   nb_joueurs = 2
-  robot = False
+  nb_robots = 0
 
   nb_choisi = False
 
   while not nb_choisi:  
     ecran.fill((26, 50, 120))
-    affiche_elements(ecran, nb_joueurs)
-    nb_joueurs, nb_choisi= click(ecran, nb_joueurs)
+    affiche_elements(ecran, nb_joueurs, nb_robots)
+    nb_joueurs, nb_choisi, nb_robots= click(ecran, nb_joueurs, nb_robots)
 
-  return nb_joueurs
+  return nb_joueurs, nb_robots
 
 
-def affiche_elements(ecran, nb_joueurs):
+def affiche_elements(ecran, nb_joueurs, nb_robots):
   """
   Affiche tous les éléments nécessaires pour l'accueil
   """
@@ -36,12 +36,14 @@ def affiche_elements(ecran, nb_joueurs):
   img = pygame.transform.scale(img, (50 , 50))
 
   ecran.blit(img, (milieu_l - 250, 400))
+  ecran.blit(img, (milieu_l - 100, 700))
 
   #signe plus
   img = pygame.image.load("images/plus.png")
   img = pygame.transform.scale(img, (50 , 50))
 
   ecran.blit(img, (milieu_l + 200, 400))
+  ecran.blit(img, (milieu_l + 50, 700))
 
   #commencer la partie
   rect = pygame.Rect(L-470, H-80, 454, 60)
@@ -55,10 +57,14 @@ def affiche_elements(ecran, nb_joueurs):
 
   ecran.blit(objet_font1.render("Nombre de joueurs :", True, "white"), (milieu_l-169, 330))
 
+  #robot
+  ecran.blit(objet_font1.render("Nombre de robots : ", True, "white"), (milieu_l-169, 600))
+  ecran.blit(objet_font2.render(str(nb_robots), True, "white"), (milieu_l +170, 590))
+
   pygame.display.flip()
 
 
-def click(ecran, nb_joueurs): 
+def click(ecran, nb_joueurs, nb_robots): 
   """
   Change le nombre de joueur selon s'il clique si + ou -
   """
