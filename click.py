@@ -24,7 +24,9 @@ def click_pioche_defausse(joueur,partie, ecran):
     pos = joueur.choix_pioche_def(partie)
     pos[0]=pos[0]+10
     pos[1]=pos[1]+10
-    pygame.time.wait(300)
+
+    pygame.time.wait(700)
+    pygame.event.get()
   else:
   #attend un click (sinon la fonction sera ré-executer) 
     pygame.event.get()
@@ -56,7 +58,9 @@ def click_pioche_defausse(joueur,partie, ecran):
     while (not click_carte):
       partie.verifie_fermeture()
       if isinstance(joueur,robot.Robot):
-        pygame.time.wait(300)
+
+        pygame.time.wait(700)
+        pygame.event.get()
         pos=joueur.choix_placement_carte(carte_select,partie)
         partie.carte_en_main="images/carte_selectionnee.png"
         click_carte = True
@@ -125,7 +129,8 @@ def click_pioche_defausse(joueur,partie, ecran):
         else:
           cache_aide(ecran,l, h)
         if isinstance(joueur,robot.Robot):
-          pygame.time.wait(900)
+          pygame.time.wait(700)
+          pygame.event.get()
           pos=joueur.choix_placement_carte(carte_select,partie)
           if pos[0]==-1:
             partie.carte_en_main="images/carte_selectionnee.png"
@@ -185,9 +190,6 @@ def click_pioche_defausse(joueur,partie, ecran):
             click_defausse = True
             #on retourne une carte selectionnnée par le joueur
             return retourne_cartes(joueur, ecran,partie)
-
-          
-
     #si le joueur clique sur la loupe 
   elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
         test_appel_loupe(ecran,partie,joueur)

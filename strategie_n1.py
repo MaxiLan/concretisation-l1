@@ -49,7 +49,6 @@ class Strategie_n1:
             return jeu_actuel[1][j].num
         else :
             return 12
-    
     def etude_colonne(self,jeu_actuel,colonne,carte):
         '''appelée si une carte est de la meme valeur dans la colonne
         on va alors chercher ou mettre cette derniere et renvoyer les indices impliqués
@@ -59,7 +58,7 @@ class Strategie_n1:
         ind_max=-1
         for i in range(3):
             if jeu_actuel[i][colonne].etat=="ouverte":
-                if self.colonne_en_cours(jeu_actuel,colonne)<=carte.num:
+                if self.colonne_en_cours(jeu_actuel,colonne)>=carte.num:
                     if jeu_actuel[i][colonne].num==carte.num and carte.num<=0:
                         compte_neg+=1
                     if jeu_actuel[i][colonne].num>max and jeu_actuel[i][colonne].num!=carte.num :
@@ -78,45 +77,63 @@ class Strategie_n1:
         va choisir l'endroit où envoyer la carte dans le jeu qu'elle vienne
         de la pioche ou de la defausse.
         '''
-        #liste_ind_ouvert=[]
-        indice_coord_carte=[]
-        self.carte_a_suppr(joueur)
-        if not self.carte_valide(carte): #si la carte est pas valide on la met dans la defausse
-            coord=[-1,-1]
-            return coord
-    
-        else:#sinon plusieurs options
-            for i in range (3):#tests des colonnes/avancée des colonnes
-                for j in range(4):
-                    if joueur.jeu_actuel[i][j].etat=="ouverte" and joueur.jeu_actuel[i][j].num==carte.num :  
-                            ligne=self.etude_colonne(joueur.jeu_actuel,j,carte)
-                            coord=[ligne,j]
-                            if ligne!=-1:
-                                return coord
-
-            #y a t'il des cartes qui ne sont pas valides dans notre jeu actuel ?           
-            if len(joueur.carte_a_suppr)!=0:
-                for i in range(3):
+        if not self.fin_partie(joueur):
+            indice_coord_carte=[]
+            self.carte_a_suppr(joueur)
+            if not self.carte_valide(carte): #si la carte est pas valide on la met dans la defausse
+                coord=[-1,-1]
+                return coord
+        
+            else:#sinon plusieurs options
+                for i in range (3):#tests des colonnes/avancée des colonnes
                     for j in range(4):
-                        if joueur.jeu_actuel[i][j].num==joueur.carte_a_suppr[0] and joueur.jeu_actuel[i][j].etat=="ouverte":
-                            joueur.carte_a_suppr.pop(0)
-                            coord=[i,j]
-                            return coord #alors on retourne les indices de la carte a supprimer
+                        if joueur.jeu_actuel[i][j].etat=="ouverte" and joueur.jeu_actuel[i][j].num==carte.num:  
+                                ligne=self.etude_colonne(joueur.jeu_actuel,j,carte)
+                                coord=[ligne,j]
+                                if ligne!=-1:
+                                    return coord
+
+                #y a t'il des cartes qui ne sont pas valides dans notre jeu actuel ?           
+                if len(joueur.carte_a_suppr)!=0:
+                    for i in range(3):
+                        for j in range(4):
+                            if joueur.jeu_actuel[i][j].num==joueur.carte_a_suppr[0] and joueur.jeu_actuel[i][j].etat=="ouverte":
+                                joueur.carte_a_suppr.pop(0)
+                                coord=[i,j]
+                                return coord #alors on retourne les indices de la carte a supprimer
 
 
+                choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
+                coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
+                return coord 
+
+        # else:
+        #     joueur.evol(score)
+        #     for J in partie.tab_joueurs:
+        #         fact_carte_cachee=0
+        #         J.evol_score()
+        #         for i in range (3):
+        #             for j in range(4):
+        #                 if J.jeu_actuel[i][j].etat=="cachee":
+        #                     fact_carte_cachee+=5
+        #         J.score_actuel+=fact_carte_cachee
+        #         if not J.score_actuel<= joueur.score_actuel:
+                    
+
+
+
+
+            
+    def retourne_hasard(self,joueur):
             choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
             coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
-            return  coord 
-
-           
-    def retourne_hasard(self,joueur):
-        choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
-        coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
-        return  coord
+            return  coord
 
     def retourne_carte(self,joueur):
-        coord=[]
-        for i in range(3):
-                if joueur.jeu_actuel[len(joueur.jeu_actuel)-1-i][len(joueur.jeu_actuel[0])-1].etat!="ouverte":
-                    coord=[len(joueur.jeu_actuel)-1-i,len(joueur.jeu_actuel[0])-1]
-                    return coord
+            coord=[]
+            for i in range(3):
+                    if joueur.jeu_actuel[len(joueur.jeu_actuel)-1-i][len(joueur.jeu_actuel[0])-1].etat!="ouverte":
+                        coord=[len(joueur.jeu_actuel)-1-i,len(joueur.jeu_actuel[0])-1]
+                        return coord
+
+        

@@ -46,6 +46,7 @@ def retourne_carte(partie, joueur, ecran):
 
     if isinstance(joueur,robot.Robot):
       pygame.time.wait(500)
+      pygame.event.get()
       pos=joueur.retourne_carte()
       joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
       joueur.affiche_jeu(ecran)
