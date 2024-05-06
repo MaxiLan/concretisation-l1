@@ -37,10 +37,7 @@ def click_pioche_defausse(joueur,partie, ecran):
 
     #si le click est sur la défausse
   if (LARGEUR- 2*l- 50< pos[0] < LARGEUR-50-l) and (HAUTEUR-30-h< pos[1] < HAUTEUR-30):
-    if isinstance(joueur,robot.Robot):
-      pygame.time.wait(100)
-      #pos = joueur.choix_placement_carte(partie)
-    else:
+    if not (isinstance(joueur,robot.Robot)):
       pygame.event.get()
       s = pygame.mouse.get_pressed()
       if s[0]:
@@ -98,10 +95,7 @@ def click_pioche_defausse(joueur,partie, ecran):
 
     #sinon si le click est sur la pioche
   elif (LARGEUR-30-l< pos[0] < LARGEUR-30 and HAUTEUR-30-h< pos[1] < HAUTEUR-30):
-      if isinstance(joueur,robot.Robot):
-        pygame.time.wait(900)
-      
-      else:
+      if not isinstance(joueur,robot.Robot):
         pygame.event.get()
         s = pygame.mouse.get_pressed()
         if s[0]:

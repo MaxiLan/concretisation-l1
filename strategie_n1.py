@@ -59,11 +59,12 @@ class Strategie_n1:
         ind_max=-1
         for i in range(3):
             if jeu_actuel[i][colonne].etat=="ouverte":
-                if jeu_actuel[i][colonne].num==carte.num and carte.num<=0:
-                    compte_neg+=1
-                if jeu_actuel[i][colonne].num>max and jeu_actuel[i][colonne].num!=carte.num :
-                    ind_max=i
-                    max=jeu_actuel[i][colonne].num
+                if self.colonne_en_cours(jeu_actuel,colonne)<=carte.num:
+                    if jeu_actuel[i][colonne].num==carte.num and carte.num<=0:
+                        compte_neg+=1
+                    if jeu_actuel[i][colonne].num>max and jeu_actuel[i][colonne].num!=carte.num :
+                        ind_max=i
+                        max=jeu_actuel[i][colonne].num
             elif max==-4:
                 max=-3
                 ind_max=i
@@ -87,7 +88,7 @@ class Strategie_n1:
         else:#sinon plusieurs options
             for i in range (3):#tests des colonnes/avancée des colonnes
                 for j in range(4):
-                    if joueur.jeu_actuel[i][j].etat=="ouverte" and joueur.jeu_actuel[i][j].num==carte.num and self.colonne_en_cours(joueur.jeu_actuel,j)>=carte.num:  
+                    if joueur.jeu_actuel[i][j].etat=="ouverte" and joueur.jeu_actuel[i][j].num==carte.num :  
                             ligne=self.etude_colonne(joueur.jeu_actuel,j,carte)
                             coord=[ligne,j]
                             if ligne!=-1:
@@ -95,7 +96,6 @@ class Strategie_n1:
 
             #y a t'il des cartes qui ne sont pas valides dans notre jeu actuel ?           
             if len(joueur.carte_a_suppr)!=0:
-                print(joueur.carte_a_suppr)
                 for i in range(3):
                     for j in range(4):
                         if joueur.jeu_actuel[i][j].num==joueur.carte_a_suppr[0] and joueur.jeu_actuel[i][j].etat=="ouverte":
