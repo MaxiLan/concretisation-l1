@@ -5,13 +5,14 @@ import defausse
 
 
 class Partie:
-  def __init__(self, nb_joueurs, ecran):
+  def __init__(self, nb_joueurs, ecran,robot=0):
     self.nb_joueurs = nb_joueurs
     self.tab_joueurs = []
-    self.pioche = pioche.Pioche()
-    self.defausse = defausse.Defausse()
+    self.pioche = pioche.Pioche(ecran)
+    self.defausse = defausse.Defausse(ecran)
     self.carte_en_main="images/carte_selectionnee.png"
     self.manche_finie = False
+    self.robot=robot
     self.score = [0 for _ in range(nb_joueurs)]
 
   def fin_partie(self):

@@ -2,12 +2,14 @@ import click
 import pygame
 import random
 import carte
-
+import robot
 
 def tour(joueur,partie, ecran):
   """
   Réalise le tour d'un joueur
   """
+  if isinstance(joueur, robot.Robot):
+    joueur.evol_carte_cachee()
 
   ecran.fill("grey24")
   tour_fini=False
@@ -26,10 +28,47 @@ def tour(joueur,partie, ecran):
   partie.pioche.affiche(ecran)
   partie.defausse.affiche(ecran)
   pygame.display.flip()
+  
   while not tour_fini:  
     tour_fini = click.click_pioche_defausse(joueur,partie, ecran)
     
   
+def retourne_carte(partie, joueur, ecran):
+  """
+  Retourne une carte choisie par le joueur dans son jeu
+  """ 
+  h = partie.pioche.cartes[0].hauteur
+  l = partie.pioche.cartes[0].largeur
+  
+  click = False
+  while not click:
+    if isinstance(joueur,robot.Robot):
+      pygame.time.wait(500)
+      pos=joueur.retourne_carte()
+      joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
+      joueur.affiche_jeu(ecran)
+      pygame.display.flip()
+      click = True
+    else: 
+      pygame.event.get()
+      s = pygame.mouse.get_pressed()
+
+      if s[0]:
+        pos = pygame.mouse.get_pos()
+
+        for i in range(3):
+          for j in range(4):
+            if (30 + j * l+j*20< pos[0] <30 + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
+            
+              if joueur.jeu_actuel[i][j].etat != "ouverte":
+                joueur.jeu_actuel[i][j].etat = "ouverte"
+                joueur.affiche_jeu(ecran)
+                pygame.display.flip()
+                click = True
+
+                
+
+  pygame.time.wait(150)
 
 
 def lancement_manche(partie,ecran):
@@ -37,28 +76,38 @@ def lancement_manche(partie,ecran):
   Prépare le début de la manche  (mélange, distribution de la pioche et retourne
   des cartes au hasard)
   """
+  l_milieu = ecran.get_width() // 2
+  H = ecran.get_height()
+
   ma_carte=carte.Carte(42,ecran)
   partie.pioche.vide()
   partie.pioche.rempli(ecran)
   partie.pioche.melange()
-  
+
+  #distribution des cartes  
   for joueur in partie.tab_joueurs:
     for i in range(3):
       for j in range(4):
         joueur.jeu_actuel[i][j] = partie.pioche.cartes.pop(0)
+    
+    ecran.fill("grey24")
+    objet_font1 = pygame.font.Font(None, 45)
+    ecran.blit(objet_font1.render("Retournez 2 cartes", True, "white"), (l_milieu - 137, H-200))
+    objet_font2=pygame.font.Font(None, 35)
+    text=objet_font2.render("Joueur n°"+str(joueur.nom),1, "white")
+    ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
 
-    abs = random.randint(0, 2)
-    ord = random.randint(0, 3)
-    joueur.jeu_actuel[abs][ord].etat = "ouverte"
-    for _ in range(8):
-      while (joueur.jeu_actuel[abs][ord].etat != "cachee"):
-        abs = random.randint(0, 2)
-        ord = random.randint(0, 3)
+    joueur.affiche_jeu(ecran)
+    pygame.display.flip()
 
-      joueur.jeu_actuel[abs][ord].etat = "ouverte"
+    retourne_carte(partie, joueur, ecran)
+    retourne_carte(partie, joueur, ecran)
+    
+    pygame.display.flip()
+    #click=True
+    pygame.time.wait(1000)
 
-  #AFFICHAGE des le debut de l'emplacement "carte en main" 
-  
+  #affichage dès le debut de l'emplacement "carte en main" 
   ma_carte=carte.Carte(42,ecran)
   partie.defausse.ajout_carte(ma_carte)
   partie.defausse.ajout_carte(partie.pioche.cartes[0])

@@ -7,7 +7,8 @@ import defausse
 import click
 import manche
 import accueil
-
+import strategie_n1
+import robot
 #variables intiales
 fin_partie = False
 
@@ -22,9 +23,18 @@ ecran.fill("grey24")
 
 
 nb_joueurs = accueil.affiche_accueil(ecran)
-partie = partie.Partie(nb_joueurs, ecran)
+if nb_joueurs==1:
+  nb_joueurs+=1
+  partie=partie.Partie(nb_joueurs,ecran,1)
+  S=strategie_n1.Strategie_n1()
+  R=robot.Robot(S,2)
+  partie.tab_joueurs.append(R)
+else: 
+  partie = partie.Partie(nb_joueurs, ecran)
 
-for i in range(nb_joueurs):
+
+
+for i in range (nb_joueurs-1):
   J = joueur.Joueur(i + 1)
   partie.tab_joueurs.append(J)
 
