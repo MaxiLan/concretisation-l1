@@ -1,4 +1,5 @@
 import pygame
+import partie
 
 def affiche_accueil(ecran):
   """
@@ -13,6 +14,8 @@ def affiche_accueil(ecran):
 
   while not nb_choisi:  
     ecran.fill((26, 50, 120))
+    if nb_robots>nb_joueurs:
+      nb_robots = nb_joueurs
     affiche_elements(ecran, nb_joueurs, nb_robots)
     nb_joueurs, nb_choisi, nb_robots= click(ecran, nb_joueurs, nb_robots)
 
@@ -77,6 +80,7 @@ def click(ecran, nb_joueurs, nb_robots):
   
   while not click_souris:
     pygame.event.get()
+    partie.verifie_fermeture()
     s = pygame.mouse.get_pressed()
 
     if s[0]:

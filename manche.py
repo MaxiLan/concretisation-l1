@@ -1,4 +1,5 @@
 import click
+import partie as P
 import pygame
 import random
 import carte
@@ -43,6 +44,7 @@ def retourne_carte(partie, joueur, ecran):
   
   click = False
   while not click: 
+    P.verifie_fermeture()
 
     if isinstance(joueur,robot.Robot):
       pygame.time.wait(500)
@@ -120,7 +122,6 @@ def fin_manche(ind_joueur,tab_joueurs):
   Renvoie vrai si la manche est terminée,
   i.e. un joueur a retourné toutes ses cartes
   """
-  #J est un joueur, on testera s'il a retourné toutes ses cartes ou non
   i = 0
   manche_finie = True
   while (manche_finie and i < 3):
@@ -184,6 +185,7 @@ def continuer_partie(ecran, partie):
 
   cliquer = False
   while not cliquer:
+    P.verifie_fermeture()
     pygame.event.get()
     s = pygame.mouse.get_pressed()
 

@@ -73,11 +73,11 @@ class Strategie_n1:
             return ind_max
 
     def choix_placement_carte(self,joueur,carte,partie): #joueur est de type robot
-        '''
-        va choisir l'endroit où envoyer la carte dans le jeu qu'elle vienne
-        de la pioche ou de la defausse.
-        '''
-        if not self.fin_partie(joueur):
+            '''
+            va choisir l'endroit où envoyer la carte dans le jeu qu'elle vienne
+            de la pioche ou de la defausse.
+            '''
+        #if not self.fin_partie(joueur):
             indice_coord_carte=[]
             self.carte_a_suppr(joueur)
             if not self.carte_valide(carte): #si la carte est pas valide on la met dans la defausse
