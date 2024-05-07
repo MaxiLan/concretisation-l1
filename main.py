@@ -9,6 +9,7 @@ import manche
 import accueil
 import strategie_n1
 import robot
+import strat_aleatoire
 #variables intiales
 fin_partie = False
 
@@ -26,7 +27,7 @@ nb_joueurs, nb_robots = accueil.affiche_accueil(ecran)
 partie = partie.Partie(nb_joueurs, ecran)
 
 for i in range(nb_robots):
-  S=strategie_n1.Strategie_n1()
+  S=strat_aleatoire.Strategie_aleatoire()
   R=robot.Robot(S,i+1)
   partie.tab_joueurs.append(R)
 
