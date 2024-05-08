@@ -1,4 +1,5 @@
 import pygame
+import partie as P
 import carte
 import defausse
 import pioche
@@ -8,13 +9,14 @@ def click_pioche_defausse(joueur,partie, ecran):
   """
   Permet au joueur de choisir ses cartes à jouer
   """
-  partie.verifie_fermeture()
+  P.verifie_fermeture()
   HAUTEUR = ecran.get_height()
   LARGEUR = ecran.get_width()
   h = partie.defausse.cartes[0].hauteur
   l = partie.defausse.cartes[0].largeur
   click_carte = False
   
+  #affiche ou cache l'aide
   if souris_sur_aide(ecran, h):
     affiche_aide(ecran, h, section=0)
   else:
@@ -30,6 +32,7 @@ def click_pioche_defausse(joueur,partie, ecran):
   else:
   #attend un click (sinon la fonction sera ré-executer) 
     pygame.event.get()
+
     souris = pygame.mouse.get_pressed()
     if souris[0]:
       pos = pygame.mouse.get_pos()
@@ -37,7 +40,7 @@ def click_pioche_defausse(joueur,partie, ecran):
     else:
     #sinon on renvoie False, et la fonction sera rappelée
       return False
-
+  
     #si le click est sur la défausse
   if (LARGEUR- 2*l- 50< pos[0] < LARGEUR-50-l) and (HAUTEUR-30-h< pos[1] < HAUTEUR-30):
     if not (isinstance(joueur,robot.Robot)):
@@ -56,7 +59,7 @@ def click_pioche_defausse(joueur,partie, ecran):
 
       #on attend la décision du joueur (carte à échanger)
     while (not click_carte):
-      partie.verifie_fermeture()
+      P.verifie_fermeture()
       if isinstance(joueur,robot.Robot):
 
         pygame.time.wait(700)
@@ -122,7 +125,7 @@ def click_pioche_defausse(joueur,partie, ecran):
       click_defausse = False
       #on attend le choix du joueur (jouer sur son jeu ou sur la défausse)
       while not (click_carte or click_defausse): 
-        partie.verifie_fermeture()
+        P.verifie_fermeture()
 
         if souris_sur_aide(ecran, h):
           affiche_aide(ecran, h, section=2) 
@@ -201,7 +204,7 @@ def test_appel_loupe(ecran,partie,joueur):
   i_joueur=0 #arbitraire
   
   while not click_croix:
-    partie.verifie_fermeture()
+    P.verifie_fermeture()
     pygame.time.wait(100)
     click_croix,i_joueur=voir_autre_jeu(ecran,partie.tab_joueurs,i_joueur)
 
@@ -226,7 +229,7 @@ def retourne_cartes(joueur, ecran,partie):
   carte_selectionner = False
 
   while not (carte_selectionner):
-    partie.verifie_fermeture()
+    P.verifie_fermeture()
     if souris_sur_aide(ecran, h):
       affiche_aide(ecran, h, section=3) 
     else:

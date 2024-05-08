@@ -42,11 +42,9 @@ class Partie:
     self.tab_joueurs.append(J)
 
 
-  def verifie_fermeture(self):
-    for event in pygame.event.get():
-      if event.type == pygame.QUIT:
-        pygame.quit()
-        exit()
-
-  
-
+def verifie_fermeture():
+  pygame.display.flip()
+  for event in pygame.event.get():
+    if event.type == pygame.QUIT:
+      pygame.quit()
+      exit()

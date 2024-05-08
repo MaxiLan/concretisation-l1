@@ -76,7 +76,7 @@ class Strategie_n1:
             return ind_max
 
     def choix_placement_carte(self,joueur,carte,partie): #joueur est de type robot
-            '''
+        '''
         va choisir l'endroit où envoyer la carte dans le jeu qu'elle vienne
         de la pioche ou de la defausse.
         '''
