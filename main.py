@@ -27,7 +27,10 @@ nb_joueurs, nb_robots = accueil.affiche_accueil(ecran)
 partie = partie.Partie(nb_joueurs, ecran)
 
 for i in range(nb_robots):
-  S=strat_aleatoire.Strategie_aleatoire()
+  if i%2==0:
+    S=strat_aleatoire.Strategie_aleatoire()
+  else :
+    S=strategie_n1.Strategie_n1()
   R=robot.Robot(S,i+1)
   partie.tab_joueurs.append(R)
 

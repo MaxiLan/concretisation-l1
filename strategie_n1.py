@@ -10,7 +10,8 @@ class Strategie_n1:
                 on la met dans une colonne 
             sinon on retourne une carte du jeu
     '''
-
+    def fin_partie(self,joueur):
+        return len(joueur.ind_carte_cachee)==1
     def carte_valide(self,c):
         # carte en dessous de 7
         if c.num>= 7:
@@ -28,6 +29,7 @@ class Strategie_n1:
 
 
     def choix_pioche_def(self,jeu_actuel,partie):
+        ''' renvoie les coordonnées de la pioche ou de la defausse'''
         d=partie.defausse.cartes[-1]
         coords=[partie.pioche.abs,partie.pioche.ord]
         if self.carte_valide(d):
@@ -49,6 +51,7 @@ class Strategie_n1:
             return jeu_actuel[1][j].num
         else :
             return 12
+
     def etude_colonne(self,jeu_actuel,colonne,carte):
         '''appelée si une carte est de la meme valeur dans la colonne
         on va alors chercher ou mettre cette derniere et renvoyer les indices impliqués
@@ -77,8 +80,7 @@ class Strategie_n1:
         va choisir l'endroit où envoyer la carte dans le jeu qu'elle vienne
         de la pioche ou de la defausse.
         '''
-        #if not self.fin_partie(joueur):
-            indice_coord_carte=[]
+        
             self.carte_a_suppr(joueur)
             if not self.carte_valide(carte): #si la carte est pas valide on la met dans la defausse
                 coord=[-1,-1]
@@ -102,23 +104,40 @@ class Strategie_n1:
                                 coord=[i,j]
                                 return coord #alors on retourne les indices de la carte a supprimer
 
-
+                #if not self.fin_partie(joueur):
                 choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
                 coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
                 return coord 
 
-        # else:
-        #     joueur.evol(score)
-        #     for J in partie.tab_joueurs:
-        #         fact_carte_cachee=0
-        #         J.evol_score()
-        #         for i in range (3):
-        #             for j in range(4):
-        #                 if J.jeu_actuel[i][j].etat=="cachee":
-        #                     fact_carte_cachee+=5
-        #         J.score_actuel+=fact_carte_cachee
-        #         if not J.score_actuel<= joueur.score_actuel:
-                    
+                # else:
+                #     nb_joueur_meilleur=0
+                #     while (nb_joueur_meilleur==0 and i<len(partie.tab_joueurs)-1):
+                #         joueur.evol(score)
+                #         for i in range len(partie.tab_joueurs) :
+                #             fact_carte_cachee=0
+                #             partie.tab_joueurs[i].evol_score()
+                #             for i in range (3):
+                #                 for j in range(4):
+                #                     if partie.tab_joueurs[i].jeu_actuel[i][j].etat=="cachee":
+                #                         fact_carte_cachee+=5
+                #             partie.tab_joueurs[i].score_actuel+=fact_carte_cachee
+                #             if partie.tab_joueurs[i].score_actuel< joueur.score_actuel+carte.num:
+                #                 nb_joueur_meilleur+=1
+                #     if nb_joueur_meilleur==0:
+                #         return joueur.ind_carte_cachee[0]
+                #     else:
+                #         colonne_pas_cours=[]
+                #         for j in range(4):
+                #             if self.colonne_en_cours(joueur,j)==12:
+                #                 colonne_pas_cours.append(j)
+                #             if len (colonne_pas_en_cours)==1:
+                                
+                            
+
+
+
+
+                            
 
 
 

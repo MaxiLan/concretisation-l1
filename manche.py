@@ -246,7 +246,7 @@ def manche(partie, ecran):
   
   gagne = True
   i=0
-  while gagne:
+  while gagne and i<len(partie.tab_joueurs):
     if partie.tab_joueurs[i_gagnant].score_individuel>=partie.tab_joueurs[i].score_individuel and i_gagnant != i:
         partie.tab_joueurs[i_gagnant].score_individuel *= 2
         gagne = False
