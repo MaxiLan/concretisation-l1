@@ -10,6 +10,9 @@ class Strategie_n1:
                 on la met dans une colonne 
             sinon on retourne une carte du jeu
     '''
+    def __init__(self):
+        self.colonne_encours=[]
+
     def fin_partie(self,joueur):
         return len(joueur.ind_carte_cachee)==1
     def carte_valide(self,c):
@@ -44,7 +47,7 @@ class Strategie_n1:
         
         return coords
 
-    def colonne_en_cours(self,jeu_actuel,j):
+    def num_colonne_en_cours(self,jeu_actuel,j):
         if jeu_actuel[0][j].etat=="ouverte" and ( (jeu_actuel[0][j].num==jeu_actuel[1][j].num and jeu_actuel[1][j].etat=="ouverte") or (jeu_actuel[0][j].num==jeu_actuel[2][j].num and jeu_actuel[2][j].etat=="ouverte") ):
             return jeu_actuel[0][j].num
         elif jeu_actuel[2][j].etat=="ouverte" and ( (jeu_actuel[2][j].num==jeu_actuel[1][j].num and jeu_actuel[1][j].etat=="ouverte") or (jeu_actuel[0][j].num==jeu_actuel[2][j].num and jeu_actuel[0][j].etat=="ouverte") ):
@@ -61,10 +64,11 @@ class Strategie_n1:
         ind_max=-1
         for i in range(3):
             if jeu_actuel[i][colonne].etat=="ouverte":
-                if self.colonne_en_cours(jeu_actuel,colonne)>=carte.num:
+                if self.num_colonne_en_cours(jeu_actuel,colonne)>=carte.num:
                     if jeu_actuel[i][colonne].num==carte.num and carte.num<=0:
                         compte_neg+=1
-                    if jeu_actuel[i][colonne].num>max and jeu_actuel[i][colonne].num!=carte.num :
+                        
+                    if jeu_actuel[i][colonne].num>max and jeu_actuel[i][colonne].num!=carte.num and carte.num<=0 :
                         ind_max=i
                         max=jeu_actuel[i][colonne].num
             elif max==-4:
@@ -75,14 +79,19 @@ class Strategie_n1:
         else:
             return ind_max
 
+    def evol_colonne_encours(self,jeu_actuel):
+        self.colonne_encours=[]
+        for colonne in range(3):
+                if (jeu_actuel[0][colonne].etat=="ouverte"  and jeu_actuel[1][colonne].etat=="ouverte" and jeu_actuel[0][colonne].num==jeu_actuel[1][colonne].num) or (jeu_actuel[1][colonne].etat=="ouverte"  and jeu_actuel[2][colonne].etat=="ouverte" and jeu_actuel[1][colonne].num==jeu_actuel[2][colonne].num) or (jeu_actuel[0][colonne].etat=="ouverte"  and jeu_actuel[2][colonne].etat=="ouverte" and jeu_actuel[0][colonne].num==jeu_actuel[2][colonne].num):
+                    self.colonne_encours.append(colonne)
+                    
     def choix_placement_carte(self,joueur,carte,partie): #joueur est de type robot
-        '''
+            '''
         va choisir l'endroit où envoyer la carte dans le jeu qu'elle vienne
         de la pioche ou de la defausse.
         '''
-        
             self.carte_a_suppr(joueur)
-            if not self.carte_valide(carte): #si la carte est pas valide on la met dans la defausse
+            if not self.carte_valide(carte) and not self.fin_partie(joueur): #si la carte est pas valide on la met dans la defausse
                 coord=[-1,-1]
                 return coord
         
@@ -104,40 +113,87 @@ class Strategie_n1:
                                 coord=[i,j]
                                 return coord #alors on retourne les indices de la carte a supprimer
 
-                #if not self.fin_partie(joueur):
-                choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
-                coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
-                return coord 
+                if not self.fin_partie(joueur):
+                    choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
+                    coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
+                    return coord 
 
-                # else:
-                #     nb_joueur_meilleur=0
-                #     while (nb_joueur_meilleur==0 and i<len(partie.tab_joueurs)-1):
-                #         joueur.evol(score)
-                #         for i in range len(partie.tab_joueurs) :
-                #             fact_carte_cachee=0
-                #             partie.tab_joueurs[i].evol_score()
-                #             for i in range (3):
-                #                 for j in range(4):
-                #                     if partie.tab_joueurs[i].jeu_actuel[i][j].etat=="cachee":
-                #                         fact_carte_cachee+=5
-                #             partie.tab_joueurs[i].score_actuel+=fact_carte_cachee
-                #             if partie.tab_joueurs[i].score_actuel< joueur.score_actuel+carte.num:
-                #                 nb_joueur_meilleur+=1
-                #     if nb_joueur_meilleur==0:
-                #         return joueur.ind_carte_cachee[0]
-                #     else:
-                #         colonne_pas_cours=[]
-                #         for j in range(4):
-                #             if self.colonne_en_cours(joueur,j)==12:
-                #                 colonne_pas_cours.append(j)
-                #             if len (colonne_pas_en_cours)==1:
-                                
+                else:
+                    print("ici")
+                    return self.joueur_gagnant(joueur,carte,partie)
+    
                             
+    def joueur_gagnant(self,joueur,carte,partie):
+        print("joueur_gagnant")
+        nb_joueur_meilleur=0
+        i=0
+        joueur.evol_score()
+        while (nb_joueur_meilleur==0 and i<len(partie.tab_joueurs)-1):
+            fact_carte_cachee=0
+            partie.tab_joueurs[i].evol_score()
+            if partie.tab_joueurs[i].nom!=joueur.nom:
+                for ligne in range(3):
+                        for j in range(4):
+                            if partie.tab_joueurs[i].jeu_actuel[ligne][j].etat=="cachee":
+                                fact_carte_cachee+=5
+                partie.tab_joueurs[i].score_individuel+=fact_carte_cachee
+                if partie.tab_joueurs[i].score_individuel< joueur.score_individuel+carte.num and partie.tab_joueurs[i].nom!=joueur.nom:
+                    nb_joueur_meilleur+=1
+                    print("coucou")
+            i+=1
+        print(nb_joueur_meilleur)
+        if nb_joueur_meilleur==0:
+            print("je gagne",joueur.nom)
+            return joueur.ind_carte_cachee[0]
+        else: 
+            return self.jeu_fin_partie(joueur,carte,partie)
+
+    def jeu_fin_partie(self,joueur,carte,partie):
+            print("hey")
+            self.evol_colonne_encours(joueur.jeu_actuel)
+            max_=-3
+            if len(self.colonne_encours)<4:
+                for colonne in range(4):
+                    if colonne in self.colonne_encours:
+                        continue
+                    else:
+                        ma_colonne=[joueur.jeu_actuel[0][colonne].num,joueur.jeu_actuel[1][colonne].num,joueur.jeu_actuel[2][colonne].num]
+                        max_tmp=max(ma_colonne)
+                        if max_tmp>max_ and max_tmp>=0:
+                            max_=max_tmp
+                            coord=[ma_colonne.index(max_),colonne,]
+                if max_>-3:
+                    return coord
+            
+            coord_max_tmp=[]
+            for colonne in self.colonne_encours:
+                if colonne not in self.colonne_encours:
+                    continue
+                else:
+                    if joueur.jeu_actuel[0][colonne].num=="42bis":
+                        continue
+                    elif joueur.jeu_actuel[0][colonne]/num!=joueur.jeu_actuel[1][colonne].num and joueur.jeu_actuel[0][colonne].num!=joueur.jeu_actuel[2][colonne].num:
+                        coord_max_tmp.append([0,colonne])
+                    elif joueur.jeu_actuel[1][colonne]/num!=joueur.jeu_actuel[0][colonne].num and joueur.jeu_actuel[1][colonne].num!=joueur.jeu_actuel[2][colonne].num:
+                        coord_max_tmp.append([1,colonne])
+                    else:
+                        coord_max_tmp.append([2,colonne])
+            for k in range(1,len(coord_max_tmp)):
+                val=joueur.jeu_actuel[coord_max_tmp[k][0]][coord_max_tmp[k][1]]
+                if val>max_ and val>0 :
+                    coord=[coord_max_tmp[k][0],coord_max_tmp[k][1]]
+                    max_=val
+            if max_>-3:
+                return coord
+            
+            else:
+                '''on recherche juste le maximum dans tout le jeu'''
+                pass
+
+            
+            
 
 
-
-
-                            
 
 
 
