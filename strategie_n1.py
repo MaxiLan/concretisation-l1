@@ -67,13 +67,13 @@ class Strategie_n1:
             elif max==-4:
                 max=-3
                 ind_max=i
-        if compte_neg==2:
+        if compte_neg==1:
             return -1
         else:
             return ind_max
 
     def choix_placement_carte(self,joueur,carte,partie): #joueur est de type robot
-        '''
+            '''
         va choisir l'endroit où envoyer la carte dans le jeu qu'elle vienne
         de la pioche ou de la defausse.
         '''
