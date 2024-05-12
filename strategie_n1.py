@@ -68,7 +68,7 @@ class Strategie_n1:
                     if jeu_actuel[i][colonne].num==carte.num and carte.num<=0:
                         compte_neg+=1
                         
-                    if jeu_actuel[i][colonne].num>max and jeu_actuel[i][colonne].num!=carte.num and carte.num<=0 :
+                    if jeu_actuel[i][colonne].num>max and jeu_actuel[i][colonne].num!=carte.num:
                         ind_max=i
                         max=jeu_actuel[i][colonne].num
             elif max==-4:
@@ -122,13 +122,20 @@ class Strategie_n1:
                     print("ici")
                     return self.joueur_gagnant(joueur,carte,partie)
     
-                            
+    def affiche(self,jeu_actuel):
+        for i in range(3):
+            for j in range(4):
+                if jeu_actuel[i][j].etat=="ouverte":
+                    print(jeu_actuel[i][j].num, "; ")
+                else:
+                    print(5, "; ")
+
     def joueur_gagnant(self,joueur,carte,partie):
         print("joueur_gagnant")
         nb_joueur_meilleur=0
         i=0
         joueur.evol_score()
-        while (nb_joueur_meilleur==0 and i<len(partie.tab_joueurs)-1):
+        while (nb_joueur_meilleur==0 and i<=len(partie.tab_joueurs)-1):
             fact_carte_cachee=0
             partie.tab_joueurs[i].evol_score()
             if partie.tab_joueurs[i].nom!=joueur.nom:
@@ -139,17 +146,16 @@ class Strategie_n1:
                 partie.tab_joueurs[i].score_individuel+=fact_carte_cachee
                 if partie.tab_joueurs[i].score_individuel< joueur.score_individuel+carte.num and partie.tab_joueurs[i].nom!=joueur.nom:
                     nb_joueur_meilleur+=1
-                    print("coucou")
+                print(i+1,"mon score est estimé à: ",partie.tab_joueurs[i].score_individuel)
+                self.affiche(partie.tab_joueurs[i].jeu_actuel)
             i+=1
-        print(nb_joueur_meilleur)
         if nb_joueur_meilleur==0:
-            print("je gagne",joueur.nom)
+            print("je suis le joueur",joueur.nom, " et je gagne avec: ",joueur.score_individuel)
             return joueur.ind_carte_cachee[0]
         else: 
             return self.jeu_fin_partie(joueur,carte,partie)
 
     def jeu_fin_partie(self,joueur,carte,partie):
-            print("hey")
             self.evol_colonne_encours(joueur.jeu_actuel)
             max_=-3
             if len(self.colonne_encours)<4:
@@ -157,11 +163,12 @@ class Strategie_n1:
                     if colonne in self.colonne_encours:
                         continue
                     else:
-                        ma_colonne=[joueur.jeu_actuel[0][colonne].num,joueur.jeu_actuel[1][colonne].num,joueur.jeu_actuel[2][colonne].num]
-                        max_tmp=max(ma_colonne)
-                        if max_tmp>max_ and max_tmp>=0:
-                            max_=max_tmp
-                            coord=[ma_colonne.index(max_),colonne,]
+                        if joueur.jeu_actuel[0][colonne].num!="42bis":
+                            ma_colonne=[joueur.jeu_actuel[0][colonne].num,joueur.jeu_actuel[1][colonne].num,joueur.jeu_actuel[2][colonne].num]
+                            max_tmp=max(ma_colonne)
+                            if max_tmp>max_ and max_tmp>=0:
+                                max_=max_tmp
+                                coord=[ma_colonne.index(max_),colonne,]
                 if max_>-3:
                     return coord
             
