@@ -232,8 +232,9 @@ def manche(partie, ecran):
     i_joueur = (i_joueur + 1) % len(partie.tab_joueurs)
     joueur = partie.tab_joueurs[i_joueur]
     #laisse le temps au joueur de voir son score
-    pygame.time.wait(500)
-
+    pygame.time.wait(300)
+    
+  pygame.time.wait(4000)
   #une fois qu'un joueur a retourné toute ses cartes il faut encore faire un tour
   for i in range(len(partie.tab_joueurs)-1):
     tour(joueur, partie, ecran)
@@ -244,11 +245,11 @@ def manche(partie, ecran):
     pygame.display.flip()
     i_joueur = (i_joueur + 1) % len(partie.tab_joueurs)
     joueur = partie.tab_joueurs[i_joueur]
-    pygame.time.wait(2000)
+    pygame.time.wait(4000)
   
   gagne = True
   i=0
-  while gagne and i < len(partie.tab_joueurs):
+  while gagne and i<len(partie.tab_joueurs):
     if partie.tab_joueurs[i_gagnant].score_individuel>=partie.tab_joueurs[i].score_individuel and i_gagnant != i:
         partie.tab_joueurs[i_gagnant].score_individuel *= 2
         gagne = False

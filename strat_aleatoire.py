@@ -13,8 +13,8 @@ class Strategie_aleatoire:
                     self.carte_ouverte.append([i,j])
 
     def choix_pioche_def(self,jeu_actuel,partie):
-        choix =random.randint(0,1)
-        if choix==1:
+        choix_pioche =random.randint(0,1)
+        if choix_pioche==1:
             coords=[partie.pioche.abs,partie.pioche.ord]
             self.provenance=1
             return coords 
