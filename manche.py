@@ -148,7 +148,10 @@ def joueur_commence(tab_joueurs):
 def affichage_fin_manche(partie,ecran):
   """
   Affiche les scores des joueurs à la fin de la manche
-  """
+  """ 
+  LARGEUR = ecran.get_width() 
+  HAUTEUR = ecran.get_height()
+
   ecran.fill("grey24")
   font=pygame.font.Font(None, 45)
   text=font.render("RESULTATS MANCHE: ",1,"white")
@@ -157,11 +160,8 @@ def affichage_fin_manche(partie,ecran):
   for i in range(len(partie.tab_joueurs)):
       text=font.render("Score joueur n°"+str(i+1)+" : " +str(partie.score[i]),1, "white")
       ecran.blit(text,(150,150+h))
-      #pygame.display.flip()
       h=h+25 
 
-  LARGEUR = ecran.get_width() 
-  HAUTEUR = ecran.get_height()
   l_milieu = ecran.get_width() // 2
   objet_font = pygame.font.Font(None, 30) 
   ecran.blit(objet_font.render("Cliquez pour continuer", True, "white"), (l_milieu-228 - 50, 600))
@@ -174,8 +174,6 @@ def affichage_fin_manche(partie,ecran):
 
   pygame.display.flip()
 
-
-  
 
 def jeu_fin_manche(joueur,ecran):
     """
