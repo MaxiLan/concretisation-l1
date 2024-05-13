@@ -199,7 +199,7 @@ def click_pioche_defausse(joueur,partie, ecran):
  
   
 
-def test_appel_loupe(ecran,partie,joueur):
+def test_appel_loupe(ecran,partie,joueur, section="fin jeu"):
   click_croix=False
   i_joueur=0 #arbitraire
   
@@ -207,16 +207,16 @@ def test_appel_loupe(ecran,partie,joueur):
     P.verifie_fermeture()
     pygame.time.wait(100)
     click_croix,i_joueur=voir_autre_jeu(ecran,partie.tab_joueurs,i_joueur)
-
-  font=pygame.font.Font(None, 35)
-  text=font.render("Joueur n°"+str(joueur.nom),1, "white")
-  ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
-  joueur.affiche_jeu(ecran)
-  partie.pioche.affiche(ecran)
-  partie.defausse.affiche(ecran)
-  carte.cacher_carte(ecran,partie)
-  pygame.display.flip()
-  pygame.time.wait(200)
+  if section!="fin jeu":
+    font=pygame.font.Font(None, 35)
+    text=font.render("Joueur n°"+str(joueur.nom),1, "white")
+    ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
+    joueur.affiche_jeu(ecran)
+    partie.pioche.affiche(ecran)
+    partie.defausse.affiche(ecran)
+    carte.cacher_carte(ecran,partie)
+    pygame.display.flip()
+    pygame.time.wait(200)
 
 def retourne_cartes(joueur, ecran,partie): 
   """

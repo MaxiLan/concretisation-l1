@@ -135,7 +135,7 @@ class Strategie_n1:
         nb_joueur_meilleur=0
         i=0
         joueur.evol_score()
-        while (nb_joueur_meilleur==0 and i<=len(partie.tab_joueurs)-1):
+        while (nb_joueur_meilleur==0 and i<len(partie.tab_joueurs)):
             fact_carte_cachee=0
             partie.tab_joueurs[i].evol_score()
             if partie.tab_joueurs[i].nom!=joueur.nom:
