@@ -74,7 +74,7 @@ class Strategie_n1:
             elif max==-4:
                 max=-3
                 ind_max=i
-        if compte_neg==2:
+        if compte_neg==1:
             return -1
         else:
             return ind_max
@@ -137,8 +137,10 @@ class Strategie_n1:
         print(joueur.nom)
         nb_joueur_meilleur=0
         i=0
+
         self.calcul_score(joueur,carte)
         while (i<=len(partie.tab_joueurs)-1):
+
             fact_carte_cachee=0
             partie.tab_joueurs[i].evol_score()
             if partie.tab_joueurs[i].nom!=joueur.nom:

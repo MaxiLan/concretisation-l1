@@ -149,6 +149,7 @@ def affichage_fin_manche(partie,ecran):
   """
   Affiche les scores des joueurs à la fin de la manche
   """
+  ecran.fill("grey24")
   font=pygame.font.Font(None, 45)
   text=font.render("RESULTATS MANCHE: ",1,"white")
   ecran.blit(text,(30,30))
@@ -157,8 +158,24 @@ def affichage_fin_manche(partie,ecran):
       ch="Score joueur n°"+str(partie.tab_joueurs[i].nom)+" : " +str(partie.tab_joueurs[i].score_individuel)
       text=font.render(ch,1, "white")
       ecran.blit(text,(150,150+h))
-      pygame.display.flip()
-      h=h+25
+      #pygame.display.flip()
+      h=h+25 
+
+  LARGEUR = ecran.get_width() 
+  HAUTEUR = ecran.get_height()
+  l_milieu = ecran.get_width() // 2
+  objet_font = pygame.font.Font(None, 30) 
+  ecran.blit(objet_font.render("Cliquez pour continuer", True, "white"), (l_milieu-228 - 50, 600))
+  ecran.blit(objet_font.render("Cliquez pour arrêtez", True, "white"), (l_milieu + 50, 600))
+
+  ch = "images/loupe.png"
+  img = pygame.image.load(ch)
+  img = pygame.transform.scale(img, (50,50))
+  ecran.blit(img, (ecran.get_width()-80, 30))
+
+  pygame.display.flip()
+
+
   
 
 def jeu_fin_manche(joueur,ecran):
@@ -178,11 +195,22 @@ def continuer_partie(ecran, partie):
   """
   Relance une manche ou arrête la partie
   """
+
+  LARGEUR = ecran.get_width() 
+  HAUTEUR = ecran.get_height()
   l_milieu = ecran.get_width() // 2
+  """
   objet_font = pygame.font.Font(None, 30) 
   ecran.blit(objet_font.render("Cliquez pour continuer", True, "white"), (l_milieu-228 - 50, 600))
   ecran.blit(objet_font.render("Cliquez pour arrêtez", True, "white"), (l_milieu + 50, 600))
+
+  ch = "images/loupe.png"
+  img = pygame.image.load(ch)
+  img = pygame.transform.scale(img, (50,50))
+  ecran.blit(img, (ecran.get_width()-80, 30))
+
   pygame.display.flip()
+  """
 
   cliquer = False
   while not cliquer:
@@ -198,7 +226,11 @@ def continuer_partie(ecran, partie):
         return True
       elif (l_milieu + 50<pos[0]<l_milieu + 50 + 200) and (600<pos[1]<620):
         cliquer = True
-        return False
+        return False 
+
+      elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
+          click.test_appel_loupe(ecran,partie,partie.tab_joueurs[0])
+          affichage_fin_manche(partie, ecran)
 
 
 def manche(partie, ecran): 
@@ -258,7 +290,6 @@ def manche(partie, ecran):
       i += 1
 
   #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
-  ecran.fill("grey24")
   partie.mise_a_jour_score()
   affichage_fin_manche(partie,ecran)
   return continuer_partie(ecran, partie)

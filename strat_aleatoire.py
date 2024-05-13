@@ -73,4 +73,3 @@ class Strategie_aleatoire:
             if joueur.jeu_actuel[i][j].etat=="cachee":
                 coord=[i,j]
         return coord
-        

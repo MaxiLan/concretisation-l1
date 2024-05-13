@@ -23,34 +23,34 @@
       Les différentes fonctionnalités du jeu sont séparées en plusieurs fichiers.</p>
 
       <ul>
-        <li>main.py</li>
-        <li>accueil.py</li>
-        <li>carte.py</li>
-        <li>joueur.py</li>
-        <li>pioche.py</li>
-        <li>defausse.py</li>
-        <li>partie.py</li>
-        <li>manche.py</li>
-        <li>click.py</li>
+        <li><a href="#main">main.py</a></li>
+        <li><a href="#accueil">accueil.py</a></li>
+        <li><a href="#carte">carte.py</a></li>
+        <li><a href="#joueur">joueur.py</a></li>
+        <li><a href="#pioche">pioche.py</a></li>
+        <li><a href="#defausse">defausse.py</a></li>
+        <li><a href="#partie">partie.py</a></li>
+        <li><a href="#manche">manche.py</a></li>
+        <li><a href="#click">click.py</a></li>
       </ul>
       
-      <p>Les structures de données utilisées (Carte, Pioche, Defausse, Joueur, Pa) sont sous forme de classe Python.</p>
+      <p>Les structures de données utilisées (Carte, Pioche, Defausse, Joueur, Partie) sont sous forme de classe Python.</p>
 
       <br>
 
-      <h3>main.py</h3>
+      <h3 id="main">main.py</h3>
         <p>
         Le fichier main.py contient les lignes de code principales.<br>
         C'est ici qu'est affiché l'écran d'accueil et où la partie est lancée.
         </p>
 
-      <h3>accueil.py</h3>
+      <h3 id="accueil">accueil.py</h3>
         <p>
         Le fichier accueil.html affiche, comme son nom l'indique, la page d'accueil du jeu.<br>
         Le joueur indiquera le nombre de joueurs présents pour la partie, puis sélectionnnera "Cliquer pour commencer".
         </p>
 
-      <h3>carte.py</h3>
+      <h3 id="carte">carte.py</h3>
         <p>
         Ce fichier contient la classe Carte, représentant donc une carte du jeu.<br>
         Un objet carte a pour attribut :
@@ -67,7 +67,7 @@
         Il n'y a pas de méthode, seulement une fonction qui permet de recouvrir l'emplacement "carte en main".
         </p>
 
-      <h3>joueur.py</h3>
+      <h3 id="joueur">joueur.py</h3>
         <p>
         joueur.py contient la classe représentant un joueur.<br>
         Les attributs sont les suivants :
@@ -88,7 +88,7 @@
             <li>affiche_jeu_vision_ext(ecran) : Affiche le jeu des autres joueurs si la loupe est sélectionnée</li>
         </ul>
 
-      <h3>pioche.py</h3>
+      <h3 id="pioche">pioche.py</h3>
         <p>
         Comme son nom l'indique, on retrouve ici la classe de la pioche du jeu.<br>
         Un seul attribut :
@@ -108,7 +108,7 @@
           <li>est_vide(defausse) : Si la pioche est vide, ajoute les cartes de la défausse à la pioche</li>
         </ul>
 
-      <h3>defausse.py</h3>
+      <h3 id="defausse">defausse.py</h3>
         <p>        
         Similaire à pioche.py, defausse.py contient la classe représentant la défausse du jeu.<br>
         Un seul attribut également :
@@ -126,7 +126,7 @@
         </ul>
 
 
-      <h3>partie.py</h3>
+      <h3 id="partie">partie.py</h3>
         <p>
         Contient la classe Partie.<br>
         Plusieurs attributs : 
@@ -149,12 +149,12 @@
           <li>ajouter_joueur(joueur) : Ajoute un joueur à l'attribut tab_joueurs</li>
         </ul>
 
-      <h3>manche.py</h3>
+      <h3 id="manche">manche.py</h3>
         <p>
         C'est dans ce fichier que se déroule une manche entière.<br>
         </p>
 
-      <h3>click.py</h3>
+      <h3 id="click">click.py</h3>
         <p>
 
         </p>
