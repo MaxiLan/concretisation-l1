@@ -154,7 +154,8 @@ def affichage_fin_manche(partie,ecran):
   ecran.blit(text,(30,30))
   h=1
   for i in range(len(partie.tab_joueurs)):
-      text=font.render("Score joueur n°"+str(i+1)+" : " +str(partie.score[i]),1, "white")
+      ch="Score joueur n°"+str(partie.tab_joueurs[i].nom)+" : " +str(partie.tab_joueurs[i].score_individuel)
+      text=font.render(ch,1, "white")
       ecran.blit(text,(150,150+h))
       pygame.display.flip()
       h=h+25
@@ -191,7 +192,7 @@ def continuer_partie(ecran, partie):
 
     if s[0]:
       pos = pygame.mouse.get_pos()
-
+      
       if (l_milieu-228 - 50<pos[0]<l_milieu - 50 ) and (600<pos[1]<620):
         cliquer = True
         return True

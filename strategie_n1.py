@@ -129,13 +129,16 @@ class Strategie_n1:
                     print(jeu_actuel[i][j].num, "; ")
                 else:
                     print(5, "; ")
-
+    def calcul_score(self,joueur,carte):
+        joueur.evol_score()
+        if joueur.jeu_actuel[0][joueur.ind_carte_cachee[0][1]]==joueur.jeu_actuel[1][joueur.ind_carte_cachee[0][1]]==joueur.jeu_actuel[2][joueur.ind_carte_cachee[0][1]]:
+            joueur.score_individuel-=3*carte.num -(joueur.jeu_actuel[joueur.ind_carte_cachee[0][0]][joueur.ind_carte_cachee[0][1]].num-carte.num)
     def joueur_gagnant(self,joueur,carte,partie):
-        print("joueur_gagnant")
+        print(joueur.nom)
         nb_joueur_meilleur=0
         i=0
-        joueur.evol_score()
-        while (nb_joueur_meilleur==0 and i<=len(partie.tab_joueurs)-1):
+        self.calcul_score(joueur,carte)
+        while (i<=len(partie.tab_joueurs)-1):
             fact_carte_cachee=0
             partie.tab_joueurs[i].evol_score()
             if partie.tab_joueurs[i].nom!=joueur.nom:
@@ -146,11 +149,11 @@ class Strategie_n1:
                 partie.tab_joueurs[i].score_individuel+=fact_carte_cachee
                 if partie.tab_joueurs[i].score_individuel< joueur.score_individuel+carte.num and partie.tab_joueurs[i].nom!=joueur.nom:
                     nb_joueur_meilleur+=1
-                print(i+1,"mon score est estimé à: ",partie.tab_joueurs[i].score_individuel)
+                print(partie.tab_joueurs[i].nom,"mon score est estimé à: ",partie.tab_joueurs[i].score_individuel)
                 self.affiche(partie.tab_joueurs[i].jeu_actuel)
             i+=1
         if nb_joueur_meilleur==0:
-            print("je suis le joueur",joueur.nom, " et je gagne avec: ",joueur.score_individuel)
+            print("je suis le joueur",joueur.nom, " et je gagne avec: ",joueur.score_individuel+carte.num)
             return joueur.ind_carte_cachee[0]
         else: 
             return self.jeu_fin_partie(joueur,carte,partie)
@@ -179,14 +182,14 @@ class Strategie_n1:
                 else:
                     if joueur.jeu_actuel[0][colonne].num=="42bis":
                         continue
-                    elif joueur.jeu_actuel[0][colonne]/num!=joueur.jeu_actuel[1][colonne].num and joueur.jeu_actuel[0][colonne].num!=joueur.jeu_actuel[2][colonne].num:
+                    elif joueur.jeu_actuel[0][colonne].num!=joueur.jeu_actuel[1][colonne].num and joueur.jeu_actuel[0][colonne].num!=joueur.jeu_actuel[2][colonne].num:
                         coord_max_tmp.append([0,colonne])
-                    elif joueur.jeu_actuel[1][colonne]/num!=joueur.jeu_actuel[0][colonne].num and joueur.jeu_actuel[1][colonne].num!=joueur.jeu_actuel[2][colonne].num:
+                    elif joueur.jeu_actuel[1][colonne].num!=joueur.jeu_actuel[0][colonne].num and joueur.jeu_actuel[1][colonne].num!=joueur.jeu_actuel[2][colonne].num:
                         coord_max_tmp.append([1,colonne])
                     else:
                         coord_max_tmp.append([2,colonne])
             for k in range(1,len(coord_max_tmp)):
-                val=joueur.jeu_actuel[coord_max_tmp[k][0]][coord_max_tmp[k][1]]
+                val=joueur.jeu_actuel[coord_max_tmp[k][0]][coord_max_tmp[k][1]].num
                 if val>max_ and val>0 :
                     coord=[coord_max_tmp[k][0],coord_max_tmp[k][1]]
                     max_=val
