@@ -16,8 +16,8 @@ def affiche_accueil(ecran):
     while not nb_choisi:  
         if nb_robots>nb_joueurs:
             nb_robots = nb_joueurs
-            affiche_elements(ecran, nb_joueurs, nb_robots, niveau)
-            nb_joueurs, nb_choisi, nb_robots, niveau = click(ecran, nb_joueurs, nb_robots, niveau)
+        affiche_elements(ecran, nb_joueurs, nb_robots, niveau)
+        nb_joueurs, nb_choisi, nb_robots, niveau = click(ecran, nb_joueurs, nb_robots, niveau)
 
     return nb_joueurs, nb_robots, niveau
 
