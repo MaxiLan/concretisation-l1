@@ -27,7 +27,7 @@ def click_pioche_defausse(joueur,partie, ecran):
     pos[0]=pos[0]+10
     pos[1]=pos[1]+10
 
-    pygame.time.wait(500)
+    pygame.time.wait(1000)
     pygame.event.get()
   else:
   #attend un click (sinon la fonction sera ré-executer) 
@@ -43,6 +43,7 @@ def click_pioche_defausse(joueur,partie, ecran):
   
     #si le click est sur la défausse
   if (LARGEUR- 2*l- 50< pos[0] < LARGEUR-50-l) and (HAUTEUR-30-h< pos[1] < HAUTEUR-30):
+
     if not (isinstance(joueur,robot.Robot)):
       pygame.event.get()
       s = pygame.mouse.get_pressed()
@@ -50,7 +51,8 @@ def click_pioche_defausse(joueur,partie, ecran):
         pos = pygame.mouse.get_pos()
         if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
           test_appel_loupe(ecran,partie,joueur)
-      #on déplace la carte de la defausse
+      
+    #on déplace la carte de la defausse
     carte_select = partie.defausse.retire_carte()
     partie.carte_en_main="images/" + str(carte_select.num) + ".png"
     carte.cacher_carte(ecran,partie)
@@ -60,12 +62,12 @@ def click_pioche_defausse(joueur,partie, ecran):
       #on attend la décision du joueur (carte à échanger)
     while (not click_carte):
       P.verifie_fermeture()
+
       if isinstance(joueur,robot.Robot):
 
-        pygame.time.wait(700)
+        pygame.time.wait(1000)
         pygame.event.get()
         pos=joueur.choix_placement_carte(carte_select,partie)
-        partie.carte_en_main="images/carte_selectionnee.png"
         click_carte = True
         partie.carte_en_main="images/carte_selectionnee.png"
         aux = joueur.jeu_actuel[pos[0]][pos[1]]
@@ -74,7 +76,9 @@ def click_pioche_defausse(joueur,partie, ecran):
         partie.defausse.ajout_carte(aux)
         carte.cacher_carte(ecran,partie)
         return True
+
       else:
+
         if souris_sur_aide(ecran,h):
           affiche_aide(ecran,h, section=1)
         else:
@@ -131,6 +135,7 @@ def click_pioche_defausse(joueur,partie, ecran):
           affiche_aide(ecran, h, section=2) 
         else:
           cache_aide(ecran,l, h)
+
         if isinstance(joueur,robot.Robot):
           pygame.time.wait(300)
           pygame.event.get()
@@ -142,7 +147,7 @@ def click_pioche_defausse(joueur,partie, ecran):
             carte.cacher_carte(ecran,partie)
             pygame.display.flip()
             click_defausse = True
-            pygame.time.wait(300)
+            pygame.time.wait(1000)
 
             pos=joueur.retourne_hasard()
             joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"

@@ -5,6 +5,18 @@ import random
 import carte
 import robot
 
+
+def joueur_commence(tab_joueurs):
+  """
+  Renvoie l'indice du joueur ayant la plus au score au départ
+  """
+  ind_j1=0
+  for i in range(1,len(tab_joueurs)):
+    if tab_joueurs[i].score_individuel>tab_joueurs[ind_j1].score_individuel:
+      ind_j1=i
+  return ind_j1
+
+
 def tour(joueur,partie, ecran):
   """
   Réalise le tour d'un joueur
@@ -49,7 +61,7 @@ def retourne_carte(partie, joueur, ecran):
     if isinstance(joueur,robot.Robot):
       pygame.time.wait(500)
       pygame.event.get()
-      pos=joueur.retourne_carte()
+      pos=joueur.debut_manche()
       joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
       joueur.affiche_jeu(ecran)
       pygame.display.flip()
@@ -134,17 +146,6 @@ def fin_manche(ind_joueur,tab_joueurs):
   return manche_finie
 
 
-def joueur_commence(tab_joueurs):
-  """
-  Renvoie l'indice du joueur ayant la plus au score au départ
-  """
-  ind_j1=0
-  for i in range(1,len(tab_joueurs)):
-    if tab_joueurs[i].score_individuel>tab_joueurs[ind_j1].score_individuel:
-      ind_j1=i
-  return ind_j1
-
-
 def affichage_fin_manche(partie,ecran):
   """
   Affiche les scores des joueurs à la fin de la manche
@@ -158,7 +159,7 @@ def affichage_fin_manche(partie,ecran):
   ecran.blit(text,(30,30))
   h=1
   for i in range(len(partie.tab_joueurs)):
-      ch="Score joueur n°"+str(partie.tab_joueurs[i].nom)+" : " +str(partie.tab_joueurs[i].score_individuel)
+      ch="Score joueur n°"+str(partie.tab_joueurs[i].nom)+" : " +str(partie.score[i])
       text=font.render(ch,1, "white")
       ecran.blit(text,(150,150+h))
       h=h+25 
@@ -197,18 +198,7 @@ def continuer_partie(ecran, partie):
   LARGEUR = ecran.get_width() 
   HAUTEUR = ecran.get_height()
   l_milieu = ecran.get_width() // 2
-  """
-  objet_font = pygame.font.Font(None, 30) 
-  ecran.blit(objet_font.render("Cliquez pour continuer", True, "white"), (l_milieu-228 - 50, 600))
-  ecran.blit(objet_font.render("Cliquez pour arrêtez", True, "white"), (l_milieu + 50, 600))
 
-  ch = "images/loupe.png"
-  img = pygame.image.load(ch)
-  img = pygame.transform.scale(img, (50,50))
-  ecran.blit(img, (ecran.get_width()-80, 30))
-
-  pygame.display.flip()
-  """
 
   cliquer = False
   while not cliquer:
@@ -276,7 +266,7 @@ def manche(partie, ecran):
     pygame.display.flip()
     i_joueur = (i_joueur + 1) % len(partie.tab_joueurs)
     joueur = partie.tab_joueurs[i_joueur]
-    pygame.time.wait(4000)
+    pygame.time.wait(2000)
   
   gagne = True
   i=0

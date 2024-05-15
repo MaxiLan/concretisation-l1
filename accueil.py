@@ -6,9 +6,9 @@ def affiche_accueil(ecran):
   Affiche le titre et permet de choisir le nombre de joueur
   """
 
-  nb_joueurs = 2
-  nb_robots = 0
-  niveau = 1
+  nb_joueurs = 1
+  nb_robots = 1
+  niveau = 2
   robot = False
 
   nb_choisi = False

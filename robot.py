@@ -5,7 +5,6 @@ class Robot(joueur.Joueur):
     def __init__(self,strategie,nom):
         super().__init__(nom)
         self.strategie=strategie #strategie est une classe 
-        self.carte_a_suppr=[]
         self.ind_carte_cachee=[]
 
     def evol_carte_cachee(self):
@@ -28,6 +27,6 @@ class Robot(joueur.Joueur):
         coord=self.strategie.retourne_hasard(self)
         return coord
 
-    def retourne_carte(self):
-        coord=self.strategie.retourne_carte(self)
+    def debut_manche(self):
+        coord=self.strategie.debut_manche(self)
         return coord
