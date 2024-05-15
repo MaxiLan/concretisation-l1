@@ -199,7 +199,6 @@ def continuer_partie(ecran, partie):
   HAUTEUR = ecran.get_height()
   l_milieu = ecran.get_width() // 2
 
-
   cliquer = False
   while not cliquer:
     P.verifie_fermeture()
@@ -217,7 +216,7 @@ def continuer_partie(ecran, partie):
         return False 
 
       elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-          click.test_appel_loupe(ecran,partie,partie.tab_joueurs[0])
+          click.test_appel_loupe(ecran,partie,partie.tab_joueurs[0],"fin jeu")
           affichage_fin_manche(partie, ecran)
 
 

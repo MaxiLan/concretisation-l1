@@ -1,5 +1,6 @@
 import robot
 import random
+import manche
 class Strategie_n1:
     """ 
     Ne prends pas les cartes au dessus égales à 7
@@ -15,7 +16,6 @@ class Strategie_n1:
         self.colonne_en_cours=[]
         self.carte_a_suppr = []
 
- 
     #TEMPORAIRE
     def affiche(self,jeu_actuel):
         for i in range(3):
