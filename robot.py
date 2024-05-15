@@ -6,6 +6,7 @@ class Robot(joueur.Joueur):
         super().__init__(nom)
         self.strategie=strategie #strategie est une classe 
         self.ind_carte_cachee=[]
+        self.jeu_individuel= []
 
     def evol_carte_cachee(self):
         self.ind_carte_cachee=[]

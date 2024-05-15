@@ -30,8 +30,15 @@ class Pioche:
     for _ in range(5):
       c = carte.Carte(-2,ecran)
       self.cartes.append(c)
+    """
+    for i in range(75):
+        c = carte.Carte(3, ecran)
+        self.cartes.append(c)
 
-  
+    for i in range(75):
+        c = carte.Carte(2, ecran)
+        self.cartes.append(c)
+    """
   def vide(self):
     self.cartes.clear()
 

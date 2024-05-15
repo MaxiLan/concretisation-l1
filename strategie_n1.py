@@ -16,15 +16,6 @@ class Strategie_n1:
         self.colonne_en_cours=[]
         self.carte_a_suppr = []
 
-    #TEMPORAIRE
-    def affiche(self,jeu_actuel):
-        for i in range(3):
-            for j in range(4):
-                if jeu_actuel[i][j].etat=="ouverte":
-                    print(jeu_actuel[i][j].num, "; ")
-                else:
-                    print(5, "; ")
-
 
     def fin_partie(self,joueur):
         return len(joueur.ind_carte_cachee)==1
@@ -87,7 +78,7 @@ class Strategie_n1:
         """
         Choisi des coordonnées aléatoires parmi les cartes cachées du jeu
         """
-
+        
         choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
         coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
         return  coord
@@ -101,6 +92,7 @@ class Strategie_n1:
         for i in range(2):
             if joueur.jeu_actuel[len(joueur.jeu_actuel)-1-i][len(joueur.jeu_actuel[0])-1].etat!="ouverte":
                 coord=[len(joueur.jeu_actuel)-1-i,len(joueur.jeu_actuel[0])-1]
+                #coord=[i,0]
         
         return coord
 
@@ -162,17 +154,20 @@ class Strategie_n1:
         Choisi l'endroit où envoyer la carte dans le jeu, qu'elle vienne
         de la pioche ou de la défausse.
         """
+
+        #met à jour les cartes à supprimer et les colonnes en cours
         self.carte_a_suppr_maj(joueur)
         self.evol_colonne_encours(joueur.jeu_actuel)
     
-        #si la carte est pas valide on la met dans la defausse
+        #si la carte est pas valide on la met dans la défausse
         if not self.carte_valide(carte) and not self.fin_partie(joueur):
             coord=[-1,-1]
             return coord
     
         #sinon plusieurs options
         else:
-
+            
+            #si il y des colonnes à finir
             if carte.num > 0:
                 for c in self.colonne_en_cours:
                     if self.num_colonne_en_cours(joueur.jeu_actuel, c)==carte.num:
@@ -181,7 +176,7 @@ class Strategie_n1:
                                 return [i, c]
 
             
-            #test des colonnes/avancée des colonnes
+            #avancée des colonnes
             for i in range (3):
                 for j in range(4):
                     if joueur.jeu_actuel[i][j].etat=="ouverte" and joueur.jeu_actuel[i][j].num==carte.num:  
@@ -205,7 +200,6 @@ class Strategie_n1:
                 return coord 
 
             else:
-                print("ici")
                 return self.joueur_gagnant(joueur,carte,partie)
 
     
@@ -214,10 +208,20 @@ class Strategie_n1:
         joueur.evol_score()
         if joueur.jeu_actuel[0][joueur.ind_carte_cachee[0][1]]==joueur.jeu_actuel[1][joueur.ind_carte_cachee[0][1]]==joueur.jeu_actuel[2][joueur.ind_carte_cachee[0][1]]:
             joueur.score_individuel -= 3*carte.num -(joueur.jeu_actuel[joueur.ind_carte_cachee[0][0]][joueur.ind_carte_cachee[0][1]].num-carte.num)
+    
+
+    def carte_max(self, jeu_actuel):
+        coord = [0, 0]
+
+        for l in range(3):
+            for c in range(4):
+                if jeu_actuel[l][c].num > c_max.num:
+                    coord = [l, c]
+
+        return coord
 
 
     def joueur_gagnant(self,joueur,carte,partie):
-        print(joueur.nom)
         nb_joueur_meilleur=0
         i=0
 
@@ -234,11 +238,9 @@ class Strategie_n1:
                 partie.tab_joueurs[i].score_individuel+=fact_carte_cachee
                 if partie.tab_joueurs[i].score_individuel< joueur.score_individuel+carte.num and partie.tab_joueurs[i].nom!=joueur.nom:
                     nb_joueur_meilleur+=1
-                print(partie.tab_joueurs[i].nom,"mon score est estimé à: ",partie.tab_joueurs[i].score_individuel)
                 self.affiche(partie.tab_joueurs[i].jeu_actuel)
             i+=1
         if nb_joueur_meilleur==0:
-            print("je suis le joueur",joueur.nom, " et je gagne avec: ",joueur.score_individuel+carte.num)
             return joueur.ind_carte_cachee[0]
         else: 
             return self.jeu_fin_partie(joueur,carte,partie)
@@ -283,8 +285,8 @@ class Strategie_n1:
                 return coord
             
             else:
-                '''on recherche juste le maximum dans tout le jeu'''
-                pass
+                #on recherche juste le maximum dans tout le jeu
+                return self.carte_max(jeu_actuel)
 
             
             
