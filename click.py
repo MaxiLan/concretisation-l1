@@ -199,7 +199,7 @@ def click_pioche_defausse(joueur,partie, ecran):
  
   
 
-def test_appel_loupe(ecran,partie,joueur, section="fin jeu"):
+def test_appel_loupe(ecran,partie,joueur, section="jeu"):
   click_croix=False
   i_joueur=0 #arbitraire
   
@@ -207,7 +207,7 @@ def test_appel_loupe(ecran,partie,joueur, section="fin jeu"):
     P.verifie_fermeture()
     pygame.time.wait(100)
     click_croix,i_joueur=voir_autre_jeu(ecran,partie.tab_joueurs,i_joueur)
-  if section!="fin jeu":
+  if section=="jeu":
     font=pygame.font.Font(None, 35)
     text=font.render("Joueur n°"+str(joueur.nom),1, "white")
     ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))

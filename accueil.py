@@ -26,7 +26,7 @@ def affiche_elements(ecran, nb_joueurs, nb_robots, niveau):
   """
   Affiche tous les éléments nécessaires pour l'accueil
   """
-  ecran.fill((26, 50, 120))
+  ecran.fill((43, 42, 76))
 
   H = ecran.get_height()
   L = ecran.get_width()

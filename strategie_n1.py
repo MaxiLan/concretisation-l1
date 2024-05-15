@@ -1,5 +1,6 @@
 import robot
 import random
+import manche
 class Strategie_n1:
     ''' 
         ne prends pas les cartes au dessus égales à 7
@@ -13,8 +14,11 @@ class Strategie_n1:
     def __init__(self):
         self.colonne_encours=[]
 
-    def fin_partie(self,joueur):
-        return len(joueur.ind_carte_cachee)==1
+    def fin_partie(self,joueur,partie):
+        for i in range (len(partie.tab_joueurs)):
+            if manche.fin_manche(i,partie.tab_joueurs):
+                return True
+        return len(joueur.ind_carte_cachee)==1 
     def carte_valide(self,c):
         # carte en dessous de 7
         if c.num>= 7:
@@ -68,7 +72,7 @@ class Strategie_n1:
                     if jeu_actuel[i][colonne].num==carte.num and carte.num<=0:
                         compte_neg+=1
                         
-                    if jeu_actuel[i][colonne].num>max and jeu_actuel[i][colonne].num!=carte.num:
+                    if jeu_actuel[i][colonne].num>max and jeu_actuel[i][colonne].num!=carte.num :
                         ind_max=i
                         max=jeu_actuel[i][colonne].num
             elif max==-4:
@@ -82,7 +86,7 @@ class Strategie_n1:
     def evol_colonne_encours(self,jeu_actuel):
         self.colonne_encours=[]
         for colonne in range(3):
-                if (jeu_actuel[0][colonne].etat=="ouverte"  and jeu_actuel[1][colonne].etat=="ouverte" and jeu_actuel[0][colonne].num==jeu_actuel[1][colonne].num) or (jeu_actuel[1][colonne].etat=="ouverte"  and jeu_actuel[2][colonne].etat=="ouverte" and jeu_actuel[1][colonne].num==jeu_actuel[2][colonne].num) or (jeu_actuel[0][colonne].etat=="ouverte"  and jeu_actuel[2][colonne].etat=="ouverte" and jeu_actuel[0][colonne].num==jeu_actuel[2][colonne].num):
+            if (jeu_actuel[0][colonne].etat=="ouverte" and jeu_actuel[1][colonne].etat=="ouverte" and jeu_actuel[0][colonne].num==jeu_actuel[1][colonne].num) or (jeu_actuel[1][colonne].etat=="ouverte"  and jeu_actuel[2][colonne].etat=="ouverte" and jeu_actuel[1][colonne].num==jeu_actuel[2][colonne].num) or (jeu_actuel[0][colonne].etat=="ouverte"  and jeu_actuel[2][colonne].etat=="ouverte" and jeu_actuel[0][colonne].num==jeu_actuel[2][colonne].num):
                     self.colonne_encours.append(colonne)
                     
     def choix_placement_carte(self,joueur,carte,partie): #joueur est de type robot
@@ -91,7 +95,7 @@ class Strategie_n1:
         de la pioche ou de la defausse.
         '''
             self.carte_a_suppr(joueur)
-            if not self.carte_valide(carte) and not self.fin_partie(joueur): #si la carte est pas valide on la met dans la defausse
+            if not self.carte_valide(carte) and not self.fin_partie(joueur,partie): #si la carte est pas valide on la met dans la defausse
                 coord=[-1,-1]
                 return coord
         
@@ -113,13 +117,12 @@ class Strategie_n1:
                                 coord=[i,j]
                                 return coord #alors on retourne les indices de la carte a supprimer
 
-                if not self.fin_partie(joueur):
+                if not self.fin_partie(joueur,partie):
                     choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
                     coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
                     return coord 
 
                 else:
-                    print("ici")
                     return self.joueur_gagnant(joueur,carte,partie)
     
     def affiche(self,jeu_actuel):

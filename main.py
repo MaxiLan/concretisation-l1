@@ -20,7 +20,7 @@ pygame.init()
 clock = pygame.time.Clock()
 ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
 pygame.display.set_caption("SKYJO")
-ecran.fill("grey24")
+ecran.fill('#EEE2DE')
 
 
 nb_joueurs, nb_robots, niveau = accueil.affiche_accueil(ecran)

@@ -155,7 +155,7 @@ def affichage_fin_manche(partie,ecran):
   ecran.blit(text,(30,30))
   h=1
   for i in range(len(partie.tab_joueurs)):
-      ch="Score joueur n°"+str(partie.tab_joueurs[i].nom)+" : " +str(partie.tab_joueurs[i].score_individuel)
+      ch="Score joueur n°"+str(partie.tab_joueurs[i].nom)+" : " +str(partie.score[i])
       text=font.render(ch,1, "white")
       ecran.blit(text,(150,150+h))
       #pygame.display.flip()
@@ -199,19 +199,6 @@ def continuer_partie(ecran, partie):
   LARGEUR = ecran.get_width() 
   HAUTEUR = ecran.get_height()
   l_milieu = ecran.get_width() // 2
-  """
-  objet_font = pygame.font.Font(None, 30) 
-  ecran.blit(objet_font.render("Cliquez pour continuer", True, "white"), (l_milieu-228 - 50, 600))
-  ecran.blit(objet_font.render("Cliquez pour arrêtez", True, "white"), (l_milieu + 50, 600))
-
-  ch = "images/loupe.png"
-  img = pygame.image.load(ch)
-  img = pygame.transform.scale(img, (50,50))
-  ecran.blit(img, (ecran.get_width()-80, 30))
-
-  pygame.display.flip()
-  """
-
   cliquer = False
   while not cliquer:
     P.verifie_fermeture()
@@ -229,7 +216,7 @@ def continuer_partie(ecran, partie):
         return False 
 
       elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-          click.test_appel_loupe(ecran,partie,partie.tab_joueurs[0])
+          click.test_appel_loupe(ecran,partie,partie.tab_joueurs[0],"fin jeu")
           affichage_fin_manche(partie, ecran)
 
 
