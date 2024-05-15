@@ -32,7 +32,7 @@ def tour(joueur,partie, ecran):
   pygame.display.flip()
   
   while not tour_fini:  
-    tour_fini = click.click_pioche_defausse(joueur,partie, ecran)
+    tour_fini = click.actions_tour(joueur,partie, ecran)
     
   
 def retourne_carte(partie, joueur, ecran):
@@ -265,7 +265,7 @@ def manche(partie, ecran):
     pygame.display.flip()
     i_joueur = (i_joueur + 1) % len(partie.tab_joueurs)
     joueur = partie.tab_joueurs[i_joueur]
-    pygame.time.wait(4000)
+    pygame.time.wait(1500)
   
   gagne = True
   i=0
