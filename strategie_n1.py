@@ -211,11 +211,11 @@ class Strategie_n1:
     
 
     def carte_max(self, jeu_actuel):
-        coord = [0, 0]
+        coord = [3, 4]
 
         for l in range(3):
             for c in range(4):
-                if jeu_actuel[l][c].num > c_max.num:
+                if jeu_actuel[l][c].num > jeu_actuel[coord[0]][coord[1]].num and jeu_actuel[l][c].etat!="cachee":
                     coord = [l, c]
 
         return coord
@@ -238,7 +238,6 @@ class Strategie_n1:
                 partie.tab_joueurs[i].score_individuel+=fact_carte_cachee
                 if partie.tab_joueurs[i].score_individuel< joueur.score_individuel+carte.num and partie.tab_joueurs[i].nom!=joueur.nom:
                     nb_joueur_meilleur+=1
-                self.affiche(partie.tab_joueurs[i].jeu_actuel)
             i+=1
         if nb_joueur_meilleur==0:
             return joueur.ind_carte_cachee[0]
@@ -287,16 +286,3 @@ class Strategie_n1:
             else:
                 #on recherche juste le maximum dans tout le jeu
                 return self.carte_max(jeu_actuel)
-
-            
-            
-
-
-
-
-
-
-            
-
-
-        

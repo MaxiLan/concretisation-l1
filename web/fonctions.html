@@ -181,14 +181,33 @@
       <fieldset class="sous_bloc">
       <h3 id="manche">Manche.py</h3>
         <p>
-        C'est dans ce fichier que se déroule une manche entière.<br>
+        Manche.py est composé de plusieurs fonctions,
+        ce qui concerne le début d'une manche:
+        <ul>
+          <li>lancement_manche(): S'occupe de toute les actions avant le début d'une manche (melange de la pioche, distribution des jeux...)</li>
+          <li>retourne_carte() : Au debut de la manche elle permet au joueur de choisir la carte qu'il retourne</li>
+          <li>joueur_commence(): Renvoie le joueur qui commence</li>
+        </ul>
+        <p> Ce qui concerne le déroulement de la manche </p>
+        <ul>
+          <li>manche() </li>
+          <li>tour()</li>
+        </ul>
+        <p> Ce qui concerne la fin d'une manche:</p>
+        <ul>
+          <li>continuer_partie()</li>
+          <li>jeu_fin_manche()</li>
+          <li> affichage_fin_manche()</li>
+          <li>fin_manche()</li>
+        </ul>
         </p>
       </fieldset>
     </fieldset>
       <fieldset>
       <h3 id="click">Click.py</h3>
         <p>
-
+          Click.py gère tout les clicks qui se déroulent lors de chaque tour. 
+          
         </p>
       </fieldset>
     </main>
