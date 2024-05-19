@@ -68,11 +68,11 @@
             Ce fichier contient la classe Carte, représentant donc une carte du jeu.
             Un objet carte a pour attribut :
             </p>
-            <ul>
-              <li>hauteur </li>
-              <li>largeur </li>
-              <li>num </li>
-              <li>etat: Etat de la carte (ouverte ou cachée)</li>
+            <ul class="attribut">
+              <li>hauteur,</li>
+              <li>largeur,</li>
+              <li>num, </li>
+              <li>etat</li>
             </ul>
 
             <p>
@@ -88,9 +88,9 @@
           Les attributs sont les suivants :
           </p>
 
-          <ul>
-              <li>nom </li>
-              <li>jeu_actuel : Matrice 3x4 representant le jeu du joueur</li>
+          <ul class="attribut">
+              <li>nom, </li>
+              <li>jeu_actuel, </li>
               <li>score_individuel </li>
           </ul>
 
@@ -114,13 +114,13 @@
           <p>
           Comme son nom l'indique, on retrouve ici la classe de la pioche du jeu.<br>
           Un seul attribut :
-          </p>   
-
-          <ul>
-              <li>cartes : Liste de cartes (on peut voir cela comme une pile)</li>
+        </p>
+          <ul class="attribut">
+              <li>cartes </li>
           </ul>
-
-          <p>Les méthodes :</p>
+          
+          <p>
+          Les méthodes :</p>
 
           <ul>
             <li>rempli(ecran) : Rempli la pioche avec les 150 cartes du jeu</li>
@@ -136,13 +136,12 @@
             <p>      
             Similaire à pioche.py, defausse.py contient la classe représentant la défausse du jeu.<br>
             Un seul attribut également :
-            </p>
-
-            <ul>
+            <ul class="attribut">
                 <li>cartes : Liste de cartes</li>
             </ul> 
-
-            <p>Des méthodes un peu différentes : </p>
+            </p>
+            <p>
+            Des méthodes un peu différentes : </p>
             <ul>
               <li>affiche(ecran) : Affiche la défausse à l'écran (seulement la première carte)</li>
               <li>ajout_carte(carte) : Ajoute une carte à la défausse</li>
@@ -158,20 +157,22 @@
         <h3 id="partie" >Partie.py</h3>
           <p>
           Contient la classe Partie.
-          Plusieurs attributs : 
-          </p>
+          Plusieurs attributs :
+        </p>
+        <ul class="attribut">
+          <li>nb_joueurs,</li> 
+          <li>tab_joueurs,</li> 
+          <li>pioche,</li> 
+        </ul>
+        <ul class="attribut">
+          <li>defausse,</li> 
+          <li>score,</li> 
+          <li>manche_finie,</li> 
+          <li>carte_en_main</li>
+        </ul>
 
-          <ul>
-              <li>nb_joueurs </li>
-              <li>tab_joueurs </li>
-              <li>pioche </li>
-              <li>defausse </li>
-              <li>score</li>
-              <li>manche_finie : Booléen répresentant l'état de la manche actuelle</li>
-              <li>carte_en_main : Image affichée à l'emplacement "carte en main" </li>
-          </ul> 
-
-          <p>Les méthodes : </p>
+          <p>
+          Les méthodes : </p>
           <ul>
             <li>fin_partie() : Si un joueur a atteint les 100 pts, renvoie vrai</li>
             <li>mise_a_jour_score() : Met à jour les scores après une manche</li>
@@ -182,19 +183,22 @@
       <h3 id="manche">Manche.py</h3>
         <p>
         Manche.py est composé de plusieurs fonctions,
-        ce qui concerne le début d'une manche:
+        
         <ul>
+          <li class="first">Ce qui concerne le début d'une manche:</li>
           <li>lancement_manche(): S'occupe de toute les actions avant le début d'une manche (melange de la pioche, distribution des jeux...)</li>
           <li>retourne_carte() : Au debut de la manche elle permet au joueur de choisir la carte qu'il retourne</li>
           <li>joueur_commence(): Renvoie le joueur qui commence</li>
         </ul>
-        <p> Ce qui concerne le déroulement de la manche </p>
+        
+  
         <ul>
+          <li class="first">Ce qui concerne le déroulement de la manche </li> 
           <li>manche() </li>
           <li>tour()</li>
         </ul>
-        <p> Ce qui concerne la fin d'une manche:</p>
         <ul>
+          <li class="first">Ce qui concerne la fin d'une manche:</li>
           <li>continuer_partie()</li>
           <li>jeu_fin_manche()</li>
           <li> affichage_fin_manche()</li>
@@ -203,13 +207,25 @@
         </p>
       </fieldset>
     </fieldset>
-      <fieldset>
+      <fieldset class="seul">
       <h3 id="click">Click.py</h3>
         <p>
-          Click.py gère tout les clicks qui se déroulent lors de chaque tour. 
-          
+          Click.py gère toutes les actions d'un tour défini par les clics de l'utilisateur.
+        elle est donc composé de plusieurs fonctions notamment actions_tour dont découlera l'arboresence de l'utilisation des autres.
+        <ul>
+          <li class="first">Concernant l'affichage:</li>
+          <li>affiche_aide</li>
+          <li> cache_aide</li>
+          <li> souris_sur_adie</li>
+          <li> affichage page_autre_joueur</li>
+          <li>voir_autre_jeu</li>
+        </ul>
+        <ul>
+          <li>retourne_cartes</li>
+        </ul>
         </p>
       </fieldset>
+
     </main>
   </body>
 

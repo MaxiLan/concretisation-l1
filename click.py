@@ -16,12 +16,12 @@ def actions_tour(joueur,partie, ecran):
     l = partie.defausse.cartes[0].largeur
     click_carte = False
   
-  #affiche ou cache l'aide
+    #affiche ou cache l'aide
     if souris_sur_aide(ecran, h):
         affiche_aide(ecran, h, section=0)
     else:
         cache_aide(ecran, l,h)
-    
+         
     if isinstance(joueur,robot.Robot):
         pos = joueur.choix_pioche_def(partie)
         pos[0]=pos[0]+10
