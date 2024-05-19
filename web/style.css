@@ -18,7 +18,6 @@ h1{
 
 }
 
-
 a{
   text-decoration: none;
   color:#EEE2DE
@@ -51,6 +50,10 @@ body h3 {
   font-size: 30px;
   text-align:center;
   text-decoration: underline;
+
+}
+fieldset h3{
+  text-align: center;
 }
 
 fieldset{
@@ -58,14 +61,17 @@ fieldset{
   background-color: #2B2A4C;
   border-width: 8px;
   display:flex;
-  flex-direction:row;
+  flex-direction: row;
   justify-content:left;
   text-align:left;
   width:1300px;
   border-color: #EEE2DE;
   border-style:dotted;
 }
-
+.seul{
+  display:flex;
+  flex-direction: column;
+}
 .sous_bloc{
   border-width: 4px;
   width:650px;
@@ -77,15 +83,22 @@ fieldset{
 
 .sous_bloc:first-child{
   border-width: 4px;
-  border-right:black;
+  border-right:#6D9886;
   border-style:solid;
 }
 
+.attribut{
+  display:flex;
+  flex-direction: row;
+}
 
+.attribut li{
+  list-style: none;
+  margin-left: 8px;
+}
 nav {
   padding: 0;
   margin : 0;
-  /*width: 100%;*/
   display: flex;
   justify-content: space-evenly;
   text-align: center;
@@ -94,7 +107,7 @@ nav {
   border-width: 10px;
   border-color:black;
   border-style:double;
-  background-color: #EEE2DE;
+  background-color: #6D9886;
 }
 
 #img{
@@ -107,10 +120,12 @@ nav {
 
 p {
   font-size: 30px;
+  margin:0px;
 }
 ul{
-  margin: 0px;
-  
+  margin: 12px;
+  justify-content: center;
+  text-align: left;
 }
 .lien_debut{
   display:flex;
@@ -120,12 +135,29 @@ ul{
   padding:0px;
   
 }
+fieldset .manche{
+  display:flex;
+  border-style: none;
+  border-width:0px;
+  flex-direction:row;
+}
+
+.neutre{
+  border-style: none;
+  border-width:0px;
+  margin:0px
+}
 .lien_debut li {
   margin:20px;
   list-style:circle;
   font-size: 25px;
 }
 
+.first{
+  list-style: none;
+  margin:0px;
+  font-size: 28px;
+}
 ul li {
   list-style:circle;
   font-size: 25px;

@@ -25,7 +25,7 @@ def actions_tour(joueur,partie, ecran):
         affiche_aide(ecran, h, section=0)
     else:
         cache_aide(ecran, l,h)
-    
+         
     if isinstance(joueur,robot.Robot):
         pos = joueur.choix_pioche_def(partie)
         pos[0]=pos[0]+10
