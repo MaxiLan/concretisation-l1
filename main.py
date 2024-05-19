@@ -15,8 +15,8 @@ import strat_aleatoire
 fin_partie = False
 
 #INIT ECRAN
-HAUTEUR =  950
-LARGEUR =  1050
+HAUTEUR = 1000
+LARGEUR = 1700
 pygame.init()
 clock = pygame.time.Clock()
 ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))

@@ -1,21 +1,20 @@
 import pygame
 import partie
 
+
 def affiche_accueil(ecran):
     """
     Affiche le titre et permet de choisir le nombre de joueur
     """
 
     nb_joueurs = 1
-    nb_robots = 1
+    nb_robots = 0
     niveau = 2
     robot = False
 
     nb_choisi = False
 
     while not nb_choisi:  
-        if nb_robots>nb_joueurs:
-            nb_robots = nb_joueurs
         affiche_elements(ecran, nb_joueurs, nb_robots, niveau)
         nb_joueurs, nb_choisi, nb_robots, niveau = click(ecran, nb_joueurs, nb_robots, niveau)
 
@@ -70,8 +69,11 @@ def affiche_elements(ecran, nb_joueurs, nb_robots, niveau):
     ecran.blit(objet_font2.render(str(nb_robots), True, "white"), (milieu_l-15, 570))
   
     #difficulté
-    ecran.blit(objet_font1.render("Niveau des robots (1-3) :", True, "white"), (milieu_l-201, 670))
-    ecran.blit(objet_font2.render(str(niveau), True, "white"), (milieu_l-15, 740))
+    ecran.blit(objet_font1.render("Niveau des robots :", True, "white"), (milieu_l-165, 670))
+    if niveau==1:
+        ecran.blit(objet_font1.render("Facile", True, "white"), (milieu_l-50, 740))
+    else:
+        ecran.blit(objet_font1.render("Difficile", True, "white"), (milieu_l-64, 740))
 
     pygame.display.flip()
 
@@ -107,6 +109,8 @@ def click(ecran, nb_joueurs, nb_robots, niveau):
                 click_souris = True
                 if nb_joueurs>1:
                     nb_joueurs -= 1
+                if nb_joueurs<nb_robots:
+                    nb_robots-=1
                 pygame.time.wait(200)
                 return nb_joueurs, False, nb_robots, niveau
 
@@ -122,16 +126,23 @@ def click(ecran, nb_joueurs, nb_robots, niveau):
 
             if (milieu_l+200 <pos[0]< milieu_l+250) and (570<pos[1]<620):
                 click_souris = True
-                if nb_robots<nb_joueurs:
+                if nb_robots<8:
                     nb_robots+= 1
+                if nb_robots>nb_joueurs:
+                    nb_joueurs+=1
                 pygame.time.wait(200)
                 return nb_joueurs, False, nb_robots, niveau
           
             #click niveau
+            objet_font1 =  pygame.font.Font(None, 40)
+
             if (milieu_l - 250<pos[0]<milieu_l - 200) and (740<pos[1]<790):
                 click_souris = True
                 if niveau>1:
                     niveau-= 1
+
+
+
                 pygame.time.wait(200)
                 return nb_joueurs, False, nb_robots, niveau
 
@@ -140,8 +151,12 @@ def click(ecran, nb_joueurs, nb_robots, niveau):
                 click_souris = True
                 if niveau<2:
                     niveau+= 1
+                
+
+
                 pygame.time.wait(200)
                 return nb_joueurs, False, nb_robots, niveau
+
 
             #click commencer
             if (L-470<pos[0]<L-20) and (H-80<pos[1]<H-20):

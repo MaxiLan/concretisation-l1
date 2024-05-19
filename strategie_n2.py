@@ -10,6 +10,7 @@ class Strategie_n2:
         self.colonne_en_cours=[]
         self.carte_a_suppr = []
 
+
     def debut_manche(self,joueur):
         """
         Renvoie les coordonnées des 2 cartes à retourner au début d'une manche

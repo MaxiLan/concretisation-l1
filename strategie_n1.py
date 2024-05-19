@@ -3,18 +3,24 @@ import random
 import manche
 class Strategie_n1:
     """ 
-    Ne prends pas les cartes au dessus égales à 7
-    pioche ou defausse :
-    defausse si on peut avancer une colonne sup a 0 ou si carte <=0
-    pioche sinon. 
-        si carte valide
+    Ne prends pas les cartes au dessus ou égales à 7
+    Pioche ou défausse :
+    -défausse si on peut avancer une colonne supérieur à 0 ou si la carte est inférieur à 0
+    -pioche sinon. 
+        si la carte est valide (<7)
             on la met dans une colonne 
         sinon on retourne une carte du jeu
     """
 
     def __init__(self):
+        #colonne en cours, i.e les colonnes avec 2 cartes identitiques dedans
         self.colonne_en_cours=[]
+
+        #coordonnées des cartes à supprimer
         self.carte_a_suppr = []
+
+        #coordonnées des cartes cachées qu'on ne doit pas retourner
+        self.ind_interdit = []
 
 
     def fin_partie(self,joueur):
@@ -79,9 +85,11 @@ class Strategie_n1:
         Choisi des coordonnées aléatoires parmi les cartes cachées du jeu
         """
         
-        choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
-        coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
-        return  coord
+        choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1)
+        while [joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]] in self.ind_interdit:
+            choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1)
+        
+        return  [joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
 
 
     def debut_manche(self,joueur):
@@ -93,7 +101,6 @@ class Strategie_n1:
             if joueur.jeu_actuel[len(joueur.jeu_actuel)-1-i][len(joueur.jeu_actuel[0])-1].etat!="ouverte":
                 coord=[len(joueur.jeu_actuel)-1-i,len(joueur.jeu_actuel[0])-1]
                 #coord=[i,0]
-        
         return coord
 
 
@@ -155,9 +162,10 @@ class Strategie_n1:
         de la pioche ou de la défausse.
         """
 
-        #met à jour les cartes à supprimer et les colonnes en cours
+        #met à jour les cartes à supprimer, les colonnes en cours et les indices interdits
         self.carte_a_suppr_maj(joueur)
         self.evol_colonne_encours(joueur.jeu_actuel)
+        self.ind_interdit = []
     
         #si la carte est pas valide on la met dans la défausse
         if not self.carte_valide(carte) and not self.fin_partie(joueur):
@@ -168,12 +176,21 @@ class Strategie_n1:
         else:
             
             #si il y des colonnes à finir
-            if carte.num > 0:
-                for c in self.colonne_en_cours:
-                    if self.num_colonne_en_cours(joueur.jeu_actuel, c)==carte.num:
+            for c in self.colonne_en_cours:
+                if self.num_colonne_en_cours(joueur.jeu_actuel, c)==carte.num:
+                    
+                    #si la carte en main est positive, on complète la colonne
+                    if carte.num > 0:
                         for i in range(3):
                             if joueur.jeu_actuel[i][c].etat=="cachee":
                                 return [i, c]
+                    
+                    #sinon, on rend ces coordonnées interdites pour ne pas faire une colonne négative
+                    else:
+                        for i in range(3):
+                            if joueur.jeu_actuel[i][c].etat=="cachee":
+                               self.ind_interdit.append([i,c])
+                        
 
             
             #avancée des colonnes
@@ -185,32 +202,45 @@ class Strategie_n1:
                             if ligne!=-1:
                                 return coord
 
-            #y a t'il des cartes qui ne sont pas valides dans notre jeu actuel ?           
+
+            #si il reste des cartes non valides dans le jeu du joueur    
             if len(self.carte_a_suppr)!=0:
                 for i in range(3):
                     for j in range(4):
                         if joueur.jeu_actuel[i][j].num==self.carte_a_suppr[0] and joueur.jeu_actuel[i][j].etat=="ouverte":
                             self.carte_a_suppr.pop(0)
                             coord=[i,j]
-                            return coord #alors on retourne les indices de la carte a supprimer
+                            return coord 
 
+            #sinon, si ce n'est pas la fin de partie, on retourne une carte au hasard            
             if not self.fin_partie(joueur):
-                choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
+
+                choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1)
+                while [joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]] in self.ind_interdit:
+                    choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1)
                 coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
                 return coord 
 
+            #sinon, on appelle une fonction pour la fin de partie
             else:
                 return self.joueur_gagnant(joueur,carte,partie)
 
     
 
     def calcul_score(self,joueur,carte):
+        """
+        Si la carte finale finit une colonne, le score est calculé différemmment
+        """
         joueur.evol_score()
         if joueur.jeu_actuel[0][joueur.ind_carte_cachee[0][1]]==joueur.jeu_actuel[1][joueur.ind_carte_cachee[0][1]]==joueur.jeu_actuel[2][joueur.ind_carte_cachee[0][1]]:
             joueur.score_individuel -= 3*carte.num -(joueur.jeu_actuel[joueur.ind_carte_cachee[0][0]][joueur.ind_carte_cachee[0][1]].num-carte.num)
     
 
     def carte_max(self, jeu_actuel):
+        """
+        Renvoie les coordonnées de la carte la plus haute du jeu
+        """
+        #la carte à ces coordonnées est toujours retournée
         coord = [3, 4]
 
         for l in range(3):
@@ -222,67 +252,90 @@ class Strategie_n1:
 
 
     def joueur_gagnant(self,joueur,carte,partie):
+        """
+        Gère la fin de partie
+        Si le joueur à le meilleur score, on finit la manche
+        Sinon, on continue la manche
+        """
         nb_joueur_meilleur=0
         i=0
 
+        #Si le joueur sélectionné réalise une colonne avec sa dernière carte, on calcule son score de manière différente
         self.calcul_score(joueur,carte)
-        while (i<=len(partie.tab_joueurs)-1):
+        
+        #on estime le score des autres joueurs
+        while (i<len(partie.tab_joueurs)):
 
-            fact_carte_cachee=0
+            #les cartes cachées valent (en moyenne) 5
+            facteur_carte_cachee=0
             partie.tab_joueurs[i].evol_score()
+
             if partie.tab_joueurs[i].nom!=joueur.nom:
                 for ligne in range(3):
                         for j in range(4):
                             if partie.tab_joueurs[i].jeu_actuel[ligne][j].etat=="cachee":
-                                fact_carte_cachee+=5
-                partie.tab_joueurs[i].score_individuel+=fact_carte_cachee
-                if partie.tab_joueurs[i].score_individuel< joueur.score_individuel+carte.num and partie.tab_joueurs[i].nom!=joueur.nom:
+                                facteur_carte_cachee+=5
+
+                #estimation du score total des joueurs
+                partie.tab_joueurs[i].score_individuel+=facteur_carte_cachee
+
+                #Si le joueur i a un meilleur score que le joueur sélectionné, on incrémente une variable
+                if partie.tab_joueurs[i].score_individuel < joueur.score_individuel+carte.num and partie.tab_joueurs[i].nom!=joueur.nom:
                     nb_joueur_meilleur+=1
             i+=1
+        
+        #si le joueur sélectionné a le meilleur score, on retourne sa dernière carte
         if nb_joueur_meilleur==0:
             return joueur.ind_carte_cachee[0]
+        
+        #sinon, on appelle une autre fonction
         else: 
             return self.jeu_fin_partie(joueur,carte,partie)
 
 
     def jeu_fin_partie(self,joueur,carte,partie):
-            self.evol_colonne_encours(joueur.jeu_actuel)
-            max_=-3
-            if len(self.colonne_en_cours)<4:
-                for colonne in range(4):
-                    if colonne in self.colonne_en_cours:
-                        continue
-                    else:
-                        if joueur.jeu_actuel[0][colonne].num!="42bis":
-                            ma_colonne=[joueur.jeu_actuel[0][colonne].num,joueur.jeu_actuel[1][colonne].num,joueur.jeu_actuel[2][colonne].num]
-                            max_tmp=max(ma_colonne)
-                            if max_tmp>max_ and max_tmp>=0:
-                                max_=max_tmp
-                                coord=[ma_colonne.index(max_),colonne,]
-                if max_>-3:
-                    return coord
-            
-            coord_max_tmp=[]
-            for colonne in self.colonne_en_cours:
-                if colonne not in self.colonne_en_cours:
+        """
+        
+        """
+        self.evol_colonne_encours(joueur.jeu_actuel)
+
+        max_=-3
+        
+        if len(self.colonne_en_cours)<4:
+            for colonne in range(4):
+                if colonne in self.colonne_en_cours:
                     continue
                 else:
-                    if joueur.jeu_actuel[0][colonne].num=="42bis":
-                        continue
-                    elif joueur.jeu_actuel[0][colonne].num!=joueur.jeu_actuel[1][colonne].num and joueur.jeu_actuel[0][colonne].num!=joueur.jeu_actuel[2][colonne].num:
-                        coord_max_tmp.append([0,colonne])
-                    elif joueur.jeu_actuel[1][colonne].num!=joueur.jeu_actuel[0][colonne].num and joueur.jeu_actuel[1][colonne].num!=joueur.jeu_actuel[2][colonne].num:
-                        coord_max_tmp.append([1,colonne])
-                    else:
-                        coord_max_tmp.append([2,colonne])
-            for k in range(1,len(coord_max_tmp)):
-                val=joueur.jeu_actuel[coord_max_tmp[k][0]][coord_max_tmp[k][1]].num
-                if val>max_ and val>0 :
-                    coord=[coord_max_tmp[k][0],coord_max_tmp[k][1]]
-                    max_=val
+                    if joueur.jeu_actuel[0][colonne].num!="42bis":
+                        ma_colonne=[joueur.jeu_actuel[0][colonne].num,joueur.jeu_actuel[1][colonne].num,joueur.jeu_actuel[2][colonne].num]
+                        max_tmp=max(ma_colonne)
+                        if max_tmp>max_ and max_tmp>=0:
+                            max_=max_tmp
+                            coord=[ma_colonne.index(max_),colonne,]
             if max_>-3:
                 return coord
-            
+        
+        coord_max_tmp=[]
+        for colonne in self.colonne_en_cours:
+            if colonne not in self.colonne_en_cours:
+                continue
             else:
-                #on recherche juste le maximum dans tout le jeu
-                return self.carte_max(jeu_actuel)
+                if joueur.jeu_actuel[0][colonne].num=="42bis":
+                    continue
+                elif joueur.jeu_actuel[0][colonne].num!=joueur.jeu_actuel[1][colonne].num and joueur.jeu_actuel[0][colonne].num!=joueur.jeu_actuel[2][colonne].num:
+                    coord_max_tmp.append([0,colonne])
+                elif joueur.jeu_actuel[1][colonne].num!=joueur.jeu_actuel[0][colonne].num and joueur.jeu_actuel[1][colonne].num!=joueur.jeu_actuel[2][colonne].num:
+                    coord_max_tmp.append([1,colonne])
+                else:
+                    coord_max_tmp.append([2,colonne])
+        for k in range(1,len(coord_max_tmp)):
+            val=joueur.jeu_actuel[coord_max_tmp[k][0]][coord_max_tmp[k][1]].num
+            if val>max_ and val>0 :
+                coord=[coord_max_tmp[k][0],coord_max_tmp[k][1]]
+                max_=val
+        if max_>-3:
+            return coord
+        
+        else:
+            #on recherche juste le maximum dans tout le jeu
+            return self.carte_max(jeu_actuel)
