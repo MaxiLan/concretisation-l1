@@ -10,6 +10,7 @@ import accueil
 import strategie_n1
 import robot
 import strat_aleatoire
+
 #variables intiales
 fin_partie = False
 
@@ -27,25 +28,28 @@ nb_joueurs, nb_robots, niveau = accueil.affiche_accueil(ecran)
 partie = partie.Partie(nb_joueurs, ecran)
 
 for i in range(nb_robots):
-  S=strategie_n1.Strategie_n1()
-  R=robot.Robot(S,i+1)
-  partie.tab_joueurs.append(R)
+    if niveau==1:
+        S=strat_aleatoire.Strategie_aleatoire()
+    elif niveau==2:
+        S=strategie_n1.Strategie_n1()
+    R=robot.Robot(S,i+1)
+    partie.tab_joueurs.append(R)
 
 
 for i in range (nb_robots, nb_joueurs):
-  J = joueur.Joueur(i + 1)
-  partie.tab_joueurs.append(J)
+    J = joueur.Joueur(i + 1)
+    partie.tab_joueurs.append(J)
 
 
 while not fin_partie:
-  for event in pygame.event.get():
-    if event.type == pygame.QUIT:
-      fin_partie = True
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            fin_partie = True
 
-  fin_partie = not manche.manche(partie, ecran)
+    fin_partie = not manche.manche(partie, ecran)
 
-  if partie.fin_partie():
-    fin_partie = True
+    if partie.fin_partie():
+        fin_partie = True
   
 
 pygame.quit()
