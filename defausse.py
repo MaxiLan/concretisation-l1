@@ -12,8 +12,6 @@ class Defausse:
         h=160 * facteur
         l=110 * facteur
         self.cartes = []
-        #self.ord= HAUTEUR-30-h
-        #self.abs= LARGEUR- 2*l- 50
         self.ord= HAUTEUR-30-h
         self.abs= LARGEUR//2 - l - l//2 - 20
 
