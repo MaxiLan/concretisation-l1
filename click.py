@@ -25,6 +25,7 @@ def actions_tour(joueur,partie, ecran):
         affiche_aide(ecran, h, section=0)
     else:
         cache_aide(ecran, l,h)
+    
          
     if isinstance(joueur,robot.Robot):
         pos = joueur.choix_pioche_def(partie)
@@ -266,8 +267,9 @@ def affiche_aide(ecran, h_carte, section):
     Affiche de l'aide si le joueur place sa souris sur le point d'intérrogation
     """
     img = pygame.image.load("images/question.png")
-    img = pygame.transform.scale(img, (40, 40))
-    ecran.blit(img, (30, 30+3*15+3*h_carte + 10))
+    img = pygame.transform.scale(img, (50, 50))
+    #ecran.blit(img, (30, 30+3*15+3*h_carte + 10))
+    ecran.blit(img, (80, ecran.get_height()-80))
     objet_texte = pygame.font.Font(None, 32)
 
     if section==0:
@@ -281,7 +283,6 @@ def affiche_aide(ecran, h_carte, section):
     
 
     ecran.blit(objet_texte.render(texte, True, "white"), (30,30+3*15+3*h_carte + 10 +40))
-    pygame.display.flip()
 
 
 def cache_aide(ecran, l_carte, h_carte):
@@ -295,6 +296,8 @@ def cache_aide(ecran, l_carte, h_carte):
     rect = pygame.Rect(30,30+3*15+3*h_carte + 10 +40, 4*l_carte+140, 30)
     pygame.draw.rect(ecran, "grey24", rect)
     pygame.display.flip()
+    #ecran.fill("grey24")
+    
 
 
 def souris_sur_aide(ecran, h_carte):
@@ -302,10 +305,8 @@ def souris_sur_aide(ecran, h_carte):
     Renvoie vrai si la souris se trouve sur l'aide, faux sinon
     """
     pos = pygame.mouse.get_pos()
-    if (30<pos[0]<30+40) and (30+3*15+3*h_carte + 10<pos[1]<30+3*15+3*h_carte + 10+40):
-        return True
-    else:
-        return False
+    return (30<pos[0]<30+40) and (30+3*15+3*h_carte + 10<pos[1]<30+3*15+3*h_carte + 10+40)
+
 
 def affiche_page_autre_joueur(ecran,tab_joueurs):
     """

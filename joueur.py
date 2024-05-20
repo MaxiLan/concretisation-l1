@@ -1,5 +1,7 @@
 import pygame
 import carte
+
+
 class Joueur:
 
     def __init__(self, nom):
