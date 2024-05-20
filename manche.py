@@ -172,23 +172,24 @@ def affichage_fin_manche(partie,ecran):
     LARGEUR = ecran.get_width() 
     HAUTEUR = ecran.get_height()
 
-    ecran.fill("grey24")
+    ecran.fill((43, 42, 76))
 
+    font1=pygame.font.Font(None, 50)
+    font1.underline = True
+    text=font1.render("Résulats de la manche : ",1,"white")
+    ecran.blit(text,(LARGEUR//2-206,30))
 
-    font=pygame.font.Font(None, 45)
-    text=font.render("RESULTATS MANCHE: ",1,"white")
-    ecran.blit(text,(30,30))
+    font2=pygame.font.Font(None, 40)
     h=1
     for i in range(len(partie.tab_joueurs)):
         ch="Score joueur n°"+str(partie.tab_joueurs[i].nom)+" : " +str(partie.score[i])
-        text=font.render(ch,1, "white")
-        ecran.blit(text,(150,150+h))
+        text=font2.render(ch,1, "white")
+        ecran.blit(text,(LARGEUR//2-142,150+h))
         h=h+25 
 
     l_milieu = ecran.get_width() // 2
-    objet_font = pygame.font.Font(None, 30) 
-    ecran.blit(objet_font.render("Cliquez pour continuer", True, "white"), (l_milieu-228 - 50, 600))
-    ecran.blit(objet_font.render("Cliquez pour arrêtez", True, "white"), (l_milieu + 50, 600))
+    ecran.blit(font2.render("Cliquez pour continuer", True, "white"), (l_milieu-278 - 50, 600))
+    ecran.blit(font2.render("Cliquez pour arrêtez", True, "white"), (l_milieu + 100, 600))
 
     ch = "images/loupe.png"
     img = pygame.image.load(ch)
