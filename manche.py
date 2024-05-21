@@ -139,7 +139,7 @@ def lancement_manche(partie,ecran):
         pygame.time.wait(1000)
 
     #affichage dès le debut de l'emplacement "carte en main" 
-    ma_carte=carte.Carte(42,ecran)
+    ma_carte=carte.Carte("42bis",ecran)
     partie.defausse.ajout_carte(ma_carte)
     partie.defausse.ajout_carte(partie.pioche.cartes[0])
     carte.cacher_carte(ecran,partie)

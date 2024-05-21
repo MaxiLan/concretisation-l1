@@ -25,7 +25,6 @@ class Defausse:
         ch = "images/" + str(self.cartes[-1].num) + ".png"
         img = pygame.image.load(ch)
         img = pygame.transform.scale(img, (self.cartes[0].largeur, self.cartes[0].hauteur))
-        #ecran.blit(img, (LARGEUR - 50 - 2*self.cartes[0].largeur, HAUTEUR - self.cartes[0].hauteur - 30))
         ecran.blit(img, (self.abs, self.ord))
 
 

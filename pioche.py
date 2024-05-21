@@ -42,12 +42,9 @@ class Pioche:
     def affiche(self, ecran): 
         HAUTEUR = ecran.get_height()
         LARGEUR = ecran.get_width()
-
         ch = "images/cachee.png"
         img = pygame.image.load(ch)
         img = pygame.transform.scale(img, (self.cartes[0].largeur, self.cartes[0].hauteur))
-
-        #ecran.blit(img, (LARGEUR - 30 - self.cartes[0].largeur, HAUTEUR - 30 - self.cartes[0].hauteur))
         ecran.blit(img, (self.abs, self.ord))
 
   

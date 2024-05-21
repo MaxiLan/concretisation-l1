@@ -47,7 +47,6 @@ def actions_tour(joueur,partie, ecran):
             return False
       
     #si le click est sur la défausse
-    #if (LARGEUR- 2*l- 50< pos[0] < LARGEUR-50-l) and (HAUTEUR-30-h< pos[1] < HAUTEUR-30):
     if (x_defausse < pos[0] < x_defausse+l) and (y_defausse< pos[1] < y_defausse+h):
 
         if not (isinstance(joueur,robot.Robot)):
@@ -90,25 +89,24 @@ def actions_tour(joueur,partie, ecran):
             s = pygame.mouse.get_pressed()
 
             if s[0]:
-              pos = pygame.mouse.get_pos()
+                pos = pygame.mouse.get_pos()
               
-            #on cherche le click sur une carte
-            for i in range(3):
-                for j in range(4):
-                    #if (30 + j * l+j*20< pos[0] <30 + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
-                    if (ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
-                        #on échange les cartes
-                        if joueur.jeu_actuel[i][j].num!="42bis":
-                            partie.carte_en_main="images/carte_selectionnee.png"
-                            aux = joueur.jeu_actuel[i][j]
-                            joueur.jeu_actuel[i][j] = carte_select
-                            joueur.jeu_actuel[i][j].etat = "ouverte"
-                            partie.defausse.ajout_carte(aux)
-                            carte.cacher_carte(ecran,partie)
-                            return True
+                #on cherche le click sur une carte
+                for i in range(3):
+                    for j in range(4):
+                        if (ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
+                            #on échange les cartes
+                            if joueur.jeu_actuel[i][j].num!="42bis":
+                                partie.carte_en_main="images/carte_selectionnee.png"
+                                aux = joueur.jeu_actuel[i][j]
+                                joueur.jeu_actuel[i][j] = carte_select
+                                joueur.jeu_actuel[i][j].etat = "ouverte"
+                                partie.defausse.ajout_carte(aux)
+                                carte.cacher_carte(ecran,partie)
+                                return True
 
-            if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                test_appel_loupe(ecran,partie,joueur)
+                if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
+                    test_appel_loupe(ecran,partie,joueur)
 
       #sinon si le click est sur la pioche
     elif (x_pioche< pos[0] < x_pioche+l and y_pioche< pos[1] < y_pioche+h):

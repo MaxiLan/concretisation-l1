@@ -100,7 +100,6 @@ class Strategie_n1:
         for i in range(2):
             if joueur.jeu_actuel[len(joueur.jeu_actuel)-1-i][len(joueur.jeu_actuel[0])-1].etat!="ouverte":
                 coord=[len(joueur.jeu_actuel)-1-i,len(joueur.jeu_actuel[0])-1]
-                #coord=[i,0]
         return coord
 
 
@@ -146,7 +145,6 @@ class Strategie_n1:
                         maximum=jeu_actuel[i][colonne].num
 
             elif maximum<0:
-                #A TESTER
                 maximum=0
                 ind_max=i
 
