@@ -241,7 +241,7 @@ def retourne_cartes(joueur, ecran,partie):
 
             for i in range(3):
                 for j in range(4):
-                    if(ecart + j * l+j*20< pos[0] <30 + j * l+j*20 +l) and (ecart + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
+                    if(ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 +l) and (ecart + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
                         if joueur.jeu_actuel[i][j].etat != "ouverte":
                             joueur.jeu_actuel[i][j].etat = "ouverte"
                             carte_selectionner = True
