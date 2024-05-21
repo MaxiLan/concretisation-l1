@@ -10,6 +10,7 @@ class Carte:
         self.num = numero 
         self.hauteur=160 * facteur
         self.largeur=110 * facteur
+        self.lieu="pioche" # sert uniquement pour les strategies du robot
 
 
 def actualise_carte_en_main(ecran, partie):

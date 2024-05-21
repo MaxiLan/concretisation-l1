@@ -12,8 +12,6 @@ class Defausse:
         h=160 * facteur
         l=110 * facteur
         self.cartes = []
-        #self.ord= HAUTEUR-30-h
-        #self.abs= LARGEUR- 2*l- 50
         self.ord= HAUTEUR-30-h
         self.abs= LARGEUR//2 - l - l//2 - 20
 
@@ -27,7 +25,6 @@ class Defausse:
         ch = "images/" + str(self.cartes[-1].num) + ".png"
         img = pygame.image.load(ch)
         img = pygame.transform.scale(img, (self.cartes[0].largeur, self.cartes[0].hauteur))
-        #ecran.blit(img, (LARGEUR - 50 - 2*self.cartes[0].largeur, HAUTEUR - self.cartes[0].hauteur - 30))
         ecran.blit(img, (self.abs, self.ord))
 
 
