@@ -103,7 +103,7 @@ def actions_tour(joueur,partie, ecran):
                 #on cherche le click sur une carte
                 for i in range(3):
                     for j in range(4):
-                        if (ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
+                        if (ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 + l) and (60 + i * h+i*15< pos[1] <  60 + i * h+i*15 + h):
                             #on échange les cartes
                             if joueur.jeu_actuel[i][j].num!="42bis":
                                 partie.carte_en_main="images/carte_selectionnee.png"
@@ -181,7 +181,7 @@ def actions_tour(joueur,partie, ecran):
                     #si le click est sur le jeu du joueur
                     for i in range(3):
                         for j in range(4):
-                            if (ecart + j *l+j*20< pos[0] <ecart + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 +h):
+                            if (ecart + j *l+j*20< pos[0] <ecart + j * l+j*20 + l) and (60 + i * h+i*15< pos[1] <  60 + i * h+i*15 +h):
 
                                 #on echange les cartes
                                 if joueur.jeu_actuel[i][j].num != "42bis":
@@ -241,7 +241,7 @@ def retourne_cartes(joueur, ecran,partie):
 
             for i in range(3):
                 for j in range(4):
-                    if(ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 +l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
+                    if(ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 +l) and (60 + i * h+i*15< pos[1] <  60 + i * h+i*15 + h):
                         if joueur.jeu_actuel[i][j].etat != "ouverte":
                             joueur.jeu_actuel[i][j].etat = "ouverte"
                             carte_selectionner = True
