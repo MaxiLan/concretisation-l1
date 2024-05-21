@@ -32,31 +32,32 @@ def tour(joueur,partie, ecran, j_precedent, j_suivant):
     img = pygame.transform.scale(img, (50,50))
     ecran.blit(img, (ecran.get_width()-80, 30))
     #tant que son tour n'est pas fini, son jeu reste affiché
-    carte.cacher_carte(ecran,partie)
+    carte.actualise_carte_en_main(ecran,partie)
 
-    font=pygame.font.Font(None, 35)
+    font1=pygame.font.Font(None, 35)
+    font1.underline = True
 
-    text1=font.render("Joueur n°"+str(joueur.nom),1, "white")
+    text1=font1.render("Joueur n°"+str(joueur.nom),1, "white")
     ecran.blit(text1,(ecran.get_width()//2-61,15))
     
     joueur.affiche_jeu(ecran)
     partie.pioche.affiche(ecran)
     partie.defausse.affiche(ecran)
 
+    font2=pygame.font.Font(None, 35)
     if len(partie.tab_joueurs)==2:
         j_suivant.affiche_petit(ecran, 'd')
-        text2=font.render("Joueur n°"+str(j_suivant.nom),1, "white")
+        text2=font2.render("Joueur n°"+str(j_suivant.nom),1, "white")
         ecran.blit(text2,((ecran.get_width()-60-30-2*73)-61,150))
 
     if len(partie.tab_joueurs)>2:
         j_precedent.affiche_petit(ecran, 'g')
-        text2=font.render("Joueur n°"+str(j_precedent.nom),1, "white")
+        text2=font2.render("Joueur n°"+str(j_precedent.nom),1, "white")
         ecran.blit(text2,((60+30+2*73)-61,150))
 
         j_suivant.affiche_petit(ecran, 'd')
-        text3=font.render("Joueur n°"+str(j_suivant.nom),1, "white")
+        text3=font2.render("Joueur n°"+str(j_suivant.nom),1, "white")
         ecran.blit(text3,((ecran.get_width()-60-30-2*73)-61,150))
-
 
     pygame.display.flip()
   
@@ -142,7 +143,7 @@ def lancement_manche(partie,ecran):
     ma_carte=carte.Carte(42,ecran)
     partie.defausse.ajout_carte(ma_carte)
     partie.defausse.ajout_carte(partie.pioche.cartes[0])
-    carte.cacher_carte(ecran,partie)
+    carte.actualise_carte_en_main(ecran,partie)
     partie.pioche.cartes.pop(0)
     partie.pioche.cartes[0].etat = "ouverte"
 
@@ -185,7 +186,7 @@ def affichage_fin_manche(partie,ecran):
         ch="Score joueur n°"+str(partie.tab_joueurs[i].nom)+" : " +str(partie.score[i])
         text=font2.render(ch,1, "white")
         ecran.blit(text,(LARGEUR//2-142,150+h))
-        h=h+25 
+        h=h+27
 
     l_milieu = ecran.get_width() // 2
     ecran.blit(font2.render("Cliquez pour continuer", True, "white"), (l_milieu-278 - 50, 600))
@@ -238,7 +239,7 @@ def continuer_partie(ecran, partie):
                 return False 
 
             elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                click.test_appel_loupe(ecran,partie,partie.tab_joueurs[0],"fin jeu")
+                click.appel_loupe(ecran,partie,partie.tab_joueurs[0],"fin jeu")
                 affichage_fin_manche(partie, ecran)
 
 
@@ -279,7 +280,7 @@ def manche(partie, ecran):
         #laisse le temps au joueur de voir son score
         pygame.time.wait(300)
     
-    pygame.time.wait(4000)
+    pygame.time.wait(1500)
     #une fois qu'un joueur a retourné toute ses cartes il faut encore faire un tour
     for i in range(len(partie.tab_joueurs)-1):
         j_precedent = partie.tab_joueurs[i_joueur-1]

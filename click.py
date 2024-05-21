@@ -9,6 +9,7 @@ def actions_tour(joueur,partie, ecran):
     """
     Gère toutes les actions du tour 
     """
+    #variables nécessaires
     P.verifie_fermeture()
     HAUTEUR = ecran.get_height()
     LARGEUR = ecran.get_width()
@@ -26,7 +27,7 @@ def actions_tour(joueur,partie, ecran):
     else:
         cache_aide(ecran, l,h)
     
-         
+    #si le joueur est un robot     
     if isinstance(joueur,robot.Robot):
         pos = joueur.choix_pioche_def(partie)
         pos[0]=pos[0]+10
@@ -41,32 +42,34 @@ def actions_tour(joueur,partie, ecran):
         souris = pygame.mouse.get_pressed()
         if souris[0]:
             pos = pygame.mouse.get_pos()
-          
+
+        #sinon on renvoie False, et la fonction sera rappelée  
         else:
-        #sinon on renvoie False, et la fonction sera rappelée
             return False
       
     #si le click est sur la défausse
-    #if (LARGEUR- 2*l- 50< pos[0] < LARGEUR-50-l) and (HAUTEUR-30-h< pos[1] < HAUTEUR-30):
     if (x_defausse < pos[0] < x_defausse+l) and (y_defausse< pos[1] < y_defausse+h):
 
         if not (isinstance(joueur,robot.Robot)):
           pygame.event.get()
           s = pygame.mouse.get_pressed()
+
           if s[0]:
             pos = pygame.mouse.get_pos()
             if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-              test_appel_loupe(ecran,partie,joueur)
-          #on déplace la carte de la defausse
+              appel_loupe(ecran,partie,joueur)
+
+        #on déplace la carte de la defausse
         carte_select = partie.defausse.retire_carte()
         partie.carte_en_main="images/" + str(carte_select.num) + ".png"
-        carte.cacher_carte(ecran,partie)
+        carte.actualise_carte_en_main(ecran,partie)
         partie.defausse.affiche(ecran)
         pygame.display.flip()
 
         #on attend la décision du joueur (carte à échanger)
         while (not click_carte):
             P.verifie_fermeture()
+
             if isinstance(joueur,robot.Robot):
                 pygame.time.wait(700)
                 pygame.event.get()
@@ -78,8 +81,9 @@ def actions_tour(joueur,partie, ecran):
                 joueur.jeu_actuel[pos[0]][pos[1]] = carte_select
                 joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
                 partie.defausse.ajout_carte(aux)
-                carte.cacher_carte(ecran,partie)
+                carte.actualise_carte_en_main(ecran,partie)
                 return True
+
             else:
                 if souris_sur_aide(ecran,h):
                     affiche_aide(ecran,h, section=1)
@@ -90,27 +94,29 @@ def actions_tour(joueur,partie, ecran):
             s = pygame.mouse.get_pressed()
 
             if s[0]:
-              pos = pygame.mouse.get_pos()
+                pos = pygame.mouse.get_pos()
+
+                if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
+                    appel_loupe(ecran,partie,joueur)
+                    pygame.time.wait(200)
               
-            #on cherche le click sur une carte
-            for i in range(3):
-                for j in range(4):
-                    #if (30 + j * l+j*20< pos[0] <30 + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
-                    if (ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
-                        #on échange les cartes
-                        if joueur.jeu_actuel[i][j].num!="42bis":
-                            partie.carte_en_main="images/carte_selectionnee.png"
-                            aux = joueur.jeu_actuel[i][j]
-                            joueur.jeu_actuel[i][j] = carte_select
-                            joueur.jeu_actuel[i][j].etat = "ouverte"
-                            partie.defausse.ajout_carte(aux)
-                            carte.cacher_carte(ecran,partie)
-                            return True
+                #on cherche le click sur une carte
+                for i in range(3):
+                    for j in range(4):
+                        if (ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
+                            #on échange les cartes
+                            if joueur.jeu_actuel[i][j].num!="42bis":
+                                partie.carte_en_main="images/carte_selectionnee.png"
+                                aux = joueur.jeu_actuel[i][j]
+                                joueur.jeu_actuel[i][j] = carte_select
+                                joueur.jeu_actuel[i][j].etat = "ouverte"
+                                partie.defausse.ajout_carte(aux)
+                                carte.actualise_carte_en_main(ecran,partie)
+                                return True
 
-            if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                test_appel_loupe(ecran,partie,joueur)
 
-      #sinon si le click est sur la pioche
+
+    #sinon si le click est sur la pioche
     elif (x_pioche< pos[0] < x_pioche+l and y_pioche< pos[1] < y_pioche+h):
         if not isinstance(joueur,robot.Robot):
             pygame.event.get()
@@ -118,7 +124,7 @@ def actions_tour(joueur,partie, ecran):
             if s[0]:
               pos = pygame.mouse.get_pos()
               if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                test_appel_loupe(ecran,partie,joueur)
+                appel_loupe(ecran,partie,joueur)
 
         # on deplace la carte de la pioche
         carte_select = partie.pioche.cartes[0]
@@ -127,7 +133,7 @@ def actions_tour(joueur,partie, ecran):
         partie.pioche.est_vide(partie.defausse)
         partie.pioche.affiche(ecran)
         partie.carte_en_main= "images/" + str(carte_select.num) + ".png"
-        carte.cacher_carte(ecran,partie)
+        carte.actualise_carte_en_main(ecran,partie)
         pygame.display.flip()
 
         click_defausse = False
@@ -147,7 +153,7 @@ def actions_tour(joueur,partie, ecran):
                     partie.carte_en_main="images/carte_selectionnee.png"
                     partie.defausse.ajout_carte(carte_select)
                     partie.defausse.affiche(ecran)
-                    carte.cacher_carte(ecran,partie)
+                    carte.actualise_carte_en_main(ecran,partie)
                     pygame.display.flip()
                     click_defausse = True
                     pygame.time.wait(300)
@@ -160,7 +166,7 @@ def actions_tour(joueur,partie, ecran):
                     return True
                 else:
                     partie.carte_en_main="images/carte_selectionnee.png"
-                    carte.cacher_carte(ecran,partie)
+                    carte.actualise_carte_en_main(ecran,partie)
                     click_carte = True
                     aux = joueur.jeu_actuel[pos[0]][pos[1]]
                     joueur.jeu_actuel[pos[0]][pos[1]] = carte_select
@@ -172,60 +178,41 @@ def actions_tour(joueur,partie, ecran):
                 s = pygame.mouse.get_pressed()
                 if s[0]:
                     pos = pygame.mouse.get_pos()
-              #si le click est sur le jeu du joueur
-                for i in range(3):
-                    for j in range(4):
-                        if (ecart + j *l+j*20< pos[0] <ecart + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 +h):
+                
+                    #si le click est sur le jeu du joueur
+                    for i in range(3):
+                        for j in range(4):
+                            if (ecart + j *l+j*20< pos[0] <ecart + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 +h):
 
-                          #on echange les cartes
-                            if joueur.jeu_actuel[i][j].num != "42bis":
-                                partie.carte_en_main="images/carte_selectionnee.png"
-                                click_carte = True
-                                aux = joueur.jeu_actuel[i][j]
-                                joueur.jeu_actuel[i][j] = carte_select
-                                joueur.jeu_actuel[i][j].etat = "ouverte"
-                                partie.defausse.ajout_carte(aux)
-                                carte.cacher_carte(ecran, partie)
-                                return True
-                if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                    test_appel_loupe(ecran,partie,joueur)
+                                #on echange les cartes
+                                if joueur.jeu_actuel[i][j].num != "42bis":
+                                    partie.carte_en_main="images/carte_selectionnee.png"
+                                    click_carte = True
+                                    aux = joueur.jeu_actuel[i][j]
+                                    joueur.jeu_actuel[i][j] = carte_select
+                                    joueur.jeu_actuel[i][j].etat = "ouverte"
+                                    partie.defausse.ajout_carte(aux)
+                                    carte.actualise_carte_en_main(ecran, partie)
+                                    return True
+                    if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
+                        appel_loupe(ecran,partie,joueur)
+
               
                 #si le click est sur la defausse
-                #if (LARGEUR- 2*l- 50< pos[0] < LARGEUR-50-l) and (HAUTEUR-30-h< pos[1] < HAUTEUR-30):
                 if (x_defausse< pos[0] < x_defausse+l) and (y_defausse< pos[1] < y_defausse+h):
                     partie.carte_en_main="images/carte_selectionnee.png"
                     partie.defausse.ajout_carte(carte_select)
                     partie.defausse.affiche(ecran)
-                    carte.cacher_carte(ecran,partie)
+                    carte.actualise_carte_en_main(ecran,partie)
                     pygame.display.flip()
                     click_defausse = True
                     #on retourne une carte selectionnnée par le joueur
                     return retourne_cartes(joueur, ecran,partie)
-        #si le joueur clique sur la loupe 
+        
+    #si le joueur clique sur la loupe 
     elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-        test_appel_loupe(ecran,partie,joueur)
+        appel_loupe(ecran,partie,joueur)
   
-    
-
-def test_appel_loupe(ecran,partie,joueur, section="jeu"):
-    click_croix=False
-    i_joueur=0 #arbitraire
-    
-    while not click_croix:
-        P.verifie_fermeture()
-        pygame.time.wait(100)
-        click_croix,i_joueur=voir_autre_jeu(ecran,partie.tab_joueurs,i_joueur)
-    if section=="jeu":
-        font=pygame.font.Font(None, 35)
-        text=font.render("Joueur n°"+str(joueur.nom),1, "white")
-        ecran.blit(text,(4*(110 * ecran.get_height()/850) +120,30))
-        joueur.affiche_jeu(ecran)
-        partie.pioche.affiche(ecran)
-        partie.defausse.affiche(ecran)
-        carte.cacher_carte(ecran,partie)
-        pygame.display.flip()
-        pygame.time.wait(200)
-
 
 def retourne_cartes(joueur, ecran,partie): 
     """
@@ -252,7 +239,8 @@ def retourne_cartes(joueur, ecran,partie):
         if s[0]:
             pos = pygame.mouse.get_pos()
             if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                test_appel_loupe(ecran,partie,joueur)
+                appel_loupe(ecran,partie,joueur)
+
             for i in range(3):
                 for j in range(4):
                     if(ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 +l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
@@ -268,8 +256,7 @@ def affiche_aide(ecran, h_carte, section):
     """
     img = pygame.image.load("images/question.png")
     img = pygame.transform.scale(img, (50, 50))
-    #ecran.blit(img, (30, 30+3*15+3*h_carte + 10))
-    ecran.blit(img, (80, ecran.get_height()-80))
+    ecran.blit(img, (30, ecran.get_height()-80))
     objet_texte = pygame.font.Font(None, 32)
 
     if section==0:
@@ -277,12 +264,11 @@ def affiche_aide(ecran, h_carte, section):
     elif section==1:
         texte="Echangez avec une de vos cartes"
     elif section==2:
-        texte="Echangez avec une de vos cartes ou posez la dans la défausse"
+        texte="Placez la dans le défausse ou votre jeu"
     elif section==3:
         texte="Retournez maintenant une carte"
     
-
-    ecran.blit(objet_texte.render(texte, True, "white"), (30,30+3*15+3*h_carte + 10 +40))
+    ecran.blit(objet_texte.render(texte, True, "white"), (30, ecran.get_height()-110))
 
 
 def cache_aide(ecran, l_carte, h_carte):
@@ -290,14 +276,11 @@ def cache_aide(ecran, l_carte, h_carte):
     Cache l'aide si le joueur a enlevé sa souris de l'aide
     """
     img = pygame.image.load("images/question.png")
-    img = pygame.transform.scale(img, (40, 40))
-    ecran.blit(img, (30, 30+3*15+3*h_carte + 10))
+    img = pygame.transform.scale(img, (50, 50))
+    ecran.blit(img, (30, ecran.get_height()-80))
 
-    rect = pygame.Rect(30,30+3*15+3*h_carte + 10 +40, 4*l_carte+140, 30)
+    rect = pygame.Rect(30, ecran.get_height()-110, 510, 25)
     pygame.draw.rect(ecran, "grey24", rect)
-    pygame.display.flip()
-    #ecran.fill("grey24")
-    
 
 
 def souris_sur_aide(ecran, h_carte):
@@ -305,7 +288,50 @@ def souris_sur_aide(ecran, h_carte):
     Renvoie vrai si la souris se trouve sur l'aide, faux sinon
     """
     pos = pygame.mouse.get_pos()
-    return (30<pos[0]<30+40) and (30+3*15+3*h_carte + 10<pos[1]<30+3*15+3*h_carte + 10+40)
+    return (30<pos[0]<80) and (ecran.get_height()-80<pos[1]<ecran.get_height()-30)
+
+
+def appel_loupe(ecran,partie,joueur, section="jeu"):
+    click_croix=False
+    i_joueur=0
+    pygame.time.wait(200)
+
+    while not click_croix:
+        P.verifie_fermeture()
+        click_croix,i_joueur=voir_autre_jeu(ecran,partie.tab_joueurs,i_joueur)
+        
+    if section=="jeu":
+        j_precedent = partie.tab_joueurs[joueur.nom - 2]
+        j_suivant = partie.tab_joueurs[joueur.nom%len(partie.tab_joueurs)]
+
+        font1=pygame.font.Font(None, 35)
+        font1.underline = True
+
+        text1=font1.render("Joueur n°"+str(joueur.nom),1, "white")
+        ecran.blit(text1,(ecran.get_width()//2-61,15))
+        
+        joueur.affiche_jeu(ecran)
+        partie.pioche.affiche(ecran)
+        partie.defausse.affiche(ecran)
+        carte.actualise_carte_en_main(ecran,partie)
+
+        font2=pygame.font.Font(None, 35)
+        if len(partie.tab_joueurs)==2:
+            j_suivant.affiche_petit(ecran, 'd')
+            text2=font2.render("Joueur n°"+str(j_suivant.nom),1, "white")
+            ecran.blit(text2,((ecran.get_width()-60-30-2*73)-61,150))
+
+        if len(partie.tab_joueurs)>2:
+            j_precedent.affiche_petit(ecran, 'g')
+            text2=font2.render("Joueur n°"+str(j_precedent.nom),1, "white")
+            ecran.blit(text2,((60+30+2*73)-61,150))
+
+            j_suivant.affiche_petit(ecran, 'd')
+            text3=font2.render("Joueur n°"+str(j_suivant.nom),1, "white")
+            ecran.blit(text3,((ecran.get_width()-60-30-2*73)-61,150))
+        
+        pygame.display.flip()
+        pygame.time.wait(200)
 
 
 def affiche_page_autre_joueur(ecran,tab_joueurs):
@@ -314,6 +340,9 @@ def affiche_page_autre_joueur(ecran,tab_joueurs):
     """
     HAUTEUR = ecran.get_height()
     LARGEUR = ecran.get_width()
+    h = tab_joueurs[0].jeu_actuel[0][0].hauteur
+    l = tab_joueurs[0].jeu_actuel[0][0].largeur
+
     ecran.fill("grey24")
     ch = "images/fermer.png"
     img = pygame.image.load(ch)
@@ -323,12 +352,13 @@ def affiche_page_autre_joueur(ecran,tab_joueurs):
     ch="images/suiv.png"
     img=pygame.image.load(ch)
     img = pygame.transform.scale(img, (80,50))
-    ecran.blit(img,(LARGEUR//8, 130+(3*tab_joueurs[0].jeu_actuel[0][0].hauteur//2)))
+    ecran.blit(img,(LARGEUR//2 - 80 - 60 - 2*l, 130+(3*h//2)))
+
     ch="images/suiv.png"
     img=pygame.image.load(ch)
     img = pygame.transform.scale(img, (80,50))
     img=pygame.transform.rotate(img,180)
-    ecran.blit(img,(LARGEUR//4 + 4 *(tab_joueurs[0].jeu_actuel[0][0].largeur)+50, 130+(3*tab_joueurs[0].jeu_actuel[0][0].hauteur//2)))
+    ecran.blit(img,(LARGEUR//2 + 2*l + 60, 130+(3*h//2)))
 
 
 def voir_autre_jeu(ecran,tab_joueurs,i_joueur):
@@ -343,10 +373,10 @@ def voir_autre_jeu(ecran,tab_joueurs,i_joueur):
     affiche_page_autre_joueur(ecran,tab_joueurs)
     pygame.event.get()
     souris = pygame.mouse.get_pressed()
-    tab_joueurs[i_joueur].affiche_jeu_vision_ext(ecran)
+    tab_joueurs[i_joueur].affiche_jeu(ecran)
     font=pygame.font.Font(None, 35)
     text=font.render("Joueur n°"+str(i_joueur+1),1, "white")
-    ecran.blit(text,(LARGEUR//4 + l +20-30+l//2,150 + 3 * h +3*20))
+    ecran.blit(text,(ecran.get_width()//2-61,150 + 3 * h +3*20))
 
     pygame.display.flip()
 
@@ -362,11 +392,13 @@ def voir_autre_jeu(ecran,tab_joueurs,i_joueur):
             ecran.blit(img, (LARGEUR-80, 30))
             pygame.display.flip()
         
-        elif ((LARGEUR//8 < pos[0] < LARGEUR//8+80) and (130+(3*h//2 < pos[1] < 180+(3*h//2)))):
+        elif ((LARGEUR//2 - 80 - 60 - 2*l < pos[0] < LARGEUR//2 - 60 - 2*l) and (130+(3*h//2 < pos[1] < 180+(3*h//2)))):
             i_joueur=(i_joueur-1)%len(tab_joueurs)
         
-        elif ((LARGEUR//4 + 4 *l+50 < pos[0] < LARGEUR//4 + 4 *l+130) and (130+(3*h//2 < pos[1] < 180+(3*h//2)))):
+        elif ((LARGEUR//2 + 2*l + 60 < pos[0] < LARGEUR//2 + 2*l + 140) and (130+(3*h//2 < pos[1] < 180+(3*h//2)))):
             i_joueur=(i_joueur+1)%len(tab_joueurs)
+        
+        pygame.time.wait(200)
         
 
     return click_croix,i_joueur

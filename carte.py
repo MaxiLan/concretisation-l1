@@ -12,7 +12,7 @@ class Carte:
         self.largeur=110 * facteur
 
 
-def cacher_carte(ecran, partie):
+def actualise_carte_en_main(ecran, partie):
     """
     Recouvre l'emplacement "carte en main"
     """
@@ -21,4 +21,3 @@ def cacher_carte(ecran, partie):
     img = pygame.image.load(partie.carte_en_main)
     img = pygame.transform.scale(img, (partie.pioche.cartes[0].largeur, partie.pioche.cartes[0].hauteur))
     ecran.blit(img, (x, y))
-    

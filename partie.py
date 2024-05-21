@@ -28,6 +28,7 @@ class Partie:
             if element >= 100:
                 result=True
         return result
+        
     
     def mise_a_jour_score(self):
         """
