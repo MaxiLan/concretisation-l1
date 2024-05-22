@@ -3,6 +3,7 @@ import pygame
 import random
 import carte
 import robot
+import partie
 
 def manche(partie, ecran): 
     """
@@ -231,8 +232,18 @@ def affichage_fin_manche(partie,ecran):
         h=h+27
 
     l_milieu = ecran.get_width() // 2
-    ecran.blit(font2.render("Cliquez pour continuer", True, "white"), (l_milieu-278 - 50, 600))
-    ecran.blit(font2.render("Cliquez pour arrêtez", True, "white"), (l_milieu + 100, 600))
+    if partie.fin_partie():
+        img = pygame.image.load("images/recommencer.png")
+        img = pygame.transform.scale(img, (250, 100))
+        ecran.blit(img, (l_milieu - 250 - 30, 600))
+    else:
+        img = pygame.image.load("images/continuer.png")
+        img = pygame.transform.scale(img, (250, 100))
+        ecran.blit(img, (l_milieu - 250 - 30, 600))
+    
+    img = pygame.image.load("images/quitter.png")
+    img = pygame.transform.scale(img, (250, 100))
+    ecran.blit(img, (l_milieu + 30, 600))
 
     ch = "images/loupe.png"
     img = pygame.image.load(ch)

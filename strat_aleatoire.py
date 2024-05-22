@@ -67,9 +67,12 @@ class Strategie_aleatoire:
 
 
     def retourne_hasard(self,joueur):
-            choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
-            coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
-            return  coord
+        """
+        Renvoie des coordonnées au hasard dans le jeu du joueur
+        """
+        choix_carte=random.randint(0,len(joueur.ind_carte_cachee)-1) 
+        coord=[joueur.ind_carte_cachee[choix_carte][0],joueur.ind_carte_cachee[choix_carte][1]]
+        return  coord
 
 
     def debut_manche(self,joueur):
