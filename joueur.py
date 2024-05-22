@@ -9,6 +9,7 @@ class Joueur:
         self.score_individuel = 0
 
     def debut_manche(self,partie,ecran):
+        """renvoie les cartes que le joueur choisit de retourner au début"""
         click=False
         h = partie.pioche.cartes[0].hauteur
         l = partie.pioche.cartes[0].largeur
@@ -26,8 +27,8 @@ class Joueur:
                             pygame.display.flip()
                             click = True
         return click
-        
-         
+
+
     def evol_score(self):
         """
         Fait évoluer le score de chaque joueur
