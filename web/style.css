@@ -62,9 +62,9 @@ fieldset{
   border-width: 8px;
   display:flex;
   flex-direction: row;
-  justify-content:left;
+  justify-content:center;
   text-align:left;
-  width:1300px;
+  width:1500px;
   border-color: #EEE2DE;
   border-style:dotted;
 }

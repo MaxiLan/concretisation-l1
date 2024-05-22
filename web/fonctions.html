@@ -60,6 +60,53 @@
         </fieldset>
 
       </fieldset>
+      <fieldset>
+        <fieldset class="sous_bloc">
+          <h3 id="manche">Manche.py</h3>
+            <p>
+            Manche.py est composé de plusieurs fonctions,
+            
+            <ul>
+              <li class="first">Ce qui concerne le début d'une manche:</li>
+              <li>lancement_manche(): S'occupe de toute les actions avant le début d'une manche (melange de la pioche, distribution des jeux...)</li>
+              <li>retourne_carte() : Au debut de la manche elle permet au joueur de choisir la carte qu'il retourne</li>
+              <li>joueur_commence(): Renvoie le joueur qui commence</li>
+            </ul>
+            
+      
+            <ul>
+              <li class="first">Ce qui concerne le déroulement de la manche </li> 
+              <li>manche() </li>
+              <li>tour()</li>
+            </ul>
+            <ul>
+              <li class="first">Ce qui concerne la fin d'une manche:</li>
+              <li>continuer_partie()</li>
+              <li>jeu_fin_manche()</li>
+              <li> affichage_fin_manche()</li>
+              <li>fin_manche()</li>
+            </ul>
+            </p>
+          </fieldset>
+          <fieldset class="sous_bloc">
+            <h3 id="click">Click.py</h3>
+              <p>
+                Click.py gère toutes les actions d'un tour défini par les clics de l'utilisateur.
+              elle est donc composé de plusieurs fonctions notamment actions_tour dont découlera l'arboresence de l'utilisation des autres.
+              <ul>
+                <li class="first">Concernant l'affichage:</li>
+                <li>affiche_aide</li>
+                <li> cache_aide</li>
+                <li> souris_sur_adie</li>
+                <li> affichage page_autre_joueur</li>
+                <li>voir_autre_jeu</li>
+              </ul>
+              <ul>
+                <li>retourne_cartes</li>
+              </ul>
+              </p>
+            </fieldset>
+      </fieldset>
       <p> <br> <br> Les fichiers concernant les classes: </p>
       <fieldset>
 
@@ -181,52 +228,9 @@
             <li>ajouter_joueur(joueur) : Ajoute un joueur à l'attribut tab_joueurs</li>
           </ul>
       </fieldset>
-      <fieldset class="sous_bloc">
-      <h3 id="manche">Manche.py</h3>
-        <p>
-        Manche.py est composé de plusieurs fonctions,
-        
-        <ul>
-          <li class="first">Ce qui concerne le début d'une manche:</li>
-          <li>lancement_manche(): S'occupe de toute les actions avant le début d'une manche (melange de la pioche, distribution des jeux...)</li>
-          <li>retourne_carte() : Au debut de la manche elle permet au joueur de choisir la carte qu'il retourne</li>
-          <li>joueur_commence(): Renvoie le joueur qui commence</li>
-        </ul>
-        
-  
-        <ul>
-          <li class="first">Ce qui concerne le déroulement de la manche </li> 
-          <li>manche() </li>
-          <li>tour()</li>
-        </ul>
-        <ul>
-          <li class="first">Ce qui concerne la fin d'une manche:</li>
-          <li>continuer_partie()</li>
-          <li>jeu_fin_manche()</li>
-          <li> affichage_fin_manche()</li>
-          <li>fin_manche()</li>
-        </ul>
-        </p>
-      </fieldset>
+      
     </fieldset>
-      <fieldset class="seul">
-      <h3 id="click">Click.py</h3>
-        <p>
-          Click.py gère toutes les actions d'un tour défini par les clics de l'utilisateur.
-        elle est donc composé de plusieurs fonctions notamment actions_tour dont découlera l'arboresence de l'utilisation des autres.
-        <ul>
-          <li class="first">Concernant l'affichage:</li>
-          <li>affiche_aide</li>
-          <li> cache_aide</li>
-          <li> souris_sur_adie</li>
-          <li> affichage page_autre_joueur</li>
-          <li>voir_autre_jeu</li>
-        </ul>
-        <ul>
-          <li>retourne_cartes</li>
-        </ul>
-        </p>
-      </fieldset>
+      
 
     </main>
   </body>
