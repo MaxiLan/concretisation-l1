@@ -10,7 +10,7 @@ def actions_tour(joueur,partie, ecran):
     Gère toutes les actions du tour 
     """
     #variables nécessaires
-    P.verifie_fermeture()
+    partie.verifie_fermeture()
     HAUTEUR = ecran.get_height()
     LARGEUR = ecran.get_width()
     h = partie.defausse.cartes[0].hauteur
@@ -62,13 +62,13 @@ def actions_tour(joueur,partie, ecran):
         #on déplace la carte de la defausse
         carte_select = partie.defausse.retire_carte()
         partie.carte_en_main="images/" + str(carte_select.num) + ".png"
-        carte.actualise_carte_en_main(ecran,partie)
+        partie.actualise_carte_en_main(ecran)
         partie.defausse.affiche(ecran)
         pygame.display.flip()
 
         #on attend la décision du joueur (carte à échanger)
         while (not click_carte):
-            P.verifie_fermeture()
+            partie.verifie_fermeture()
 
             if isinstance(joueur,robot.Robot):
                 pygame.time.wait(700)
@@ -76,12 +76,11 @@ def actions_tour(joueur,partie, ecran):
                 pos=joueur.choix_placement_carte(carte_select,partie)
                 partie.carte_en_main="images/carte_selectionnee.png"
                 click_carte = True
-                partie.carte_en_main="images/carte_selectionnee.png"
                 aux = joueur.jeu_actuel[pos[0]][pos[1]]
                 joueur.jeu_actuel[pos[0]][pos[1]] = carte_select
                 joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
                 partie.defausse.ajout_carte(aux)
-                carte.actualise_carte_en_main(ecran,partie)
+                partie.actualise_carte_en_main(ecran)
                 return True
 
             else:
@@ -111,7 +110,7 @@ def actions_tour(joueur,partie, ecran):
                                 joueur.jeu_actuel[i][j] = carte_select
                                 joueur.jeu_actuel[i][j].etat = "ouverte"
                                 partie.defausse.ajout_carte(aux)
-                                carte.actualise_carte_en_main(ecran,partie)
+                                partie.actualise_carte_en_main(ecran)
                                 return True
 
 
@@ -132,13 +131,13 @@ def actions_tour(joueur,partie, ecran):
         partie.pioche.est_vide(partie.defausse)
         partie.pioche.affiche(ecran)
         partie.carte_en_main= "images/" + str(carte_select.num) + ".png"
-        carte.actualise_carte_en_main(ecran,partie)
+        partie.actualise_carte_en_main(ecran)
         pygame.display.flip()
 
         click_defausse = False
         #on attend le choix du joueur (jouer sur son jeu ou sur la défausse)
         while not (click_carte or click_defausse): 
-            P.verifie_fermeture()
+            partie.verifie_fermeture()
 
             if souris_sur_aide(ecran, h):
                 affiche_aide(ecran, h, section=2) 
@@ -152,7 +151,7 @@ def actions_tour(joueur,partie, ecran):
                     partie.carte_en_main="images/carte_selectionnee.png"
                     partie.defausse.ajout_carte(carte_select)
                     partie.defausse.affiche(ecran)
-                    carte.actualise_carte_en_main(ecran,partie)
+                    partie.actualise_carte_en_main(ecran)
                     pygame.display.flip()
                     click_defausse = True
                     pygame.time.wait(300)
@@ -165,7 +164,7 @@ def actions_tour(joueur,partie, ecran):
                     return True
                 else:
                     partie.carte_en_main="images/carte_selectionnee.png"
-                    carte.actualise_carte_en_main(ecran,partie)
+                    partie.actualise_carte_en_main(ecran)
                     click_carte = True
                     aux = joueur.jeu_actuel[pos[0]][pos[1]]
                     joueur.jeu_actuel[pos[0]][pos[1]] = carte_select
@@ -191,7 +190,7 @@ def actions_tour(joueur,partie, ecran):
                                     joueur.jeu_actuel[i][j] = carte_select
                                     joueur.jeu_actuel[i][j].etat = "ouverte"
                                     partie.defausse.ajout_carte(aux)
-                                    carte.actualise_carte_en_main(ecran, partie)
+                                    partie.actualise_carte_en_main(ecran)
                                     return True
                     if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
                         loupe(ecran,partie,joueur)
@@ -202,7 +201,7 @@ def actions_tour(joueur,partie, ecran):
                     partie.carte_en_main="images/carte_selectionnee.png"
                     partie.defausse.ajout_carte(carte_select)
                     partie.defausse.affiche(ecran)
-                    carte.actualise_carte_en_main(ecran,partie)
+                    partie.actualise_carte_en_main(ecran)
                     pygame.display.flip()
                     click_defausse = True
                     #on retourne une carte selectionnnée par le joueur
@@ -223,10 +222,10 @@ def retourne_cartes(joueur, ecran,partie):
     l = joueur.jeu_actuel[0][0].largeur 
     ecart = LARGEUR//2 - 2*l - 30
 
-    carte_selectionner = False
+    carte_selectionnee = False
 
-    while not (carte_selectionner):
-        P.verifie_fermeture()
+    while not (carte_selectionnee):
+        partie.verifie_fermeture()
         if souris_sur_aide(ecran, h):
             affiche_aide(ecran, h, section=3) 
         else:
@@ -244,7 +243,7 @@ def retourne_cartes(joueur, ecran,partie):
                     if(ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 +l) and (60 + i * h+i*15< pos[1] <  60 + i * h+i*15 + h):
                         if joueur.jeu_actuel[i][j].etat != "ouverte":
                             joueur.jeu_actuel[i][j].etat = "ouverte"
-                            carte_selectionner = True
+                            carte_selectionnee = True
     return True
 
 
@@ -295,7 +294,7 @@ def loupe(ecran,partie,joueur, section="jeu"):
     pygame.time.wait(200)
 
     while not click_croix:
-        P.verifie_fermeture()
+        partie.verifie_fermeture()
         click_croix,i_joueur=voir_autre_jeu(ecran,partie.tab_joueurs,i_joueur)
         
     if section=="jeu":
@@ -311,7 +310,7 @@ def loupe(ecran,partie,joueur, section="jeu"):
         joueur.affiche_jeu(ecran)
         partie.pioche.affiche(ecran)
         partie.defausse.affiche(ecran)
-        carte.actualise_carte_en_main(ecran,partie)
+        partie.actualise_carte_en_main(ecran)
 
         font2=pygame.font.Font(None, 35)
         if len(partie.tab_joueurs)==2:

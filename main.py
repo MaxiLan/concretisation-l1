@@ -23,6 +23,7 @@ ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
 pygame.display.set_caption("SKYJO")
 ecran.fill('#EEE2DE')
 
+#INIT PARTIE
 nb_joueurs, nb_robots, niveau = accueil.affiche_accueil(ecran)
 partie = partie.Partie(nb_joueurs, ecran)
 

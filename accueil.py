@@ -90,7 +90,10 @@ def click(ecran, nb_joueurs, nb_robots, niveau):
   
     while not click_souris:
         pygame.event.get()
-        partie.verifie_fermeture()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
         s = pygame.mouse.get_pressed()
 
         if s[0]:
@@ -140,9 +143,6 @@ def click(ecran, nb_joueurs, nb_robots, niveau):
                 click_souris = True
                 if niveau>1:
                     niveau-= 1
-
-
-
                 pygame.time.wait(200)
                 return nb_joueurs, False, nb_robots, niveau
 
@@ -151,9 +151,6 @@ def click(ecran, nb_joueurs, nb_robots, niveau):
                 click_souris = True
                 if niveau<2:
                     niveau+= 1
-                
-
-
                 pygame.time.wait(200)
                 return nb_joueurs, False, nb_robots, niveau
 

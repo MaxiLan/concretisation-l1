@@ -17,6 +17,15 @@ class Partie:
         self.robot=robot
         self.score = [0 for _ in range(nb_joueurs)]
 
+    def actualise_carte_en_main(self,ecran):
+        """
+        Recouvre l'emplacement "carte en main"
+        """
+        x = ecran.get_width()//2 - self.pioche.cartes[0].largeur//2
+        y = ecran.get_height() - self.pioche.cartes[0].hauteur - 60
+        img = pygame.image.load(self.carte_en_main)
+        img = pygame.transform.scale(img, (self.pioche.cartes[0].largeur, self.pioche.cartes[0].hauteur))
+        ecran.blit(img, (x, y))
 
     def fin_partie(self):
         """
@@ -45,12 +54,12 @@ class Partie:
         self.tab_joueurs.append(J)
 
 
-def verifie_fermeture():
-    """
-    Vérifie si l'utilisateur ferme la fenêtre
-    """
-    pygame.display.flip()
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            exit()
+    def verifie_fermeture(self):
+        """
+        Vérifie si l'utilisateur ferme la fenêtre
+        """
+        pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()

@@ -1,5 +1,6 @@
 import strategie_n1
 import joueur
+import pygame
 class Robot(joueur.Joueur):
 
     def __init__(self,strategie,nom):
@@ -28,6 +29,10 @@ class Robot(joueur.Joueur):
         coord=self.strategie.retourne_hasard(self)
         return coord
 
-    def debut_manche(self):
-        coord=self.strategie.debut_manche(self)
-        return coord
+    def debut_manche(self,partie,ecran):
+        pos=self.strategie.debut_manche(self)
+        pygame.time.wait(500)
+        self.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
+        self.affiche_jeu(ecran)
+        pygame.display.flip()
+        return True

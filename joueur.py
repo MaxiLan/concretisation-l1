@@ -1,7 +1,6 @@
 import pygame
 import carte
 
-
 class Joueur:
 
     def __init__(self, nom):
@@ -9,7 +8,26 @@ class Joueur:
         self.nom = nom
         self.score_individuel = 0
 
-
+    def debut_manche(self,partie,ecran):
+        click=False
+        h = partie.pioche.cartes[0].hauteur
+        l = partie.pioche.cartes[0].largeur
+        ecart = ecran.get_width()//2 - 2*l - 30
+        pygame.event.get()
+        s = pygame.mouse.get_pressed()
+        if s[0]:
+            pos = pygame.mouse.get_pos()
+            for i in range(3):
+                for j in range(4):
+                    if (ecart + j * l+j*20< pos[0] < ecart + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
+                        if self.jeu_actuel[i][j].etat != "ouverte":
+                            self.jeu_actuel[i][j].etat = "ouverte"
+                            self.affiche_jeu(ecran)
+                            pygame.display.flip()
+                            click = True
+        return click
+        
+         
     def evol_score(self):
         """
         Fait évoluer le score de chaque joueur

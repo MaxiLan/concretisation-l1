@@ -1,10 +1,8 @@
 import click
-import partie as P
 import pygame
 import random
 import carte
 import robot
-
 
 def manche(partie, ecran): 
     """
@@ -103,57 +101,23 @@ def lancement_manche(partie,ecran):
         pygame.display.flip()
 
         #retourne 2 cartes au début de la manche
-        retourne_carte(partie, joueur, ecran)
-        retourne_carte(partie, joueur, ecran)
-        
-        pygame.display.flip()
+        for _ in range (2):
+            click = False
+            while not click: 
+                partie.verifie_fermeture()
+                click=joueur.debut_manche(partie,ecran)
+                pygame.time.wait(150)
+            
+            pygame.display.flip()
         pygame.time.wait(1000)
 
     #affichage dès le debut de l'emplacement "carte en main" 
     ma_carte=carte.Carte("42bis",ecran)
     partie.defausse.ajout_carte(ma_carte)
     partie.defausse.ajout_carte(partie.pioche.cartes[0])
-    carte.actualise_carte_en_main(ecran,partie)
+    partie.actualise_carte_en_main(ecran)
     partie.pioche.cartes.pop(0)
     partie.pioche.cartes[0].etat = "ouverte"
-
-
-def retourne_carte(partie, joueur, ecran):
-    """
-    Retourne une carte choisie par le joueur dans son jeu
-    """ 
-    h = partie.pioche.cartes[0].hauteur
-    l = partie.pioche.cartes[0].largeur
-    ecart = ecran.get_width()//2 - 2*l - 30
-  
-    click = False
-    while not click: 
-        P.verifie_fermeture()
-
-        if isinstance(joueur,robot.Robot):
-            pygame.time.wait(500)
-            pygame.event.get()
-            pos=joueur.debut_manche()
-            joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
-            joueur.affiche_jeu(ecran)
-            pygame.display.flip()
-            click = True
-        else: 
-            pygame.event.get()
-            s = pygame.mouse.get_pressed()
-
-            if s[0]:
-                pos = pygame.mouse.get_pos()
-
-                for i in range(3):
-                    for j in range(4):
-                        if (ecart + j * l+j*20< pos[0] < ecart + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
-                            if joueur.jeu_actuel[i][j].etat != "ouverte":
-                                joueur.jeu_actuel[i][j].etat = "ouverte"
-                                joueur.affiche_jeu(ecran)
-                                pygame.display.flip()
-                                click = True
-    pygame.time.wait(150)
 
 
 def tour(joueur,partie, ecran, j_precedent, j_suivant):
@@ -165,23 +129,22 @@ def tour(joueur,partie, ecran, j_precedent, j_suivant):
 
     ecran.fill("grey24")
     tour_fini=False
-    partie.carte_en_main="images/carte_selectionnee.png"
     ch = "images/loupe.png"
     img = pygame.image.load(ch)
     img = pygame.transform.scale(img, (50,50))
     ecran.blit(img, (ecran.get_width()-80, 30))
     #tant que son tour n'est pas fini, son jeu reste affiché
-    carte.actualise_carte_en_main(ecran,partie)
-
+    
     font1=pygame.font.Font(None, 35)
     font1.underline = True
 
     text1=font1.render("Joueur n°"+str(joueur.nom),1, "white")
     ecran.blit(text1,(ecran.get_width()//2-61,15))
-    
+    #partie.carte_en_main="images/carte_selectionnee.png"
     joueur.affiche_jeu(ecran)
     partie.pioche.affiche(ecran)
     partie.defausse.affiche(ecran)
+    partie.actualise_carte_en_main(ecran)
 
     font2=pygame.font.Font(None, 35)
     if len(partie.tab_joueurs)==2:
@@ -275,8 +238,6 @@ def affichage_fin_manche(partie,ecran):
     img = pygame.image.load(ch)
     img = pygame.transform.scale(img, (50,50))
     ecran.blit(img, (ecran.get_width()-80, 30))
-    
-
     pygame.display.flip()
 
 
@@ -291,7 +252,7 @@ def continuer_partie(ecran, partie):
 
     cliquer = False
     while not cliquer:
-        P.verifie_fermeture()
+        partie.verifie_fermeture()
         pygame.event.get()
         s = pygame.mouse.get_pressed()
 
