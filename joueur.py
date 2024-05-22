@@ -59,7 +59,7 @@ class Joueur:
 
     def affiche_petit(self, ecran, cote):
         """
-        Affiche le jeu du joueur
+        Affiche le jeu du joueur en petit 
         """
         HAUTEUR = ecran.get_height()
         LARGEUR = ecran.get_width()

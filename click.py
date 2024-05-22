@@ -57,7 +57,7 @@ def actions_tour(joueur,partie, ecran):
           if s[0]:
             pos = pygame.mouse.get_pos()
             if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-              appel_loupe(ecran,partie,joueur)
+              loupe(ecran,partie,joueur)
 
         #on déplace la carte de la defausse
         carte_select = partie.defausse.retire_carte()
@@ -97,7 +97,7 @@ def actions_tour(joueur,partie, ecran):
                 pos = pygame.mouse.get_pos()
 
                 if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                    appel_loupe(ecran,partie,joueur)
+                    loupe(ecran,partie,joueur)
                     pygame.time.wait(200)
 
                 #on cherche le click sur une carte
@@ -123,7 +123,7 @@ def actions_tour(joueur,partie, ecran):
             if s[0]:
               pos = pygame.mouse.get_pos()
               if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                appel_loupe(ecran,partie,joueur)
+                loupe(ecran,partie,joueur)
 
         # on deplace la carte de la pioche
         carte_select = partie.pioche.cartes[0]
@@ -194,7 +194,7 @@ def actions_tour(joueur,partie, ecran):
                                     carte.actualise_carte_en_main(ecran, partie)
                                     return True
                     if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                        appel_loupe(ecran,partie,joueur)
+                        loupe(ecran,partie,joueur)
 
               
                 #si le click est sur la defausse
@@ -210,7 +210,7 @@ def actions_tour(joueur,partie, ecran):
         
     #si le joueur clique sur la loupe 
     elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-        appel_loupe(ecran,partie,joueur)
+        loupe(ecran,partie,joueur)
   
 
 def retourne_cartes(joueur, ecran,partie): 
@@ -237,7 +237,7 @@ def retourne_cartes(joueur, ecran,partie):
         if s[0]:
             pos = pygame.mouse.get_pos()
             if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                appel_loupe(ecran,partie,joueur)
+                loupe(ecran,partie,joueur)
 
             for i in range(3):
                 for j in range(4):
@@ -289,7 +289,7 @@ def souris_sur_aide(ecran, h_carte):
     return (30<pos[0]<80) and (ecran.get_height()-80<pos[1]<ecran.get_height()-30)
 
 
-def appel_loupe(ecran,partie,joueur, section="jeu"):
+def loupe(ecran,partie,joueur, section="jeu"):
     click_croix=False
     i_joueur=0
     pygame.time.wait(200)

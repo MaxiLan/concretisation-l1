@@ -7,7 +7,7 @@ class Strategie_aleatoire:
         self.carte_ouverte=[]
 
 
-    def carteouverte(self,jeu_actuel):
+    def carte_ouverte(self,jeu_actuel):
       """
       Renvoie les cartes ouvertes d'un jeu
       """
@@ -19,6 +19,9 @@ class Strategie_aleatoire:
 
 
     def choix_pioche_def(self,jeu_actuel,partie):
+        """
+        Choisi aléatoirement la carte de la pioche ou de la défausse
+        """
         choix_pioche =random.randint(0,1)
         if choix_pioche==1:
             coords=[partie.pioche.abs,partie.pioche.ord]
@@ -35,7 +38,7 @@ class Strategie_aleatoire:
         Va choisir aléatoirement l'endroit où envoyer la carte dans le jeu qu'elle vienne
         de la pioche ou de la defausse.
         """
-        self.carteouverte(joueur.jeu_actuel)
+        self.carte_ouverte(joueur.jeu_actuel)
         if self.provenance==0: #si carte a ete prise depuis la défausse
             echg_with_carte_cachee=random.randint(0,1) 
             #soit on retourne avec une carte ouverte soit une carte cachée
