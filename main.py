@@ -1,7 +1,7 @@
 import pygame
 import carte
 import joueur
-import partie
+import partie as P
 import pioche
 import defausse
 import click
@@ -11,45 +11,45 @@ import strategie_n1
 import robot
 import strat_aleatoire
 
-#variables intiales
-fin_partie = False
 
-#INIT ECRAN
-HAUTEUR = 1000
-LARGEUR = 1600
-pygame.init()
-clock = pygame.time.Clock()
-ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
-pygame.display.set_caption("SKYJO")
-ecran.fill('#EEE2DE')
+relance_partie = True
 
-#INIT PARTIE
-nb_joueurs, nb_robots, niveau = accueil.affiche_accueil(ecran)
-partie = partie.Partie(nb_joueurs, ecran)
+while relance_partie:
+    #variables intiales
+    fin_partie = False
 
-for i in range(nb_robots):
-    if niveau==1:
-        S=strat_aleatoire.Strategie_aleatoire()
-    elif niveau==2:
-        S=strategie_n1.Strategie_n1()
-    R=robot.Robot(S,i+1)
-    partie.tab_joueurs.append(R)
+    #INIT ECRAN
+    HAUTEUR = 1000
+    LARGEUR = 1600
+    pygame.init()
+    clock = pygame.time.Clock()
+    ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
+    pygame.display.set_caption("SKYJO")
+    ecran.fill('#EEE2DE')
+
+    #INIT PARTIE
+    nb_joueurs, nb_robots, niveau = accueil.affiche_accueil(ecran)
+    partie = P.Partie(nb_joueurs, ecran)
+
+    for i in range(nb_robots):
+        if niveau==1:
+            S=strat_aleatoire.Strategie_aleatoire()
+        elif niveau==2:
+            S=strategie_n1.Strategie_n1()
+        R=robot.Robot(S,i+1)
+        partie.tab_joueurs.append(R)
 
 
-for i in range (nb_robots, nb_joueurs):
-    J = joueur.Joueur(i + 1)
-    partie.tab_joueurs.append(J)
+    for i in range (nb_robots, nb_joueurs):
+        J = joueur.Joueur(i + 1)
+        partie.tab_joueurs.append(J)
 
 
-while not fin_partie:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            fin_partie = True
+    while not fin_partie:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                fin_partie = True
 
-    fin_partie = not manche.manche(partie, ecran)
+        relance_partie, fin_partie = manche.manche(partie, ecran)
 
-    if partie.fin_partie():
-        fin_partie = True
-  
-
-pygame.quit()
+    pygame.quit()
