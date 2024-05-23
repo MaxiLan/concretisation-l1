@@ -221,29 +221,38 @@ def affichage_fin_manche(partie,ecran):
     font1=pygame.font.Font(None, 50)
     font1.underline = True
     text=font1.render("Résulats de la manche : ",1,"white")
-    ecran.blit(text,(LARGEUR//2-206,30))
+    ecran.blit(text,(LARGEUR//3-250,150))
+    text=font1.render("Scores de la partie : ",1,"white")
+    ecran.blit(text,(2*LARGEUR//3-100,150))
 
     font2=pygame.font.Font(None, 40)
     h=1
     for i in range(len(partie.tab_joueurs)):
+        ch="Score joueur n°"+str(partie.tab_joueurs[i].nom)+" : " +str(partie.tab_joueurs[i].score_individuel)
+        text=font2.render(ch,1, "white")
+        ecran.blit(text,(LARGEUR//3-200,230+h))
+        h=h+27
+
+    h=1
+    for i in range(len(partie.tab_joueurs)):
         ch="Score joueur n°"+str(partie.tab_joueurs[i].nom)+" : " +str(partie.score[i])
         text=font2.render(ch,1, "white")
-        ecran.blit(text,(LARGEUR//2-142,150+h))
+        ecran.blit(text,(2*LARGEUR//3-70,230+h))
         h=h+27
 
     l_milieu = ecran.get_width() // 2
     if partie.fin_partie():
         img = pygame.image.load("images/recommencer.png")
         img = pygame.transform.scale(img, (250, 100))
-        ecran.blit(img, (l_milieu - 250 - 30, 600))
+        ecran.blit(img, (l_milieu - 250 - 50, HAUTEUR-300))
     else:
         img = pygame.image.load("images/continuer.png")
         img = pygame.transform.scale(img, (250, 100))
-        ecran.blit(img, (l_milieu - 250 - 30, 600))
+        ecran.blit(img, (l_milieu - 250 - 50, HAUTEUR-300))
     
     img = pygame.image.load("images/quitter.png")
     img = pygame.transform.scale(img, (250, 100))
-    ecran.blit(img, (l_milieu + 30, 600))
+    ecran.blit(img, (l_milieu + 50, HAUTEUR-300))
 
     ch = "images/loupe.png"
     img = pygame.image.load(ch)
@@ -270,10 +279,10 @@ def continuer_partie(ecran, partie):
         if s[0]:
             pos = pygame.mouse.get_pos()
             
-            if (l_milieu-228 - 50<pos[0]<l_milieu - 50 ) and (600<pos[1]<620):
+            if (l_milieu-300<pos[0]<l_milieu - 50) and (HAUTEUR-300<pos[1]<HAUTEUR-200):
                 cliquer = True
                 return True
-            elif (l_milieu + 50<pos[0]<l_milieu + 50 + 200) and (600<pos[1]<620):
+            elif (l_milieu + 50<pos[0]<l_milieu + 300) and (HAUTEUR-300<pos[1]<HAUTEUR-200):
                 cliquer = True
                 return False 
 
