@@ -62,7 +62,7 @@ fieldset{
   border-width: 8px;
   display:flex;
   flex-direction: row;
-  justify-content:center;
+  justify-content:left;
   text-align:left;
   width:1500px;
   border-color: #EEE2DE;
@@ -74,7 +74,7 @@ fieldset{
 }
 .sous_bloc{
   border-width: 4px;
-  width:650px;
+  width:750px;
   display:flex;
   flex-direction:column;
   border-color:#2B2A4C;

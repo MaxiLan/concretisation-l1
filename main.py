@@ -27,6 +27,7 @@ ecran.fill('#EEE2DE')
 nb_joueurs, nb_robots, niveau = accueil.affiche_accueil(ecran)
 partie = partie.Partie(nb_joueurs, ecran)
 
+#CREATION DES OBJETS
 for i in range(nb_robots):
     if niveau==1:
         S=strat_aleatoire.Strategie_aleatoire()
@@ -35,12 +36,12 @@ for i in range(nb_robots):
     R=robot.Robot(S,i+1)
     partie.tab_joueurs.append(R)
 
-
 for i in range (nb_robots, nb_joueurs):
     J = joueur.Joueur(i + 1)
     partie.tab_joueurs.append(J)
 
 
+#lancement partie
 while not fin_partie:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:

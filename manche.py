@@ -12,11 +12,11 @@ def manche(partie, ecran):
     lancement_manche(partie,ecran)
     for joueur in partie.tab_joueurs:
         joueur.evol_score()
+
     i_joueur = joueur_commence(partie.tab_joueurs)
-    
     joueur = partie.tab_joueurs[i_joueur]
-    manche_fin = False
     
+    manche_fin = False
     pygame.time.wait(150)
     while not manche_fin:
         #déroulement d'un tour
@@ -141,7 +141,8 @@ def tour(joueur,partie, ecran, j_precedent, j_suivant):
 
     text1=font1.render("Joueur n°"+str(joueur.nom),1, "white")
     ecran.blit(text1,(ecran.get_width()//2-61,15))
-    #partie.carte_en_main="images/carte_selectionnee.png"
+    
+    #affichage
     joueur.affiche_jeu(ecran)
     partie.pioche.affiche(ecran)
     partie.defausse.affiche(ecran)

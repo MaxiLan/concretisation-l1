@@ -37,7 +37,7 @@
         <li><a href="#click">click.py</a></li>
       </ul>
       
-      <p>
+      <p><br>
       Les fichiers concernant le lancement du jeu:
       <br>
     </p>
@@ -68,23 +68,23 @@
             
             <ul>
               <li class="first">Ce qui concerne le début d'une manche:</li>
-              <li>lancement_manche(): S'occupe de toute les actions avant le début d'une manche (melange de la pioche, distribution des jeux...)</li>
-              <li>retourne_carte() : Au debut de la manche elle permet au joueur de choisir la carte qu'il retourne</li>
-              <li>joueur_commence(): Renvoie le joueur qui commence</li>
+              <li>lancement_manche: S'occupe de toute les actions avant le début d'une manche (melange de la pioche, distribution des jeux...)</li>
+              <li>retourne_carte : Au debut de la manche elle permet au joueur de choisir la carte qu'il retourne</li>
+              <li>joueur_commence: Renvoie le joueur qui commence</li>
             </ul>
             
       
             <ul>
               <li class="first">Ce qui concerne le déroulement de la manche </li> 
-              <li>manche() </li>
-              <li>tour()</li>
+              <li>manche </li>
+              <li>tour</li>
             </ul>
             <ul>
               <li class="first">Ce qui concerne la fin d'une manche:</li>
-              <li>continuer_partie()</li>
-              <li>jeu_fin_manche()</li>
-              <li> affichage_fin_manche()</li>
-              <li>fin_manche()</li>
+              <li>continuer_partie</li>
+              <li>jeu_fin_manche</li>
+              <li> affichage_fin_manche</li>
+              <li>fin_manche</li>
             </ul>
             </p>
           </fieldset>
@@ -110,7 +110,34 @@
       <p> <br> <br> Les fichiers concernant les classes: </p>
       <fieldset>
 
-        <fieldset class="sous_bloc">
+        
+          <fieldset class="sous_bloc">
+            <h3 id="partie" >Partie.py</h3>
+              <p>
+              Contient la classe Partie.
+              Plusieurs attributs :
+            </p>
+            <ul class="attribut">
+              <li>nb_joueurs,</li> 
+              <li>tab_joueurs,</li> 
+              <li>pioche,</li> 
+            </ul>
+            <ul class="attribut">
+              <li>defausse,</li> 
+              <li>score,</li> 
+              <li>manche_finie,</li> 
+              <li>carte_en_main</li>
+            </ul>
+    
+              <p>
+              Les méthodes : </p>
+              <ul>
+                <li>fin_partie() : Si un joueur a atteint les 100 pts, renvoie vrai</li>
+                <li>mise_a_jour_score() : Met à jour les scores après une manche</li>
+                <li>ajouter_joueur(joueur) : Ajoute un joueur à l'attribut tab_joueurs</li>
+              </ul>
+          </fieldset>
+          <fieldset class="sous_bloc">
           <h3 id="carte">Carte.py</h3>
             <p>
             Ce fichier contient la classe Carte, représentant donc une carte du jeu.
@@ -123,38 +150,10 @@
               <li>etat,</li>
               <li>lieu</li>
             </ul>
-
-            <p>
-            il existe une méthode permettant
-            </p>
+          </fieldset>
         </fieldset>
 
       
-        <fieldset class="sous_bloc">
-        <h3 id="joueur">Joueur.py </h3>
-          <p>
-          Joueur.py contient la classe représentant un joueur.
-          Les attributs sont les suivants :
-          </p>
-
-          <ul class="attribut">
-              <li>nom, </li>
-              <li>jeu_actuel, </li>
-              <li>score_individuel </li>
-          </ul>
-
-          <p>Ensuite, les méthodes :</p> 
-
-          <ul>
-              <li>evol_score() : Met à jour le score du joueur</li>
-              <li>retrait_colonne(defausse, ecran) : Retire une colonne si elle est rempli du même nombre</li>
-              <li>affiche_jeu(ecran) : Affiche le jeu du joueur à l'écran</li>
-              <li>affiche_jeu_vision_ext(ecran) : Affiche le jeu des autres joueurs si la loupe est sélectionnée</li>
-          </ul>
-        </fieldset>
-
-      </fieldset>
-
 
       <fieldset>
 
@@ -172,11 +171,11 @@
           Les méthodes :</p>
 
           <ul>
-            <li>rempli(ecran) : Rempli la pioche avec les 150 cartes du jeu</li>
-            <li>vide() : Vide la liste pour le début d'une manche</li>
-            <li>melange() : Mélange la pioche</li>
-            <li>affiche(ecran) : Affiche la pioche à l'écran (seulement la première carte)</li>
-            <li>est_vide(defausse) : Si la pioche est vide, ajoute les cartes de la défausse à la pioche</li>
+            <li>rempli : Rempli la pioche avec les 150 cartes du jeu</li>
+            <li>vide: Vide la liste pour le début d'une manche</li>
+            <li>melange : Mélange la pioche</li>
+            <li>affiche : Affiche la pioche à l'écran (seulement la première carte)</li>
+            <li>est_vide : Si la pioche est vide, ajoute les cartes de la défausse à la pioche</li>
           </ul>
         </fieldset>
 
@@ -192,9 +191,9 @@
             <p>
             Des méthodes un peu différentes : </p>
             <ul>
-              <li>affiche(ecran) : Affiche la défausse à l'écran (seulement la première carte)</li>
-              <li>ajout_carte(carte) : Ajoute une carte à la défausse</li>
-              <li>retire_carte() : Retire la première carte de la défausse</li>
+              <li>affiche : Affiche la défausse à l'écran (seulement la première carte)</li>
+              <li>ajout_carte : Ajoute une carte à la défausse</li>
+              <li>retire_carte : Retire la première carte de la défausse</li>
             </ul>
 
         </fieldset>
@@ -202,33 +201,52 @@
       </fieldset>
 
       <fieldset>
+        
+      
         <fieldset class="sous_bloc">
-        <h3 id="partie" >Partie.py</h3>
+          <h3 id="joueur">Joueur.py </h3>
+            <p>
+            Joueur.py contient la classe représentant un joueur.
+            Les attributs sont les suivants :
+            </p>
+  
+            <ul class="attribut">
+                <li>nom, </li>
+                <li>jeu_actuel, </li>
+                <li>score_individuel </li>
+            </ul>
+  
+            <p>Ensuite, les méthodes :</p> 
+  
+            <ul>
+              <li>debut_manche</li>
+                <li>evol_score</li>
+                <li>retrait_colonne</li>
+                <li>affiche_jeu</li>
+                <li>affiche_petit</li>
+                <li>affiche_jeu_vision_ext</li>
+            </ul>
+          </fieldset>
+        <fieldset class="sous_bloc">
+        <h3 id="partie" >Robot.py</h3>
           <p>
-          Contient la classe Partie.
-          Plusieurs attributs :
+            La classe robot hérite de la classe joueur. Elle possède donc les mêmes attributs de base auxquels sont rajoutés les suivants:
         </p>
         <ul class="attribut">
-          <li>nb_joueurs,</li> 
-          <li>tab_joueurs,</li> 
-          <li>pioche,</li> 
-        </ul>
-        <ul class="attribut">
-          <li>defausse,</li> 
-          <li>score,</li> 
-          <li>manche_finie,</li> 
-          <li>carte_en_main</li>
+          <li>self.strategie,</li> 
+          <li>self.ind_carte_cachee,</li> 
+          <li>self.jeu_individuel,</li> 
         </ul>
 
           <p>
           Les méthodes : </p>
           <ul>
-            <li>fin_partie() : Si un joueur a atteint les 100 pts, renvoie vrai</li>
-            <li>mise_a_jour_score() : Met à jour les scores après une manche</li>
-            <li>ajouter_joueur(joueur) : Ajoute un joueur à l'attribut tab_joueurs</li>
+            <li>debut_manche</li>
+            <li>choix_pioche_def</li>
+            <li>choix_placement_carte</li>
+            <li>retourne_hasard</li>
           </ul>
       </fieldset>
-      
     </fieldset>
       
 
