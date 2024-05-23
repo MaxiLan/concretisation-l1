@@ -280,12 +280,19 @@ def continuer_partie(ecran, partie):
         if s[0]:
             pos = pygame.mouse.get_pos()
             
+            #continuer manche ou relancer partie
             if (l_milieu-300<pos[0]<l_milieu - 50) and (HAUTEUR-300<pos[1]<HAUTEUR-200):
                 cliquer = True
-                return True
+                
+                if partie.fin_partie():
+                    return True, True
+                else:
+                    return True, False
+
+            #quitter
             elif (l_milieu + 50<pos[0]<l_milieu + 300) and (HAUTEUR-300<pos[1]<HAUTEUR-200):
                 cliquer = True
-                return False 
+                return False, True
 
             elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
                 click.loupe(ecran,partie,partie.tab_joueurs[0],"fin jeu")
