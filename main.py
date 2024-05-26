@@ -9,7 +9,7 @@ import manche
 import accueil
 import strategie_n1
 import robot
-import strat_aleatoire
+import strategie_n0
 
 
 relance_partie = True
@@ -34,7 +34,7 @@ while relance_partie:
 
     for i in range(nb_robots):
         if niveau==1:
-            S=strat_aleatoire.Strategie_aleatoire()
+            S=strategie_n0.Strategie_aleatoire()
         elif niveau==2:
             S=strategie_n1.Strategie_n1()
         R=robot.Robot(S,i+1)
