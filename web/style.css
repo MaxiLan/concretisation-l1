@@ -68,6 +68,17 @@ fieldset{
   border-color: #EEE2DE;
   border-style:dotted;
 }
+
+.ligne{
+  display:flex;
+  flex-direction: row;
+}
+
+.colonne{
+  display:flex;
+  flex-direction: column;
+  text-align: center;
+}
 .seul{
   display:flex;
   flex-direction: column;
