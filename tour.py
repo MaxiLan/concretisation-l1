@@ -5,6 +5,7 @@ import defausse
 import pioche
 import robot
 
+
 def actions_tour(joueur,partie, ecran):
     """
     Gère toutes les actions du tour 
@@ -23,9 +24,9 @@ def actions_tour(joueur,partie, ecran):
   
     #affiche ou cache l'aide
     if souris_sur_aide(ecran, h):
-        affiche_aide(ecran, h, section=0)
+        affiche_aide(ecran, section=0)
     else:
-        cache_aide(ecran, l,h)
+        cache_aide(ecran)
     
     #si le joueur est un robot     
     if isinstance(joueur,robot.Robot):
@@ -86,9 +87,9 @@ def actions_tour(joueur,partie, ecran):
 
             else:
                 if souris_sur_aide(ecran,h):
-                    affiche_aide(ecran,h, section=1)
+                    affiche_aide(ecran, section=1)
                 else:
-                    cache_aide(ecran,l, h)
+                    cache_aide(ecran)
             
             pygame.event.get()
             s = pygame.mouse.get_pressed()
@@ -142,9 +143,10 @@ def actions_tour(joueur,partie, ecran):
             partie.verifie_fermeture()
 
             if souris_sur_aide(ecran, h):
-                affiche_aide(ecran, h, section=2) 
+                affiche_aide(ecran, section=2) 
             else:
-                cache_aide(ecran,l, h)
+                cache_aide(ecran)
+
             if isinstance(joueur,robot.Robot):
                 pygame.time.wait(300)
                 pygame.event.get()
@@ -164,6 +166,7 @@ def actions_tour(joueur,partie, ecran):
                     pygame.display.flip()
                     #on retourne une carte selectionnnée par le joueur
                     return True
+
                 else:
                     partie.carte_en_main="images/carte_selectionnee.png"
                     partie.actualise_carte_en_main(ecran)
@@ -194,6 +197,7 @@ def actions_tour(joueur,partie, ecran):
                                     partie.defausse.ajout_carte(aux)
                                     partie.actualise_carte_en_main(ecran)
                                     return True
+
                     if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
                         loupe(ecran,partie,joueur)
                         pygame.time.wait(200)
@@ -252,7 +256,7 @@ def retourne_cartes(joueur, ecran,partie):
     return True
 
 
-def affiche_aide(ecran, h_carte, section):
+def affiche_aide(ecran, section):
     """
     Affiche de l'aide si le joueur place sa souris sur le point d'intérrogation
     """
@@ -273,7 +277,7 @@ def affiche_aide(ecran, h_carte, section):
     ecran.blit(objet_texte.render(texte, True, "white"), (30, ecran.get_height()-110))
 
 
-def cache_aide(ecran, l_carte, h_carte):
+def cache_aide(ecran):
     """
     Cache l'aide si le joueur a enlevé sa souris de l'aide
     """
@@ -301,8 +305,20 @@ def loupe(ecran,partie,joueur, section="jeu"):
     while not click_croix:
         partie.verifie_fermeture()
         click_croix,i_joueur=voir_autre_jeu(ecran,partie.tab_joueurs,i_joueur)
-        
+
+    #si on clique sur la croix, on réaffiche tout    
     if section=="jeu":
+        HAUTEUR = ecran.get_height()
+        LARGEUR = ecran.get_width()
+
+        ecran.fill("grey24")
+        ch = "images/loupe.png"
+        img = pygame.image.load(ch)
+        img = pygame.transform.scale(img, (50,50))
+        ecran.blit(img, (LARGEUR-80, 30))
+        font = pygame.font.Font(None, 25)
+        ecran.blit(font.render("Afficher les autres jeux :", True, "white"), (LARGEUR-300, 40))
+
         j_precedent = partie.tab_joueurs[joueur.nom - 2]
         j_suivant = partie.tab_joueurs[joueur.nom%len(partie.tab_joueurs)]
 
@@ -310,7 +326,7 @@ def loupe(ecran,partie,joueur, section="jeu"):
         font1.underline = True
 
         text1=font1.render("Joueur n°"+str(joueur.nom),1, "white")
-        ecran.blit(text1,(ecran.get_width()//2-61,15))
+        ecran.blit(text1,(LARGEUR//2-61,15))
         
         joueur.affiche_jeu(ecran)
         partie.pioche.affiche(ecran)
@@ -321,7 +337,7 @@ def loupe(ecran,partie,joueur, section="jeu"):
         if len(partie.tab_joueurs)==2:
             j_suivant.affiche_petit(ecran, 'd')
             text2=font2.render("Joueur n°"+str(j_suivant.nom),1, "white")
-            ecran.blit(text2,((ecran.get_width()-60-30-2*73)-61,150))
+            ecran.blit(text2,((LARGEUR-60-30-2*73)-61,150))
 
         if len(partie.tab_joueurs)>2:
             j_precedent.affiche_petit(ecran, 'g')
@@ -330,7 +346,8 @@ def loupe(ecran,partie,joueur, section="jeu"):
 
             j_suivant.affiche_petit(ecran, 'd')
             text3=font2.render("Joueur n°"+str(j_suivant.nom),1, "white")
-            ecran.blit(text3,((ecran.get_width()-60-30-2*73)-61,150))
+            ecran.blit(text3,((LARGEUR-60-30-2*73)-61,150))
+    
     pygame.display.flip()
 
 def affiche_page_autre_joueur(ecran,tab_joueurs):
@@ -384,12 +401,7 @@ def voir_autre_jeu(ecran,tab_joueurs,i_joueur):
         pos = pygame.mouse.get_pos()
         if ((LARGEUR-80 < pos[0] < LARGEUR-50) and (30 < pos[1] < 60)):  
             click_croix=True
-            ecran.fill("grey24")
-            ch = "images/loupe.png"
-            img = pygame.image.load(ch)
-            img = pygame.transform.scale(img, (50,50))
-            ecran.blit(img, (LARGEUR-80, 30))
-            pygame.display.flip()
+
         elif ((LARGEUR//2 - 80 - 60 - 2*l < pos[0] < LARGEUR//2 - 60 - 2*l) and (130+(3*h//2 < pos[1] < 180+(3*h//2)))):
             i_joueur=(i_joueur-1)%len(tab_joueurs)
         

@@ -74,38 +74,38 @@
             
             <ul>
               <li class="first">Ce qui concerne le début d'une manche:</li>
-              <li>lancement_manche: S'occupe de toute les actions avant le début d'une manche (melange de la pioche, distribution des jeux...)</li>
-              <li>retourne_carte : Au debut de la manche elle permet au joueur de choisir la carte qu'il retourne</li>
-              <li>joueur_commence: Renvoie le joueur qui commence</li>
+              <li>lancement_manche</li>
+              <li>retourne_carte</li>
+              <li>joueur_commence: Renvoie l'indice du joueur qui commence</li>
             </ul>
             
       
             <ul>
               <li class="first">Ce qui concerne le déroulement de la manche </li> 
-              <li>manche </li>
-              <li>tour</li>
+              <li>manche : Réalise une manche entière</li>
+              <li>tour : Réalise le tour d'un joueur</li>
             </ul>
             <ul>
               <li class="first">Ce qui concerne la fin d'une manche:</li>
               <li>continuer_partie</li>
-              <li>jeu_fin_manche</li>
-              <li> affichage_fin_manche</li>
-              <li>fin_manche</li>
+              <li>jeu_fin_manche : Retourne les cartes des jeux après le dernier tour</li>
+              <li>affichage_fin_manche</li>
+              <li>fin_manche : Renvoie vraie si la manche est finie</li>
             </ul>
             </p>
           </fieldset>
           <fieldset class="sous_bloc">
-            <h3 id="tour">tour.py</h3>
+            <h3 id="tour">Tour.py</h3>
               <p>
-                tour.py gère toutes les actions d'un tour défini par les clics de l'utilisateur.
-              elle est donc composé de plusieurs fonctions notamment actions_tour dont découlera l'arboresence de l'utilisation des autres.
+                Tour.py gère toutes les actions d'un tour défini par les clics de l'utilisateur.
+              Elle est donc composé de plusieurs fonctions notamment actions_tour dont découlera l'arboresence de l'utilisation des autres.
               <ul>
-                <li class="first">Concernant l'affichage:</li>
+                <li class="first">Concernant l'affichage : </li>
                 <li>affiche_aide</li>
-                <li> cache_aide</li>
-                <li> souris_sur_adie</li>
-                <li> affichage page_autre_joueur</li>
-                <li>voir_autre_jeu</li>
+                <li>cache_aide</li>
+                <li>souris_sur_aide</li>
+                <li>affichage_page_autre_joueur : Affiche la page pour voir les autres jeux</li>
+                <li>voir_autre_jeu : Affiche le jeu d'un autre joueur</li>
               </ul>
               <ul>
                 <li>retourne_cartes</li>
@@ -138,9 +138,9 @@
               <p>
               Les méthodes : </p>
               <ul>
-                <li>fin_partie() : Si un joueur a atteint les 100 pts, renvoie vrai</li>
-                <li>mise_a_jour_score() : Met à jour les scores après une manche</li>
-                <li>ajouter_joueur(joueur) : Ajoute un joueur à l'attribut tab_joueurs</li>
+                <li>fin_partie : Si un joueur a atteint les 100 pts, renvoie vrai</li>
+                <li>mise_a_jour_score</li>
+                <li>ajouter_joueur</li>
               </ul>
           </fieldset>
           <fieldset class="sous_bloc">
@@ -177,11 +177,11 @@
           Les méthodes :</p>
 
           <ul>
-            <li>rempli : Rempli la pioche avec les 150 cartes du jeu</li>
-            <li>vide: Vide la liste pour le début d'une manche</li>
-            <li>melange : Mélange la pioche</li>
-            <li>affiche : Affiche la pioche à l'écran (seulement la première carte)</li>
-            <li>est_vide : Si la pioche est vide, ajoute les cartes de la défausse à la pioche</li>
+            <li>rempli</li>
+            <li>vide</li>
+            <li>melange</li>
+            <li>affiche</li>
+            <li>est_vide</li>
           </ul>
         </fieldset>
 
@@ -191,15 +191,15 @@
             Similaire à pioche.py, defausse.py contient la classe représentant la défausse du jeu.<br>
             Un seul attribut également :
             <ul class="attribut">
-                <li>cartes : Liste de cartes</li>
+                <li>cartes</li>
             </ul> 
             </p>
             <p>
             Des méthodes un peu différentes : </p>
             <ul>
-              <li>affiche : Affiche la défausse à l'écran (seulement la première carte)</li>
-              <li>ajout_carte : Ajoute une carte à la défausse</li>
-              <li>retire_carte : Retire la première carte de la défausse</li>
+              <li>affiche</li>
+              <li>ajout_carte</li>
+              <li>retire_carte</li>
             </ul>
 
         </fieldset>
@@ -208,7 +208,6 @@
 
       <fieldset>
         
-      
         <fieldset class="sous_bloc">
           <h3 id="joueur">Joueur.py </h3>
             <p>
@@ -226,11 +225,11 @@
   
             <ul>
               <li>debut_manche</li>
-                <li>evol_score</li>
-                <li>retrait_colonne</li>
-                <li>affiche_jeu</li>
-                <li>affiche_petit</li>
-                <li>affiche_jeu_vision_ext</li>
+              <li>evol_score</li>
+              <li>retrait_colonne</li>
+              <li>affiche_jeu</li>
+              <li>affiche_petit</li>
+              <li>affiche_jeu_vision_ext</li>
             </ul>
           </fieldset>
         <fieldset class="sous_bloc">
@@ -253,6 +252,17 @@
             <li>retourne_hasard</li>
           </ul>
       </fieldset>
+
+      <fieldset>
+        <fieldset class="sous_bloc">
+
+        </fieldset>
+        
+        <fieldset class="sous_bloc">
+
+        </fieldset>
+      </fieldset>
+
     </fieldset>
       
 

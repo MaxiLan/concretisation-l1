@@ -15,20 +15,17 @@ import strategie_n0
 relance_partie = True
 
 while relance_partie:
-    #variables intiales
     fin_partie = False
 
-
-    #INIT ECRAN
-    HAUTEUR = 1000
-    LARGEUR = 1600
+    HAUTEUR = 1080
+    LARGEUR = 1920
     pygame.init()
     clock = pygame.time.Clock()
-    ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
+    ecran = pygame.display.set_mode((LARGEUR, HAUTEUR), pygame.FULLSCREEN)
     pygame.display.set_caption("SKYJO")
     ecran.fill('#EEE2DE')
 
-    #INIT PARTIE
+    #on récupère le nombre de joueurs/robots sur l'accueil
     nb_joueurs, nb_robots, niveau = accueil.affiche_accueil(ecran)
     partie = P.Partie(nb_joueurs, ecran)
 
