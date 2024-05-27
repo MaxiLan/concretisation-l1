@@ -14,7 +14,7 @@ Nous avons codé en Python et avons également utilisé la bibliothèque [Pygame
 ## Instructions d'utilisation
 
 Prérequis :  
--[python3](https://www.python.org/downloads/)
+-[python3](https://www.python.org/downloads/)  
 -[pygame](https://www.pygame.org/wiki/GettingStarted)
 
 
