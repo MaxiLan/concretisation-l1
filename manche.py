@@ -1,4 +1,4 @@
-import click
+import tour
 import pygame
 import random
 import carte
@@ -12,18 +12,18 @@ def manche(partie, ecran):
     lancement_manche(partie,ecran)
     for joueur in partie.tab_joueurs:
         joueur.evol_score()
+
     i_joueur = joueur_commence(partie.tab_joueurs)
-    
     joueur = partie.tab_joueurs[i_joueur]
-    manche_fin = False
     
+    manche_fin = False
     pygame.time.wait(150)
     while not manche_fin:
         #déroulement d'un tour
         j_precedent = partie.tab_joueurs[i_joueur-1]
         j_suivant = partie.tab_joueurs[(i_joueur + 1) % len(partie.tab_joueurs)]
 
-        tour(joueur, partie, ecran, j_precedent, j_suivant)    
+        lancement_tour(joueur, partie, ecran, j_precedent, j_suivant)    
 
         #mise à jour de l'écran
         partie.defausse.affiche(ecran)
@@ -47,7 +47,7 @@ def manche(partie, ecran):
     for i in range(len(partie.tab_joueurs)-1):
         j_precedent = partie.tab_joueurs[i_joueur-1]
         j_suivant = partie.tab_joueurs[(i_joueur + 1) % len(partie.tab_joueurs)]
-        tour(joueur, partie, ecran, j_precedent, j_suivant)
+        lancement_tour(joueur, partie, ecran, j_precedent, j_suivant)
         partie.defausse.affiche(ecran)
         joueur.retrait_colonne(partie.pioche,ecran)
         jeu_fin_manche(joueur,ecran)
@@ -121,7 +121,7 @@ def lancement_manche(partie,ecran):
     partie.pioche.cartes[0].etat = "ouverte"
 
 
-def tour(joueur,partie, ecran, j_precedent, j_suivant):
+def lancement_tour(joueur,partie, ecran, j_precedent, j_suivant):
     """
     Réalise le tour d'un joueur
     """
@@ -141,6 +141,7 @@ def tour(joueur,partie, ecran, j_precedent, j_suivant):
 
     text1=font1.render("Joueur n°"+str(joueur.nom),1, "white")
     ecran.blit(text1,(ecran.get_width()//2-61,15))
+
     joueur.affiche_jeu(ecran)
     partie.pioche.affiche(ecran)
     partie.defausse.affiche(ecran)
@@ -164,7 +165,7 @@ def tour(joueur,partie, ecran, j_precedent, j_suivant):
     pygame.display.flip()
   
     while not tour_fini:  
-        tour_fini = click.actions_tour(joueur,partie, ecran)
+        tour_fini = tour.actions_tour(joueur,partie, ecran)
 
 
 def joueur_commence(tab_joueurs):
@@ -303,5 +304,6 @@ def continuer_partie(ecran, partie):
                 return False, True
 
             elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                click.loupe(ecran,partie,partie.tab_joueurs[0],"fin jeu")
+                tour.loupe(ecran,partie,partie.tab_joueurs[0],"fin jeu")
+                ecran.fill((43, 42, 76))
                 affichage_fin_manche(partie, ecran)

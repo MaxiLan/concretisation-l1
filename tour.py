@@ -32,13 +32,12 @@ def actions_tour(joueur,partie, ecran):
         pos = joueur.choix_pioche_def(partie)
         pos[0]=pos[0]+10
         pos[1]=pos[1]+10
-
         pygame.time.wait(500)
-        pygame.event.get()
+    
+    #si c'est un utilisateur
     else:
         #attend un click (sinon la fonction sera ré-executer) 
         pygame.event.get()
-
         souris = pygame.mouse.get_pressed()
         if souris[0]:
             pos = pygame.mouse.get_pos()
@@ -58,6 +57,8 @@ def actions_tour(joueur,partie, ecran):
             pos = pygame.mouse.get_pos()
             if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
               loupe(ecran,partie,joueur)
+              pygame.time.wait(200)
+            
 
         #on déplace la carte de la defausse
         carte_select = partie.defausse.retire_carte()
@@ -123,6 +124,7 @@ def actions_tour(joueur,partie, ecran):
               pos = pygame.mouse.get_pos()
               if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
                 loupe(ecran,partie,joueur)
+                pygame.time.wait(200)
 
         # on deplace la carte de la pioche
         carte_select = partie.pioche.cartes[0]
@@ -194,6 +196,7 @@ def actions_tour(joueur,partie, ecran):
                                     return True
                     if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
                         loupe(ecran,partie,joueur)
+                        pygame.time.wait(200)
 
               
                 #si le click est sur la defausse
@@ -210,6 +213,7 @@ def actions_tour(joueur,partie, ecran):
     #si le joueur clique sur la loupe 
     elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
         loupe(ecran,partie,joueur)
+        pygame.time.wait(200)
   
 
 def retourne_cartes(joueur, ecran,partie): 
@@ -237,6 +241,7 @@ def retourne_cartes(joueur, ecran,partie):
             pos = pygame.mouse.get_pos()
             if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
                 loupe(ecran,partie,joueur)
+                pygame.time.wait(200)
 
             for i in range(3):
                 for j in range(4):
@@ -326,10 +331,7 @@ def loupe(ecran,partie,joueur, section="jeu"):
             j_suivant.affiche_petit(ecran, 'd')
             text3=font2.render("Joueur n°"+str(j_suivant.nom),1, "white")
             ecran.blit(text3,((ecran.get_width()-60-30-2*73)-61,150))
-        
-        pygame.display.flip()
-        pygame.time.wait(200)
-
+    pygame.display.flip()
 
 def affiche_page_autre_joueur(ecran,tab_joueurs):
     """
