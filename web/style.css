@@ -88,6 +88,9 @@ fieldset{
 }
 .seul p{
   margin:25px;
+  display:flex;
+  align-items: flex;
+  justify-content: center;
 }
 .sous_bloc{
   border-width: 4px;
@@ -198,6 +201,13 @@ ul{
 ul li {
   list-style:circle;
   font-size: 25px;
+}
+.ecran{
+  width:1500px;
+}
+.ex_jeu{
+  width:750px;
+  height:467px;
 }
 footer{
  font-size: 30px;
