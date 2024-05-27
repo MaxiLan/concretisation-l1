@@ -23,7 +23,7 @@ def actions_tour(joueur,partie, ecran):
     click_carte = False
   
     #affiche ou cache l'aide
-    if souris_sur_aide(ecran, h):
+    if souris_sur_aide(ecran):
         affiche_aide(ecran, section=0)
     else:
         cache_aide(ecran)
@@ -86,7 +86,7 @@ def actions_tour(joueur,partie, ecran):
                 return True
 
             else:
-                if souris_sur_aide(ecran,h):
+                if souris_sur_aide(ecran):
                     affiche_aide(ecran, section=1)
                 else:
                     cache_aide(ecran)
@@ -142,7 +142,7 @@ def actions_tour(joueur,partie, ecran):
         while not (click_carte or click_defausse): 
             partie.verifie_fermeture()
 
-            if souris_sur_aide(ecran, h):
+            if souris_sur_aide(ecran):
                 affiche_aide(ecran, section=2) 
             else:
                 cache_aide(ecran)
@@ -234,10 +234,10 @@ def retourne_cartes(joueur, ecran,partie):
 
     while not (carte_selectionnee):
         partie.verifie_fermeture()
-        if souris_sur_aide(ecran, h):
-            affiche_aide(ecran, h, section=3) 
+        if souris_sur_aide(ecran):
+            affiche_aide(ecran, section=3) 
         else:
-            cache_aide(ecran,l,h)
+            cache_aide(ecran)
         pygame.event.get()
         s = pygame.mouse.get_pressed()
 
@@ -289,7 +289,7 @@ def cache_aide(ecran):
     pygame.draw.rect(ecran, "grey24", rect)
 
 
-def souris_sur_aide(ecran, h_carte):
+def souris_sur_aide(ecran):
     """
     Renvoie vrai si la souris se trouve sur l'aide, faux sinon
     """
