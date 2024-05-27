@@ -236,6 +236,7 @@ def retourne_cartes(joueur, ecran,partie):
 
     while not (carte_selectionnee):
         partie.verifie_fermeture()
+
         if souris_sur_aide(ecran):
             affiche_aide(ecran, section=3) 
         else:
