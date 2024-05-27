@@ -389,7 +389,6 @@ def voir_autre_jeu(ecran,tab_joueurs,i_joueur):
             img = pygame.image.load(ch)
             img = pygame.transform.scale(img, (50,50))
             ecran.blit(img, (LARGEUR-80, 30))
-            pygame.display.flip()
         elif ((LARGEUR//2 - 80 - 60 - 2*l < pos[0] < LARGEUR//2 - 60 - 2*l) and (130+(3*h//2 < pos[1] < 180+(3*h//2)))):
             i_joueur=(i_joueur-1)%len(tab_joueurs)
         
