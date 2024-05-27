@@ -19,13 +19,22 @@
       <a class="text_nav" href="nous.html">Nous</a> 
     </nav>
     <main>
+<<<<<<< HEAD
       <a href="#haut"><img id="img" alt="image fleche" src="../images/fleche_web.png"></a>
+=======
+      <a href="#haut"><img id="img" src="images/fleche_web.png"></a>
+>>>>>>> fcda1000468a7f464762762739182a958ee654c2
       <h2>Nos fichiers et fonctions</h2>
       <p>
       Les différentes fonctionnalités du jeu sont séparées en plusieurs fichiers.</p>
       <div class="ligne">
+<<<<<<< HEAD
         <img alt="arborescence premier graphe" id="graphe1" src="graphique_1.png" >
         <img alt="arborescence deuxieme graphe" id="graphe2" src="graphique_2.png" >
+=======
+        <img id="graphe2" src="images/graphique_2.png">
+        <img if=graphe1 src="images/graphique_1.png">
+>>>>>>> fcda1000468a7f464762762739182a958ee654c2
     </div>
         <div class="ligne">
       <ul class="lien_debut">
@@ -260,16 +269,22 @@
       </fieldset>
     </fieldset>
 
-
       <fieldset>
         <fieldset class="sous_bloc">
-          <h3 id="strat_1">Strategie_n1.py</h3>
-
+          <h3 id="strat_1">Strategie n1.py</h3>
+          <p>On retrouve ici la stratégie employée par le robot, s'il est en mode difficile.<br> <br>
+            Le robot ne prend pas les cartes au dessus ou égales à 7 (donc il ne fera pas de colonne plus grande que 7).<br> <br>
+            Il prend dans la défausse si la carte est négative ou permet d'avancer une colonne en cours, sinon il pioche.
+            Dans ce cas, si la carte est plus grande que 7, il la met dans la défausse, et il retourne une carte au hasard.
+            Sinon, il cherche à compléter une colonne ou remplacer des cartes hautes.
+          </p>
         </fieldset>
         
         <fieldset class="sous_bloc">
-          <h3 id="strat_2">Strategie_n2.py</h3>
-
+          <h3 id="strat_2">Strategie n2.py</h3>
+          <p>Ce fichier contient une stratégie non finie, basée sur les probabilités d'obtenir certaines cartes en piochant.<br> <br>
+            Cette stratégie aurait dû être meilleur que la stratégie n°1, mais par faute de temps, elle ne verra pas le jour (pour l'instant).
+          </p>
         </fieldset>
       </fieldset>
     </main>

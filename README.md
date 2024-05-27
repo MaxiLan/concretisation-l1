@@ -28,6 +28,6 @@ Pour lancer le jeu :
 ## Comment jouer ?
 
 Les règles du _Skyjo_ sont disponibles sur notre site web,  
-Lui-même accessible dans le dossier /web (le fichier index.html pour être plus précis).  
+Lui-même accessible dans le dossier /web (le fichier regles.html pour être plus précis).  
 Lorsque vous jouez, une aide est disponible en bas à gauche de l'écran.  
 Elle vous dit que faire selon la situation.
