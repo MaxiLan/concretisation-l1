@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import pygame
 import carte
 import joueur
