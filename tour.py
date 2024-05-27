@@ -33,7 +33,7 @@ def actions_tour(joueur,partie, ecran):
         pos = joueur.choix_pioche_def(partie)
         pos[0]=pos[0]+10
         pos[1]=pos[1]+10
-        pygame.time.wait(500)
+        pygame.time.wait(900)
     
     #si c'est un utilisateur
     else:
@@ -73,7 +73,6 @@ def actions_tour(joueur,partie, ecran):
             partie.verifie_fermeture()
 
             if isinstance(joueur,robot.Robot):
-                pygame.time.wait(700)
                 pygame.event.get()
                 pos=joueur.choix_placement_carte(carte_select,partie)
                 partie.carte_en_main="images/carte_selectionnee.png"
@@ -83,6 +82,7 @@ def actions_tour(joueur,partie, ecran):
                 joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
                 partie.defausse.ajout_carte(aux)
                 partie.actualise_carte_en_main(ecran)
+                pygame.time.wait(900)
                 return True
 
             else:
@@ -91,29 +91,29 @@ def actions_tour(joueur,partie, ecran):
                 else:
                     cache_aide(ecran)
             
-            pygame.event.get()
-            s = pygame.mouse.get_pressed()
+                pygame.event.get()
+                s = pygame.mouse.get_pressed()
 
-            if s[0]:
-                pos = pygame.mouse.get_pos()
+                if s[0]:
+                    pos = pygame.mouse.get_pos()
 
-                if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                    loupe(ecran,partie,joueur)
-                    pygame.time.wait(200)
+                    if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
+                        loupe(ecran,partie,joueur)
+                        pygame.time.wait(200)
 
-                #on cherche le click sur une carte
-                for i in range(3):
-                    for j in range(4):
-                        if (ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 + l) and (60 + i * h+i*15< pos[1] <  60 + i * h+i*15 + h):
-                            #on échange les cartes
-                            if joueur.jeu_actuel[i][j].num!="42bis":
-                                partie.carte_en_main="images/carte_selectionnee.png"
-                                aux = joueur.jeu_actuel[i][j]
-                                joueur.jeu_actuel[i][j] = carte_select
-                                joueur.jeu_actuel[i][j].etat = "ouverte"
-                                partie.defausse.ajout_carte(aux)
-                                partie.actualise_carte_en_main(ecran)
-                                return True
+                    #on cherche le click sur une carte
+                    for i in range(3):
+                        for j in range(4):
+                            if (ecart + j * l+j*20< pos[0] <ecart + j * l+j*20 + l) and (60 + i * h+i*15< pos[1] <  60 + i * h+i*15 + h):
+                                #on échange les cartes
+                                if joueur.jeu_actuel[i][j].num!="42bis":
+                                    partie.carte_en_main="images/carte_selectionnee.png"
+                                    aux = joueur.jeu_actuel[i][j]
+                                    joueur.jeu_actuel[i][j] = carte_select
+                                    joueur.jeu_actuel[i][j].etat = "ouverte"
+                                    partie.defausse.ajout_carte(aux)
+                                    partie.actualise_carte_en_main(ecran)
+                                    return True
 
 
     #sinon si le click est sur la pioche
@@ -136,6 +136,9 @@ def actions_tour(joueur,partie, ecran):
         partie.carte_en_main= "images/" + str(carte_select.num) + ".png"
         partie.actualise_carte_en_main(ecran)
         pygame.display.flip()
+        if isinstance(joueur,robot.Robot):
+            pygame.time.wait(900)
+
 
         click_defausse = False
         #on attend le choix du joueur (jouer sur son jeu ou sur la défausse)
@@ -148,7 +151,6 @@ def actions_tour(joueur,partie, ecran):
                 cache_aide(ecran)
 
             if isinstance(joueur,robot.Robot):
-                pygame.time.wait(300)
                 pygame.event.get()
                 pos=joueur.choix_placement_carte(carte_select,partie)
                 if pos[0]==-1:
@@ -158,13 +160,13 @@ def actions_tour(joueur,partie, ecran):
                     partie.actualise_carte_en_main(ecran)
                     pygame.display.flip()
                     click_defausse = True
-                    pygame.time.wait(300)
+                    pygame.time.wait(900)
 
                     pos=joueur.retourne_hasard()
                     joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
                     carte_selectionner = True
                     pygame.display.flip()
-                    #on retourne une carte selectionnnée par le joueur
+                    #pygame.time.wait(900)
                     return True
 
                 else:

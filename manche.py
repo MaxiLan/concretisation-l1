@@ -41,7 +41,7 @@ def manche(partie, ecran):
         i_joueur = (i_joueur + 1) % len(partie.tab_joueurs)
         joueur = partie.tab_joueurs[i_joueur]
         #laisse le temps au joueur de voir son score
-        pygame.time.wait(300)
+        pygame.time.wait(500)
     
     pygame.time.wait(1500)
     #une fois qu'un joueur a retourné toute ses cartes il faut encore faire un tour
@@ -272,6 +272,8 @@ def affichage_fin_manche(partie,ecran):
     img = pygame.image.load(ch)
     img = pygame.transform.scale(img, (50,50))
     ecran.blit(img, (ecran.get_width()-80, 30))
+    font = pygame.font.Font(None, 25)
+    ecran.blit(font.render("Afficher les jeux :", True, "white"), (ecran.get_width()-250, 40))
     pygame.display.flip()
 
 

@@ -8,6 +8,7 @@ class Joueur:
         self.nom = nom
         self.score_individuel = 0
 
+
     def debut_manche(self,partie,ecran):
         click=False
         h = partie.pioche.cartes[0].hauteur
