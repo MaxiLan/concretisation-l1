@@ -401,7 +401,6 @@ def voir_autre_jeu(ecran,tab_joueurs,i_joueur):
         pos = pygame.mouse.get_pos()
         if ((LARGEUR-80 < pos[0] < LARGEUR-50) and (30 < pos[1] < 60)):  
             click_croix=True
-
         elif ((LARGEUR//2 - 80 - 60 - 2*l < pos[0] < LARGEUR//2 - 60 - 2*l) and (130+(3*h//2 < pos[1] < 180+(3*h//2)))):
             i_joueur=(i_joueur-1)%len(tab_joueurs)
         
