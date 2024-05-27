@@ -14,12 +14,12 @@ Nous avons codé en Python et avons également utilisé la bibliothèque [Pygame
 ## Instructions d'utilisation
 
 Prérequis :  
--[python3](https://www.python.org/downloads/)
+-[python3](https://www.python.org/downloads/)  
 -[pygame](https://www.pygame.org/wiki/GettingStarted)
 
 
 Pour lancer le jeu :  
-1. Télécharger tous les fichiers du dépôt (le dossier web/ et le .gitignore ne sont pas nécéssaire)
+1. Télécharger tous les fichiers du dépôt (le dossier web/ et le .gitignore ne sont pas nécéssaire)  
    ```git clone https://github.com/MaxiLan/concretisation-l1```
-2. Exécuter le fichier `main.py`
+2. Exécuter le fichier `main.py`  
    ```python3 main.py```
