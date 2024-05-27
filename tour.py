@@ -235,9 +235,9 @@ def retourne_cartes(joueur, ecran,partie):
     while not (carte_selectionnee):
         partie.verifie_fermeture()
         if souris_sur_aide(ecran, h):
-            affiche_aide(ecran, h, section=3) 
+            affiche_aide(ecran, section=3) 
         else:
-            cache_aide(ecran,l,h)
+            cache_aide(ecran)
         pygame.event.get()
         s = pygame.mouse.get_pressed()
 

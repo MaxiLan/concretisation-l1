@@ -80,8 +80,14 @@ fieldset{
   text-align: center;
 }
 .seul{
+  margin:4px;
   display:flex;
   flex-direction: column;
+  flex-direction:column;
+  width:1600px;
+}
+.seul p{
+  margin:25px;
 }
 .sous_bloc{
   border-width: 4px;
@@ -133,7 +139,7 @@ p a:hover{
   filter: drop-shadow(-0.5px 0px 0 black)
   drop-shadow(0px -0.5px 0 black)
   drop-shadow(0.5px 0.5px 0 black)
-                  drop-shadow(0px 0.5px 0 black);;
+  drop-shadow(0px 0.5px 0 black);;
 }
 
 .photo_gens{
@@ -143,6 +149,11 @@ p a:hover{
 #boite{
   height:400px;
   width:400px
+}
+.plateau{
+  height:400px;
+  width:500px;
+
 }
 .soulignee
 {
@@ -166,12 +177,6 @@ ul{
   padding:0px;
   
 }
-fieldset .manche{
-  display:flex;
-  border-style: none;
-  border-width:0px;
-  flex-direction:row;
-}
 
 .neutre{
   border-style: none;
@@ -189,6 +194,7 @@ fieldset .manche{
   margin:0px;
   font-size: 28px;
 }
+
 ul li {
   list-style:circle;
   font-size: 25px;
