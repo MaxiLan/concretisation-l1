@@ -19,9 +19,9 @@ Prérequis :
 
 
 Pour lancer le jeu :  
-1. Télécharger tous les fichiers du dépôt (le dossier /web et le .gitignore ne sont pas nécéssaire)
+1. Télécharger tous les fichiers du dépôt (le dossier /web et le .gitignore ne sont pas nécéssaire)  
    ```git clone https://github.com/MaxiLan/concretisation-l1```
-2. Exécuter le fichier `main.py`
+2. Exécuter le fichier `main.py`  
    ```python3 main.py```
 3. Profiter ! (il est fortement conseiller d'utiliser une souris plutôt que le pavé tactile)
 

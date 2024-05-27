@@ -34,6 +34,9 @@
         <li><a href="#partie">partie.py</a></li>
         <li><a href="#carte">carte.py</a></li>
         <li><a href="#joueur">joueur.py</a></li>
+        <li><a href="#robot">robot.py</a></li>
+        <li><a href="#strat_1">strategie_n1.py</a></li>
+        <li><a href="#strat_2">strategie_n2.py</a></li>
       </ul>
       <ul class="lien_debut">
         <li><a href="#main">main.py</a></li>
@@ -107,7 +110,10 @@
                 <li>affichage_page_autre_joueur : Affiche la page pour voir les autres jeux</li>
                 <li>voir_autre_jeu : Affiche le jeu d'un autre joueur</li>
               </ul>
-              <ul>
+              </p>
+              <p>
+                Autre fonction :
+              <ul>  
                 <li>retourne_cartes</li>
               </ul>
               </p>
@@ -138,7 +144,7 @@
               <p>
               Les méthodes : </p>
               <ul>
-                <li>fin_partie : Si un joueur a atteint les 100 pts, renvoie vrai</li>
+                <li>fin_partie : Renvoie vrai si un joueur a atteint les 100 pts</li>
                 <li>mise_a_jour_score</li>
                 <li>ajouter_joueur</li>
               </ul>
@@ -170,7 +176,7 @@
           Un seul attribut :
         </p>
           <ul class="attribut">
-              <li>cartes </li>
+              <li>cartes</li>
           </ul>
           
           <p>
@@ -233,14 +239,14 @@
             </ul>
           </fieldset>
         <fieldset class="sous_bloc">
-        <h3 id="partie" >Robot.py</h3>
+        <h3 id="robot">Robot.py</h3>
           <p>
             La classe robot hérite de la classe joueur. Elle possède donc les mêmes attributs de base auxquels sont rajoutés les suivants:
         </p>
         <ul class="attribut">
-          <li>self.strategie,</li> 
-          <li>self.ind_carte_cachee,</li> 
-          <li>self.jeu_individuel,</li> 
+          <li>strategie,</li> 
+          <li>ind_carte_cachee,</li> 
+          <li>jeu_individuel,</li> 
         </ul>
 
           <p>
@@ -252,18 +258,21 @@
             <li>retourne_hasard</li>
           </ul>
       </fieldset>
+    </fieldset>
+
 
       <fieldset>
         <fieldset class="sous_bloc">
+          <h3 id="strat_1">Strategie_n1.py</h3>
 
         </fieldset>
         
         <fieldset class="sous_bloc">
+          <h3 id="strat_2">Strategie_n2.py</h3>
 
         </fieldset>
       </fieldset>
 
-    </fieldset>
       
 
     </main>
