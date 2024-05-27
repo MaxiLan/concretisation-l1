@@ -5,6 +5,7 @@ import carte
 import robot
 import partie
 
+
 def manche(partie, ecran): 
     """
     Réalise une manche entière
@@ -130,11 +131,14 @@ def lancement_tour(joueur,partie, ecran, j_precedent, j_suivant):
 
     ecran.fill("grey24")
     tour_fini=False
+
+    #affichage loupe
     ch = "images/loupe.png"
     img = pygame.image.load(ch)
     img = pygame.transform.scale(img, (50,50))
     ecran.blit(img, (ecran.get_width()-80, 30))
-    #tant que son tour n'est pas fini, son jeu reste affiché
+    font = pygame.font.Font(None, 25)
+    ecran.blit(font.render("Afficher les autres jeux :", True, "white"), (ecran.get_width()-300, 40))
     
     font1=pygame.font.Font(None, 35)
     font1.underline = True

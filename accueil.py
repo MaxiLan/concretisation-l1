@@ -110,7 +110,7 @@ def click(ecran, nb_joueurs, nb_robots, niveau):
 
             if (milieu_l - 250 <pos[0]< milieu_l - 200) and (400<pos[1]<450):
                 click_souris = True
-                if nb_joueurs>1:
+                if nb_joueurs>2:
                     nb_joueurs -= 1
                 if nb_joueurs<nb_robots:
                     nb_robots-=1
