@@ -8,6 +8,7 @@ class Joueur:
         self.nom = nom
         self.score_individuel = 0
 
+
     def debut_manche(self,partie,ecran):
         click=False
         h = partie.pioche.cartes[0].hauteur
@@ -19,7 +20,7 @@ class Joueur:
             pos = pygame.mouse.get_pos()
             for i in range(3):
                 for j in range(4):
-                    if (ecart + j * l+j*20< pos[0] < ecart + j * l+j*20 + l) and (30 + i * h+i*15< pos[1] <  30 + i * h+i*15 + h):
+                    if (ecart + j * l+j*20< pos[0] < ecart + j * l+j*20 + l) and (60 + i * h+i*15< pos[1] <  60 + i * h+i*15 + h):
                         if self.jeu_actuel[i][j].etat != "ouverte":
                             self.jeu_actuel[i][j].etat = "ouverte"
                             self.affiche_jeu(ecran)

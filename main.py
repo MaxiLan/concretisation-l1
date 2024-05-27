@@ -1,4 +1,3 @@
-#!/usr/bin/python
 import pygame
 import carte
 import joueur
@@ -18,11 +17,19 @@ relance_partie = True
 while relance_partie:
     fin_partie = False
 
-    HAUTEUR = 1080
-    LARGEUR = 1920
-    pygame.init()
-    clock = pygame.time.Clock()
-    ecran = pygame.display.set_mode((LARGEUR, HAUTEUR), pygame.FULLSCREEN)
+    plein_ecran = input("Voulez-vous jouer en plein écran ? (0/N) : ")
+    
+    if plein_ecran=='o' or plein_ecran=='O':
+        pygame.init()
+        clock = pygame.time.Clock()
+        ecran = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+    else:
+        HAUTEUR = max(1000, int(input("Hauteur de la fenêtre (min 1000)")))
+        LARGEUR = max(1500, int(input("Largeur de la fenêtre (min 1500)")))
+        pygame.init()
+        clock = pygame.time.Clock()
+        ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
+
     pygame.display.set_caption("SKYJO")
     ecran.fill('#EEE2DE')
 
