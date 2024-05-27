@@ -141,7 +141,6 @@ def tour(joueur,partie, ecran, j_precedent, j_suivant):
 
     text1=font1.render("Joueur n°"+str(joueur.nom),1, "white")
     ecran.blit(text1,(ecran.get_width()//2-61,15))
-    #partie.carte_en_main="images/carte_selectionnee.png"
     joueur.affiche_jeu(ecran)
     partie.pioche.affiche(ecran)
     partie.defausse.affiche(ecran)
@@ -219,25 +218,28 @@ def affichage_fin_manche(partie,ecran):
     ecran.fill((43, 42, 76))
 
     font1=pygame.font.Font(None, 50)
+    text=font1.render("Scores",1,"white")
+    ecran.blit(text, (LARGEUR//2-56, 100))
+
     font1.underline = True
-    text=font1.render("Résulats de la manche : ",1,"white")
-    ecran.blit(text,(LARGEUR//3-250,150))
-    text=font1.render("Scores de la partie : ",1,"white")
-    ecran.blit(text,(2*LARGEUR//3-100,150))
+    text=font1.render("Manche : ",1,"white")
+    ecran.blit(text,(LARGEUR//3-130,200))
+    text=font1.render("Partie : ",1,"white")
+    ecran.blit(text,(2*LARGEUR//3+30,200))
 
     font2=pygame.font.Font(None, 40)
     h=1
     for i in range(len(partie.tab_joueurs)):
         ch="Score joueur n°"+str(partie.tab_joueurs[i].nom)+" : " +str(partie.tab_joueurs[i].score_individuel)
         text=font2.render(ch,1, "white")
-        ecran.blit(text,(LARGEUR//3-200,230+h))
+        ecran.blit(text,(LARGEUR//3-200,250+h))
         h=h+27
 
     h=1
     for i in range(len(partie.tab_joueurs)):
         ch="Score joueur n°"+str(partie.tab_joueurs[i].nom)+" : " +str(partie.score[i])
         text=font2.render(ch,1, "white")
-        ecran.blit(text,(2*LARGEUR//3-70,230+h))
+        ecran.blit(text,(2*LARGEUR//3-70,250+h))
         h=h+27
 
     l_milieu = ecran.get_width() // 2
@@ -245,6 +247,13 @@ def affichage_fin_manche(partie,ecran):
         img = pygame.image.load("images/recommencer.png")
         img = pygame.transform.scale(img, (250, 100))
         ecran.blit(img, (l_milieu - 250 - 50, HAUTEUR-300))
+
+        s_max = min(partie.score)
+        g = partie.tab_joueurs[partie.score.index(s_max)]
+        font1.underline = False
+        text= font1.render("Gagnant : Joueur n°"+str(g.nom), 1, "white")
+        ecran.blit(text, (l_milieu-182, HAUTEUR-400))
+
     else:
         img = pygame.image.load("images/continuer.png")
         img = pygame.transform.scale(img, (250, 100))
