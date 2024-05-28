@@ -5,6 +5,8 @@ import defausse
 import pioche
 import robot
 import asyncio
+import sys
+import platform
 
 
 #web
@@ -314,7 +316,8 @@ async def loupe(ecran,partie,joueur, section="jeu"):
     click_croix=False
     i_joueur=0
     pygame.time.wait(200)
-
+    if sys.platform=="emscripten":
+        platform.document.body.style.background="#3d3d3d"
     while not click_croix:
         partie.verifie_fermeture()
         click_croix,i_joueur=voir_autre_jeu(ecran,partie.tab_joueurs,i_joueur)
@@ -325,7 +328,6 @@ async def loupe(ecran,partie,joueur, section="jeu"):
     if section=="jeu":
         HAUTEUR = ecran.get_height()
         LARGEUR = ecran.get_width()
-
         ecran.fill("grey24")
         ch = "images/loupe.png"
         img = pygame.image.load(ch)
@@ -423,6 +425,4 @@ def voir_autre_jeu(ecran,tab_joueurs,i_joueur):
             i_joueur=(i_joueur+1)%len(tab_joueurs)
         
         pygame.time.wait(200)
-        
-
     return click_croix,i_joueur

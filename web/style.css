@@ -7,6 +7,10 @@ main{
   margin-bottom:225px;
 }
 
+a{
+  color:#EEE2DE;
+}
+
 body {
   min-height:100vh;
   margin: 0px;
@@ -31,17 +35,11 @@ h1{
   color:#EEE2DE;
   font-size: 60px;
 }
-<<<<<<< HEAD
-h2 {
-  padding-top: 25px;
-}
-=======
 
 h2 {
   padding-top: 25px;
 }
 
->>>>>>> 0e1e02cd62dd6a6263d92b1f7048d2f1da3fef45
 a{
   text-decoration: none;
   color:#EEE2DE
