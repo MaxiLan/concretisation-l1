@@ -14,7 +14,6 @@ async def manche(partie, ecran):
 
     #web
     await lancement_manche(partie,ecran)
-    
     for joueur in partie.tab_joueurs:
         joueur.evol_score()
 
@@ -86,6 +85,8 @@ async def lancement_manche(partie,ecran):
     Prépare le début de la manche  (mélange, distribution de la pioche et retourne
     des cartes au hasard)
     """
+    if sys.platform=="emscripten":
+        platform.document.body.style.background="#3d3d3d"
     l_milieu = ecran.get_width() // 2
     H = ecran.get_height()
 
@@ -229,7 +230,7 @@ def affichage_fin_manche(partie,ecran):
     et la loupe pour voir le jeu final des autres joueurs
     """ 
     if sys.platform=="emscripten":
-            platform.document.body.style.background="#2b2a4c"
+        platform.document.body.style.background="#2b2a4c"
     LARGEUR = ecran.get_width() 
     HAUTEUR = ecran.get_height()
 
