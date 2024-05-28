@@ -111,9 +111,10 @@ async def lancement_manche(partie,ecran):
         for _ in range (2):
             click = False
             while not click: 
-                await asyncio.sleep(0.150)
+                
                 partie.verifie_fermeture()
                 click=joueur.debut_manche(partie,ecran)
+                await asyncio.sleep(0.150)
             pygame.display.flip()
         pygame.time.wait(1000)
 
