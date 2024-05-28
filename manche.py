@@ -59,6 +59,7 @@ async def manche(partie, ecran):
         joueur.retrait_colonne(partie.pioche,ecran)
         jeu_fin_manche(joueur,ecran)
         joueur.affiche_jeu(ecran) 
+        joueur.evol_score()
         pygame.display.flip()
         i_joueur = (i_joueur + 1) % len(partie.tab_joueurs)
         joueur = partie.tab_joueurs[i_joueur]
