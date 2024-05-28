@@ -8,6 +8,7 @@ import joueur
 import strategie_n0
 import asyncio
 import sys
+import platform
 
 
 async def main():
