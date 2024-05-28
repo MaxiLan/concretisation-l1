@@ -4,13 +4,14 @@ import random
 import carte
 import robot
 import partie
+import asyncio
 
-
-def manche(partie, ecran): 
+async def manche(partie, ecran): 
     """
     Réalise une manche entière
     """
-    lancement_manche(partie,ecran)
+    #web
+    await lancement_manche(partie,ecran)
     for joueur in partie.tab_joueurs:
         joueur.evol_score()
 
@@ -24,7 +25,8 @@ def manche(partie, ecran):
         j_precedent = partie.tab_joueurs[i_joueur-1]
         j_suivant = partie.tab_joueurs[(i_joueur + 1) % len(partie.tab_joueurs)]
 
-        lancement_tour(joueur, partie, ecran, j_precedent, j_suivant)    
+        #web
+        await lancement_tour(joueur, partie, ecran, j_precedent, j_suivant)    
 
         #mise à jour de l'écran
         partie.defausse.affiche(ecran)
@@ -41,6 +43,8 @@ def manche(partie, ecran):
         i_joueur = (i_joueur + 1) % len(partie.tab_joueurs)
         joueur = partie.tab_joueurs[i_joueur]
         #laisse le temps au joueur de voir son score
+        #web 
+        await asyncio.sleep(0)
         pygame.time.wait(500)
     
     pygame.time.wait(1500)
@@ -48,7 +52,8 @@ def manche(partie, ecran):
     for i in range(len(partie.tab_joueurs)-1):
         j_precedent = partie.tab_joueurs[i_joueur-1]
         j_suivant = partie.tab_joueurs[(i_joueur + 1) % len(partie.tab_joueurs)]
-        lancement_tour(joueur, partie, ecran, j_precedent, j_suivant)
+        #web
+        await lancement_tour(joueur, partie, ecran, j_precedent, j_suivant)
         partie.defausse.affiche(ecran)
         joueur.retrait_colonne(partie.pioche,ecran)
         jeu_fin_manche(joueur,ecran)
@@ -70,10 +75,10 @@ def manche(partie, ecran):
     #tout le monde a joué il faut maintenant mettre tout les jeux joueurs ouverts et afficher les gagnants
     partie.mise_a_jour_score()
     affichage_fin_manche(partie,ecran)
-    return continuer_partie(ecran, partie)
+    return await continuer_partie(ecran, partie)
 
 
-def lancement_manche(partie,ecran):
+async def lancement_manche(partie,ecran):
     """
     Prépare le début de la manche  (mélange, distribution de la pioche et retourne
     des cartes au hasard)
@@ -106,10 +111,9 @@ def lancement_manche(partie,ecran):
         for _ in range (2):
             click = False
             while not click: 
+                await asyncio.sleep(0.150)
                 partie.verifie_fermeture()
                 click=joueur.debut_manche(partie,ecran)
-                pygame.time.wait(150)
-            
             pygame.display.flip()
         pygame.time.wait(1000)
 
@@ -122,7 +126,8 @@ def lancement_manche(partie,ecran):
     partie.pioche.cartes[0].etat = "ouverte"
 
 
-def lancement_tour(joueur,partie, ecran, j_precedent, j_suivant):
+#WEB
+async def lancement_tour(joueur,partie, ecran, j_precedent, j_suivant):
     """
     Réalise le tour d'un joueur
     """
@@ -169,7 +174,9 @@ def lancement_tour(joueur,partie, ecran, j_precedent, j_suivant):
     pygame.display.flip()
   
     while not tour_fini:  
-        tour_fini = tour.actions_tour(joueur,partie, ecran)
+        tour_fini = await tour.actions_tour(joueur,partie, ecran)
+        # WEB
+        await asyncio.sleep(0)
 
 
 def joueur_commence(tab_joueurs):
@@ -277,7 +284,7 @@ def affichage_fin_manche(partie,ecran):
     pygame.display.flip()
 
 
-def continuer_partie(ecran, partie):
+async def continuer_partie(ecran, partie):
     """
     Relance une manche ou arrête la partie
     """
@@ -310,6 +317,8 @@ def continuer_partie(ecran, partie):
                 return False, True
 
             elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                tour.loupe(ecran,partie,partie.tab_joueurs[0],"fin jeu")
+                await tour.loupe(ecran,partie,partie.tab_joueurs[0],"fin jeu")
                 ecran.fill((43, 42, 76))
                 affichage_fin_manche(partie, ecran)
+        #web
+        await asyncio.sleep(0.2)

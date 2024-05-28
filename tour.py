@@ -4,9 +4,10 @@ import carte
 import defausse
 import pioche
 import robot
+import asyncio
 
-
-def actions_tour(joueur,partie, ecran):
+#web
+async def actions_tour(joueur,partie, ecran):
     """
     Gère toutes les actions du tour 
     """
@@ -33,7 +34,9 @@ def actions_tour(joueur,partie, ecran):
         pos = joueur.choix_pioche_def(partie)
         pos[0]=pos[0]+10
         pos[1]=pos[1]+10
-        pygame.time.wait(900)
+        await asyncio.sleep(0.9)
+
+        #pygame.time.wait(900)
     
     #si c'est un utilisateur
     else:
@@ -57,7 +60,7 @@ def actions_tour(joueur,partie, ecran):
           if s[0]:
             pos = pygame.mouse.get_pos()
             if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-              loupe(ecran,partie,joueur)
+              await loupe(ecran,partie,joueur)
               pygame.time.wait(200)
             
 
@@ -82,7 +85,8 @@ def actions_tour(joueur,partie, ecran):
                 joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
                 partie.defausse.ajout_carte(aux)
                 partie.actualise_carte_en_main(ecran)
-                pygame.time.wait(900)
+                await asyncio.sleep(0.9)
+                #pygame.time.wait(900)
                 return True
 
             else:
@@ -98,7 +102,7 @@ def actions_tour(joueur,partie, ecran):
                     pos = pygame.mouse.get_pos()
 
                     if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                        loupe(ecran,partie,joueur)
+                        await loupe(ecran,partie,joueur)
                         pygame.time.wait(200)
 
                     #on cherche le click sur une carte
@@ -114,6 +118,7 @@ def actions_tour(joueur,partie, ecran):
                                     partie.defausse.ajout_carte(aux)
                                     partie.actualise_carte_en_main(ecran)
                                     return True
+            await asyncio.sleep(0)
 
 
     #sinon si le click est sur la pioche
@@ -124,7 +129,7 @@ def actions_tour(joueur,partie, ecran):
             if s[0]:
               pos = pygame.mouse.get_pos()
               if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                loupe(ecran,partie,joueur)
+                await loupe(ecran,partie,joueur)
                 pygame.time.wait(200)
 
         # on deplace la carte de la pioche
@@ -137,7 +142,9 @@ def actions_tour(joueur,partie, ecran):
         partie.actualise_carte_en_main(ecran)
         pygame.display.flip()
         if isinstance(joueur,robot.Robot):
-            pygame.time.wait(900)
+            await asyncio.sleep(0.9)
+
+            #pygame.time.wait(900)
 
 
         click_defausse = False
@@ -201,7 +208,7 @@ def actions_tour(joueur,partie, ecran):
                                     return True
 
                     if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                        loupe(ecran,partie,joueur)
+                        await loupe(ecran,partie,joueur)
                         pygame.time.wait(200)
 
               
@@ -214,15 +221,17 @@ def actions_tour(joueur,partie, ecran):
                     pygame.display.flip()
                     click_defausse = True
                     #on retourne une carte selectionnnée par le joueur
-                    return retourne_cartes(joueur, ecran,partie)
-        
+                    return await retourne_cartes(joueur, ecran,partie)
+
+            #web
+            await asyncio.sleep(0)
     #si le joueur clique sur la loupe 
     elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-        loupe(ecran,partie,joueur)
+        await loupe(ecran,partie,joueur)
         pygame.time.wait(200)
   
 
-def retourne_cartes(joueur, ecran,partie): 
+async def retourne_cartes(joueur, ecran,partie): 
     """
     Retourne une carte dans le jeu du joueur
     """
@@ -247,7 +256,7 @@ def retourne_cartes(joueur, ecran,partie):
         if s[0]:
             pos = pygame.mouse.get_pos()
             if (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
-                loupe(ecran,partie,joueur)
+                await loupe(ecran,partie,joueur)
                 pygame.time.wait(200)
 
             for i in range(3):
@@ -256,6 +265,8 @@ def retourne_cartes(joueur, ecran,partie):
                         if joueur.jeu_actuel[i][j].etat != "ouverte":
                             joueur.jeu_actuel[i][j].etat = "ouverte"
                             carte_selectionnee = True
+        await asyncio.sleep(0)
+    
     return True
 
 
@@ -300,7 +311,7 @@ def souris_sur_aide(ecran):
     return (30<pos[0]<80) and (ecran.get_height()-80<pos[1]<ecran.get_height()-30)
 
 
-def loupe(ecran,partie,joueur, section="jeu"):
+async def loupe(ecran,partie,joueur, section="jeu"):
     click_croix=False
     i_joueur=0
     pygame.time.wait(200)
@@ -308,6 +319,8 @@ def loupe(ecran,partie,joueur, section="jeu"):
     while not click_croix:
         partie.verifie_fermeture()
         click_croix,i_joueur=voir_autre_jeu(ecran,partie.tab_joueurs,i_joueur)
+        #web
+        await asyncio.sleep(0)
 
     #si on clique sur la croix, on réaffiche tout    
     if section=="jeu":

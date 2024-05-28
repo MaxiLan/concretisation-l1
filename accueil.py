@@ -1,8 +1,9 @@
 import pygame
 import partie
+import asyncio
 
-
-def affiche_accueil(ecran):
+#web
+async def affiche_accueil(ecran):
     """
     Affiche le titre et permet de choisir le nombre de joueur
     """
@@ -16,7 +17,9 @@ def affiche_accueil(ecran):
 
     while not nb_choisi:  
         affiche_elements(ecran, nb_joueurs, nb_robots, niveau)
-        nb_joueurs, nb_choisi, nb_robots, niveau = click(ecran, nb_joueurs, nb_robots, niveau)
+        nb_joueurs, nb_choisi, nb_robots, niveau = await click(ecran, nb_joueurs, nb_robots, niveau)
+        #web
+        await asyncio.sleep(0)
 
     return nb_joueurs, nb_robots, niveau
 
@@ -78,7 +81,7 @@ def affiche_elements(ecran, nb_joueurs, nb_robots, niveau):
     pygame.display.flip()
 
 
-def click(ecran, nb_joueurs, nb_robots, niveau): 
+async def click(ecran, nb_joueurs, nb_robots, niveau): 
     """
     Change le nombre de joueur selon s'il clique si + ou -
     """
@@ -160,3 +163,5 @@ def click(ecran, nb_joueurs, nb_robots, niveau):
                 click_souris = True
                 pygame.time.wait(250)
                 return nb_joueurs, True, nb_robots, niveau
+        await asyncio.sleep(0)
+            
