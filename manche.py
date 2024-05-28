@@ -228,6 +228,8 @@ def affichage_fin_manche(partie,ecran):
     Affiche les scores des joueurs à la fin de la manche
     et la loupe pour voir le jeu final des autres joueurs
     """ 
+    if sys.platform=="emscripten":
+            platform.document.body.style.background="#2b2a4c"
     LARGEUR = ecran.get_width() 
     HAUTEUR = ecran.get_height()
 
