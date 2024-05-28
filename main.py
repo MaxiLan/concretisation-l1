@@ -70,9 +70,10 @@ async def main():
             J = joueur.Joueur(i + 1)
             partie.tab_joueurs.append(J)
 
-        if sys.platform=="emscripten":
-            platform.document.body.style.background="#3d3d3d"
+
         while not fin_partie:
+            if sys.platform=="emscripten":
+                platform.document.body.style.background="#3d3d3d"
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     fin_partie = True
