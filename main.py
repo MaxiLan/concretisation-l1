@@ -4,6 +4,7 @@ import manche
 import accueil
 import strategie_n1
 import robot
+import joueur
 import strategie_n0
 import asyncio
 import sys
