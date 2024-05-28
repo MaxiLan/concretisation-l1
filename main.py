@@ -31,28 +31,28 @@ async def main():
         #     pygame.init()
         #     clock = pygame.time.Clock()
         #     ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
-"""
-<<<<<<< HEAD
-    pygame.display.init()
-    pygame.font.init()
-    pygame.display.set_icon(pygame.image.load("images/icon.png"))
-    clock = pygame.time.Clock()
+        """
+        <<<<<<< HEAD
+            pygame.display.init()
+            pygame.font.init()
+            pygame.display.set_icon(pygame.image.load("images/icon.png"))
+            clock = pygame.time.Clock()
 
 
-    plein_ecran = input("Voulez-vous jouer en plein écran ? (0/N) : ")
-    
-    if plein_ecran=='o' or plein_ecran=='O':
-        ecran = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
-    else:
-        HAUTEUR = max(1000, int(input("Hauteur de la fenêtre (min 1000)")))
-        LARGEUR = max(1500, int(input("Largeur de la fenêtre (min 1500)")))
-=======
-"""
+            plein_ecran = input("Voulez-vous jouer en plein écran ? (0/N) : ")
+            
+            if plein_ecran=='o' or plein_ecran=='O':
+                ecran = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+            else:
+                HAUTEUR = max(1000, int(input("Hauteur de la fenêtre (min 1000)")))
+                LARGEUR = max(1500, int(input("Largeur de la fenêtre (min 1500)")))
+        =======
+        """
         HAUTEUR=1000
         LARGEUR=1500
         pygame.init()
         clock = pygame.time.Clock()
-        
+
         ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
         pygame.display.set_caption("SKYJO")
         ecran.fill('#EEE2DE')
