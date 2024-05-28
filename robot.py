@@ -1,6 +1,8 @@
 import strategie_n1
 import joueur
 import pygame
+
+
 class Robot(joueur.Joueur):
 
     def __init__(self,strategie,nom):
