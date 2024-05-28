@@ -1,9 +1,24 @@
+html{
+  position:relative;
+  min-height:100%
+}
+
+main{
+  margin-bottom:225px;
+}
+
 body {
+  min-height:100vh;
+  margin: 0px;
+  display:flex;
+  flex-direction: column;
   background: #2B2A4C;
   color: #EEE2DE;
   text-align: center;
   font-family: Helvetica;
+  margin-top:auto;
 }
+
 main{
   display: flex ;
   align-items:center;
@@ -16,9 +31,17 @@ h1{
   color:#EEE2DE;
   font-size: 60px;
 }
+<<<<<<< HEAD
 h2 {
   padding-top: 25px;
 }
+=======
+
+h2 {
+  padding-top: 25px;
+}
+
+>>>>>>> 0e1e02cd62dd6a6263d92b1f7048d2f1da3fef45
 a{
   text-decoration: none;
   color:#EEE2DE
@@ -53,6 +76,7 @@ body h3 {
   text-decoration: underline;
 
 }
+
 fieldset h3{
   text-align: center;
 }
@@ -81,15 +105,18 @@ fieldset{
   flex-direction: column;
   text-align: center;
 }
+
 .seul{
   margin:4px;
   display:flex;
   flex-direction: column;
   width:1600px;
 }
+
 .seul p{
   margin:25px;
 }
+
 .sous_bloc{
   border-width: 4px;
   width:750px;
@@ -114,6 +141,7 @@ fieldset{
   list-style: none;
   margin-left: 8px;
 }
+
 nav {
   padding: 0;
   margin : 0;
@@ -127,7 +155,12 @@ nav {
   border-style:double;
   background-color: #6D9886;
 }
+
 p a:hover{
+  color:#FFC96F;
+}
+
+li a:hover{
   color:#FFC96F;
 }
 
@@ -147,36 +180,39 @@ p a:hover{
   height:180px;
   width:150px;
 }
+
 #boite{
   height:400px;
   width:400px
 }
+
 .plateau{
   height:400px;
   width:500px;
 
 }
-.soulignee
-{
-text-decoration: underline;
+
+.soulignee{
+  text-decoration: underline;
 }
 
 p {
   font-size: 30px;
   margin:0px;
 }
+
 ul{
   margin: 12px;
   justify-content: center;
   text-align: left;
 }
+
 .lien_debut{
   display:flex;
   text-decoration: underline;
   flex-direction:row;
   margin:0px;
   padding:0px;
-  
 }
 
 .neutre{
@@ -184,6 +220,7 @@ ul{
   border-width:0px;
   margin:0px
 }
+
 .lien_debut li {
   margin:20px;
   list-style:circle;
@@ -196,36 +233,42 @@ ul{
   font-size: 28px;
 }
 
-ul li {
+ul li{
   list-style:circle;
   font-size: 25px;
 }
+
 .ecran{
   width:1500px;
 }
+
 .ex_jeu{
   width:750px;
   height:467px;
 }
+
 footer{
   font-size: 30px;
   display:flex;
-  /*flex-direction: center;*/
   justify-content: center;
   text-align: center;
   align-items: center;
+
   height: 200px;
   background-color: #6D9886;
   color:#2B2A4C;
   border-width: 10px;
   border-color:black;
   border-style:double;
+  margin-top: auto;
 }
+
 .jouer{
   text-decoration: underline;
   /* text-align: center; */
   margin:15px;
 }
+
 button{
   color:#2B2A4C;
   font-weight:bold ;
@@ -237,7 +280,6 @@ button{
   height:50px;
   width:90px;
   font-size: 30px;
-
 }
 
 button:hover{
@@ -246,6 +288,7 @@ button:hover{
 .dernier{
   margin-bottom: 100px;
 }
+
 .espace{
   height:40px;
 }
