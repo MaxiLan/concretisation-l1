@@ -87,7 +87,6 @@ async def actions_tour(joueur,partie, ecran):
                 partie.defausse.ajout_carte(aux)
                 partie.actualise_carte_en_main(ecran)
                 await asyncio.sleep(0.9)
-                #pygame.time.wait(900)
                 return True
 
             else:
@@ -168,13 +167,12 @@ async def actions_tour(joueur,partie, ecran):
                     partie.actualise_carte_en_main(ecran)
                     pygame.display.flip()
                     click_defausse = True
-                    pygame.time.wait(900)
-
+                    await asyncio.sleep(0.9)
                     pos=joueur.retourne_hasard()
                     joueur.jeu_actuel[pos[0]][pos[1]].etat = "ouverte"
                     carte_selectionner = True
                     pygame.display.flip()
-                    #pygame.time.wait(900)
+                    #await asyncio.sleep(0.9)
                     return True
 
                 else:
