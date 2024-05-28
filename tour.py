@@ -288,7 +288,7 @@ def cache_aide(ecran):
     img = pygame.transform.scale(img, (50, 50))
     ecran.blit(img, (30, ecran.get_height()-80))
 
-    rect = pygame.Rect(30, ecran.get_height()-110, 510, 25)
+    rect = pygame.Rect(30, ecran.get_height()-110, 505, 25)
     pygame.draw.rect(ecran, "grey24", rect)
 
 

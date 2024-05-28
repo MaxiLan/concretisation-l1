@@ -5,6 +5,7 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="icon.png">
     <title>Concrétisation</title>
   </head>
 
@@ -21,9 +22,9 @@
     </nav>
 
     <main>
-      <a href="#haut"><img id="img" src="images/fleche_web.png"></a>
+      <a href="#haut"><img id="img" src="images/fleche_web.png" alt="Fleche"></a>
       <h2>Présentation du site web</h2>
-      <p> Bienvenue sur notre site web de présentation de notre projet de concrétisation <br> </p>
+      <p> Bienvenue sur notre site web de présentation de notre projet de concrétisation !<br> </p>
       <fieldset>
         <fieldset id="introduction" class="sous_bloc">
           <h3>Introduction</h3>
@@ -41,14 +42,14 @@
         <fieldset class="sous_bloc">
           <h3>Étapes de programmation</h3>
           <p>
-            La première étape a été de choisir notre langage puisque nous avions le choix entre le C++ et le Python. 
+            La première étape a été de choisir notre langage de programmation puisque nous avions le choix entre le C++ et le Python. 
             Si le C++ nous permettait d'entretenir nos connaissances développées cette année et de nous 
             entrainer sur ce nouveau langage, notre choix s'est tout de même porté sur le Python car son aspect 
             plus permissif nous semblait plus adapté pour faire un jeu. <br>
             De plus comme nous sommes en Double License Math-Info nous avons considéré 
             le fait de devoir changer sans cesse de langage si le choix se portait sur le C++.<br><br>
 
-            Pour programmer le jeu nous avons donc utilisé la bibliothèque Pygame pour tout ce qui concerne l'interface graphique 
+            Pour programmer le jeu nous avons donc utilisé la bibliothèque <a class="soulignee" href="https://www.pygame.org/docs/">Pygame</a> pour tout ce qui concerne l'interface graphique 
             et les intéractions utilisateurs-ordinateur et nos connaissances liées aux classes et aux différentes fonctionnalités de Python: 
             <a class="soulignee" href="fonctions.html#graphe1">voir l'arborescence des fichiers et classes utilisés</a> <br><br>
 
@@ -66,7 +67,7 @@
           Nous avions à disposition 5 semaines pour programmer le jeu (entre joueurs et contre un robot) ainsi que le site web.
           Cette contrainte de temps nous a donc poussé à privilégier certains aspects plus que d'autres. <br><br>
 
-          Ainsi, nous n'avons par exemple pas eu le temps de finir la <a class="soulignee" href="fonctions.html#strat_n2">stratégie n°2</a> 
+          Ainsi, nous n'avons par exemple pas eu le temps de finir la <a class="soulignee" href="fonctions.html#strat_2">stratégie n°2</a> 
           qui devait fonctionner globalement comme <a class="soulignee" href="fonctions.html#strat_1"> la première</a>
           mais de manière plus performante, car elle utiliserait des techniques de calcul de probabilités de tirer les cartes voulues. 
           En effet notre stratégie ne regarde que son propre jeu et ne prends en compte ni le jeu des autres joueurs (sauf en fin de manche) ni le nombre de cartes 
@@ -79,13 +80,12 @@
         </p>
       </fieldset>
     </main>
+
+    <footer>
+      <p>
+      Langlet Maxime, Salomon Maïa, DLMI1
+      </p>
+    </footer>
   </body>
-
-  <footer>
-    <p>
-    Langlet Maxime, Salomon Maïa, DLMI1
-    </p>
-  </footer>
-
 </html>
 

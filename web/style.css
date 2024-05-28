@@ -206,17 +206,17 @@ ul li {
   height:467px;
 }
 footer{
- font-size: 30px;
- display:flex;
- flex-direction: center;
- justify-content: center;
- text-align: center;
- align-items: center;
- height: 200px;
- background-color: #6D9886;
- color:#2B2A4C;
- border-width: 10px;
- border-color:black;
- border-style:double;
+  font-size: 30px;
+  display:flex;
+  /*flex-direction: center;*/
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  height: 200px;
+  background-color: #6D9886;
+  color:#2B2A4C;
+  border-width: 10px;
+  border-color:black;
+  border-style:double;
 }
 
