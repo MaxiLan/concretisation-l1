@@ -5,13 +5,16 @@ import carte
 import robot
 import partie
 import asyncio
-
+import sys
+import platform
 async def manche(partie, ecran): 
     """
     Réalise une manche entière
     """
+
     #web
     await lancement_manche(partie,ecran)
+    
     for joueur in partie.tab_joueurs:
         joueur.evol_score()
 
@@ -46,7 +49,6 @@ async def manche(partie, ecran):
         #web 
         await asyncio.sleep(0)
         pygame.time.wait(500)
-    
     pygame.time.wait(1500)
     #une fois qu'un joueur a retourné toute ses cartes il faut encore faire un tour
     for i in range(len(partie.tab_joueurs)-1):
@@ -61,7 +63,8 @@ async def manche(partie, ecran):
         pygame.display.flip()
         i_joueur = (i_joueur + 1) % len(partie.tab_joueurs)
         joueur = partie.tab_joueurs[i_joueur]
-        pygame.time.wait(1500)
+        await asyncio.sleep(1.5)
+        #pygame.time.wait(1500)
   
     gagne = True
     i=0
