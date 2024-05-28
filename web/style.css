@@ -219,3 +219,25 @@ footer{
   border-color:black;
   border-style:double;
 }
+.jouer{
+  text-decoration: underline;
+  /* text-align: center; */
+  margin:15px;
+}
+button{
+  color:#2B2A4C;
+  font-weight:bold ;
+  background-color:#6D9886;
+  border-radius: 2px;
+  border-width: 2px;
+  border-color: #EEE2DE;
+  border-style:lined thick;
+  height:50px;
+  width:90px;
+  font-size: 30px;
+
+}
+
+button:hover{
+  background-color: #FFC96F;
+}
