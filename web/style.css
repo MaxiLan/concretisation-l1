@@ -16,7 +16,9 @@ h1{
   color:#EEE2DE;
   font-size: 60px;
 }
-
+h2 {
+  padding-top: 25px;
+}
 a{
   text-decoration: none;
   color:#EEE2DE
@@ -240,4 +242,10 @@ button{
 
 button:hover{
   background-color: #FFC96F;
+}
+.dernier{
+  margin-bottom: 100px;
+}
+.espace{
+  height:40px;
 }
