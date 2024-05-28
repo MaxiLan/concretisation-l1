@@ -1,19 +1,15 @@
 import pygame
-import carte
-import joueur
 import partie as P
-import pioche
-import defausse
-import tour
 import manche
 import accueil
 import strategie_n1
 import robot
 import strategie_n0
 import asyncio
+import sys
+
 
 async def main():
-    print("coucou")
     relance_partie = True
 
     while relance_partie:
@@ -37,8 +33,6 @@ async def main():
             pygame.font.init()
             pygame.display.set_icon(pygame.image.load("images/icon.png"))
             clock = pygame.time.Clock()
-
-
             plein_ecran = input("Voulez-vous jouer en plein écran ? (0/N) : ")
             
             if plein_ecran=='o' or plein_ecran=='O':
@@ -74,12 +68,13 @@ async def main():
             J = joueur.Joueur(i + 1)
             partie.tab_joueurs.append(J)
 
-
+        if sys.platform=="emscripten":
+            platform.document.body.style.background="#3d3d3d"
         while not fin_partie:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     fin_partie = True
-
+            
             relance_partie, fin_partie = await manche.manche(partie, ecran)
             
             #web

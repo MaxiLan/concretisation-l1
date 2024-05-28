@@ -1,13 +1,15 @@
 import pygame
 import partie
 import asyncio
-
+import sys
+import platform
 #web
 async def affiche_accueil(ecran):
     """
     Affiche le titre et permet de choisir le nombre de joueur
     """
-
+    if sys.platform=="emscripten":
+        platform.document.body.style.background="#2b2a4c"
     nb_joueurs = 2
     nb_robots = 0
     niveau = 2
