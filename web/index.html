@@ -19,8 +19,8 @@
       <a class="text_nav" href="fonctions.html">Les détails</a> 
       <a class="text_nav" href="nous.html">Nous</a> 
     </nav>
-    <main>
 
+    <main>
       <a href="#haut"><img id="img" src="images/fleche_web.png"></a>
       <h2>Présentation du site web</h2>
       <p> Bienvenue sur notre site web de présentation de notre projet de concrétisation <br> </p>
@@ -28,56 +28,63 @@
         <fieldset id="introduction" class="sous_bloc">
           <h3>Introduction</h3>
           <p>
-
             Sur cette page vous allez pouvoir retrouver <a class="soulignee" href="regles.html">les explications détaillées du jeu</a> imagées.
-            En effet le Skyjo est un jeu de société créée par Alexander Bernhardt en 2015 qui se joue de 2 à 8 joueurs. Il est aujourd'hui très répandu, certains le décrivent même 
+            En effet, le <i>Skyjo</i> est un jeu de société créé par Alexander Bernhardt en 2015 qui se joue de 2 à 8 joueurs. Il est aujourd'hui très répandu, certains le décrivent même 
             comme le nouveau <a class="soulignee" href="https://fr.wikipedia.org/wiki/Uno">UNO</a>. Le jeu connait aujourd'hui plusieurs variantes (Junior, action...) que nous pourrions imaginer dans un <a href="#prolongement">prolongement</a> 
             de notre version codée.
           </p>
+
           <img id="boite" alt="image boite skyjo" src="images/boite_jeu.png">
           <img id="plateau" alt="image plateau de jeu" src="images/ex_plateau1.png">
-
         </fieldset>
+
         <fieldset class="sous_bloc">
-          <h3>Etapes de programmation</h3>
-          <p>La première étape a été de choisir notre langage pusique nous avions le choix entre le C++ et le Python. 
+          <h3>Étapes de programmation</h3>
+          <p>
+            La première étape a été de choisir notre langage puisque nous avions le choix entre le C++ et le Python. 
             Si le C++ nous permettait d'entretenir nos connaissances développées cette année et de nous 
             entrainer sur ce nouveau langage, notre choix s'est tout de même porté sur le Python car son aspect 
             plus permissif nous semblait plus adapté pour faire un jeu. <br>
-            De plus comme nous sommes en DLMI nous avons considéré 
-            le fait de devoir changer sans cesse de langage si le choix se portait sur le C++.<br>
-          Pour programmer le jeu nous avons donc utilisé la bibliothèque Pygame pour tout ce qui concerne l'interface graphique et les intéractions utilisateurs-ordinateur, 
-          nos connaissances liées aux classes et aux différentes fonctionnalités de Python: <a class="soulignee" href="fonctions.html#graphe1">voir l'arborscence des classes</a> <br>
-          
-          <br>
-          <br>
-          Une fois le jeu terminé, il peut être intéressant de jouer contre un ordinateur.<br>
-           Celui-ci utilisera différentes <a class="soulignee" href="fonctions.html#strat_1">stratégies</a> pour gagner la partie.
-           Notamment, il peut choisir de prendre les cartes plus petites que celles de son jeu, <br>
-           ou bien essayer de faire des colonnes, ou bien jouer complètement aléatoirement...
+            De plus comme nous sommes en Double License Math-Info nous avons considéré 
+            le fait de devoir changer sans cesse de langage si le choix se portait sur le C++.<br><br>
+
+            Pour programmer le jeu nous avons donc utilisé la bibliothèque Pygame pour tout ce qui concerne l'interface graphique 
+            et les intéractions utilisateurs-ordinateur et nos connaissances liées aux classes et aux différentes fonctionnalités de Python: 
+            <a class="soulignee" href="fonctions.html#graphe1">voir l'arborescence des fichiers et classes utilisés</a> <br><br>
+
+            Une fois le jeu terminé, il peut être intéressant de jouer contre un ordinateur.<br>
+            Celui-ci utilisera différentes <a class="soulignee" href="fonctions.html#strat_1">stratégies</a> pour gagner la partie.
+            Notamment, il peut choisir de prendre les cartes plus petites que celles de son jeu, <br>
+            ou bien essayer de faire des colonnes, ou bien jouer complètement aléatoirement...
           </p>
         </fieldset>
-
       </fieldset>
+
       <fieldset class="seul">
         <h3>Prolongement</h3>
-        <p> Nous avions à disposition 5 semaines pour programmer le jeu (entre joueur et contre robot) ainsi que le site web,
-          Cette contrainte de temps nous à donc poussés à privilégier certains aspects plus que d'autres. Ainsi nous n'avons par exemple pas eu le temps de finir
-          la <a class="soulignee" href="fonctions.html#strat_n2">strategie numero 2</a> qui devait fonctionner globalement comme <a class="soulignee" href="fonctions.html#strat_1"> la premiere</a>
-          mais de manière plus performante car elle utiliserait des techniques de calcul de probabilités de tirer les cartes voulues. En effet notre stratégie ne regarde que son propre jeu et ne 
-          prends en compte ni le jeu des autres joueurs ni le nombre de cartes qui pourraient l'intéresser restant dans la <a class="soulignee" href="fonctions.html#pioche" >pioche</a> bien qu'elle reste cependant très 
-          performante car inspirée de parties réelles.
-          <br>
-          De plus, nous avons découvert récemment les versions dérivées dont il était question <a href="#introduction" class="soulignee">plus tôt</a> qui utilisent des cartes spéciales (voir le jeu des autres, echanger son jeu avec quelqu'un...)
-          Cette découverte fut également trop tardive pour pouvoir l'ajoute en option.
+        <p> 
+          Nous avions à disposition 5 semaines pour programmer le jeu (entre joueurs et contre un robot) ainsi que le site web.
+          Cette contrainte de temps nous a donc poussé à privilégier certains aspects plus que d'autres. <br><br>
+
+          Ainsi, nous n'avons par exemple pas eu le temps de finir la <a class="soulignee" href="fonctions.html#strat_n2">stratégie n°2</a> 
+          qui devait fonctionner globalement comme <a class="soulignee" href="fonctions.html#strat_1"> la première</a>
+          mais de manière plus performante, car elle utiliserait des techniques de calcul de probabilités de tirer les cartes voulues. 
+          En effet notre stratégie ne regarde que son propre jeu et ne prends en compte ni le jeu des autres joueurs (sauf en fin de manche) ni le nombre de cartes 
+          qui pourraient l'intéresser, restantes dans la <a class="soulignee" href="fonctions.html#pioche" >pioche</a>, bien qu'elle reste cependant très 
+          performante car inspirée de parties réelles.<br> <br>
+          
+          De plus, nous avons découvert récemment les versions dérivées dont il était question <a href="#introduction" class="soulignee">plus tôt, </a> 
+          qui utilisent des cartes spéciales (voir le jeu des autres, échanger son jeu avec quelqu'un...)
+          Cette découverte fut également trop tardive pour pouvoir l'ajouter en option.
         </p>
       </fieldset>
     </main>
   </body>
+
   <footer>
     <p>
     Langlet Maxime, Salomon Maïa, DLMI1
-  </p>
+    </p>
   </footer>
 
 </html>

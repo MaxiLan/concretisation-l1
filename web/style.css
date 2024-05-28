@@ -83,14 +83,10 @@ fieldset{
   margin:4px;
   display:flex;
   flex-direction: column;
-  flex-direction:column;
   width:1600px;
 }
 .seul p{
   margin:25px;
-  display:flex;
-  align-items: flex;
-  justify-content: center;
 }
 .sous_bloc{
   border-width: 4px;

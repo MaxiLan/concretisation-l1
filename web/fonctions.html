@@ -7,26 +7,30 @@
     <link rel="stylesheet" href="style.css">
     <title>Concrétisation</title>
   </head>
+
   <body>
     <header id="haut">
-      
       <a href="index.html"><h1>SKYJO</h1></a>
     </header>
+
     <nav>
       <a class="text_nav" href="index.html">Accueil</a> 
       <a class="text_nav" href="regles.html">Règles du jeu</a> 
       <a class="text_nav" href="fonctions.html">Les détails</a> 
       <a class="text_nav" href="nous.html">Nous</a> 
     </nav>
+
     <main>
       <a href="#haut"><img id="img" src="images/fleche_web.png"></a>
       <h2>Nos fichiers et fonctions</h2>
       <p>
-      Les différentes fonctionnalités du jeu sont séparées en plusieurs fichiers.</p>
+        Les différentes fonctionnalités du jeu sont séparées en plusieurs fichiers.<br>
+        Pour plus de précision sur notre code, il est disponible sur le dépôt suivant : 
+        <u><a href="https://github.com/MaxiLan/concretisation-l1">https://github.com/MaxiLan/concretisation-l1</a></u>
+      </p>
       <div class="ligne">
         <img alt="arborescence premier graphe" id="graphe1" src="images/graphique_1.png" >
         <img alt="arborescence deuxieme graphe" id="graphe2" src="images/graphique_2.png" >
-
 
     </div>
         <div class="ligne">
@@ -48,10 +52,12 @@
       </ul>
     </div>
       
-      <p><br>
-      Les fichiers concernant le lancement du jeu:
-      <br>
-    </p>
+      <p>
+        <br>
+        Les fichiers concernant le lancement du jeu:
+        <br>
+      </p>
+
       <fieldset>
 
         <fieldset class="sous_bloc">
@@ -65,8 +71,8 @@
         <fieldset class="sous_bloc">
         <h3 id="accueil">Accueil.py</h3>
           <p>
-          Le fichier accueil.html affiche, comme son nom l'indique, la page d'accueil du jeu.<br>
-          Le joueur indiquera le nombre de joueurs présents pour la partie, puis sélectionnnera "Cliquer pour commencer".
+          Le fichier accueil.py affiche, comme son nom l'indique, la page d'accueil du jeu.<br>
+          L'utilisateur indiquera le nombre de joueurs et de robots présents pour la partie, puis sélectionnnera "Cliquer pour commencer".
           </p>
         </fieldset>
 
@@ -94,7 +100,7 @@
               <li class="first">Ce qui concerne la fin d'une manche:</li>
               <li>continuer_partie</li>
               <li>jeu_fin_manche : Retourne les cartes des jeux après le dernier tour</li>
-              <li>affichage_fin_manche</li>
+              <li>affichage_fin_manche : affiche la page de fin d'une manche</li>
               <li>fin_manche : Renvoie vraie si la manche est finie</li>
             </ul>
             </p>
@@ -103,7 +109,8 @@
             <h3 id="tour">Tour.py</h3>
               <p>
                 Tour.py gère toutes les actions d'un tour défini par les clics de l'utilisateur.
-              Elle est donc composé de plusieurs fonctions notamment actions_tour dont découlera l'arboresence de l'utilisation des autres.
+                Elle est donc composé de plusieurs fonctions, notamment <i>actions_tour</i> dont découlera l'arboresence de 
+                l'utilisation des autres fonctions.
               <ul>
                 <li class="first">Concernant l'affichage : </li>
                 <li>affiche_aide</li>
@@ -130,7 +137,7 @@
               <p>
               Contient la classe Partie.
               Plusieurs attributs :
-            </p>
+              </p>
             <ul class="attribut">
               <li>nb_joueurs,</li> 
               <li>tab_joueurs,</li> 
@@ -155,7 +162,7 @@
           <h3 id="carte">Carte.py</h3>
             <p>
             Ce fichier contient la classe Carte, représentant donc une carte du jeu.
-            Un objet carte a pour attribut :
+            Un objet <i>carte</i> a pour attribut :
             </p>
             <ul class="attribut">
               <li>hauteur,</li>
@@ -236,8 +243,8 @@
               <li>evol_score</li>
               <li>retrait_colonne</li>
               <li>affiche_jeu</li>
-              <li>affiche_petit</li>
-              <li>affiche_jeu_vision_ext</li>
+              <li>affiche_petit : affiche le jeu en petit, à droite ou à gauche</li>
+              <li>affiche_jeu_vision_ext : affichage utilisé pour la loupe</li>
             </ul>
           </fieldset>
         <fieldset class="sous_bloc">
