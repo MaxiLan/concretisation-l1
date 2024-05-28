@@ -329,6 +329,8 @@ async def continuer_partie(ecran, partie):
 
             elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
                 await tour.loupe(ecran,partie,partie.tab_joueurs[0],"fin jeu")
+                if sys.platform=="emscripten":
+                    platform.document.body.style.background="#2b2a4c"
                 ecran.fill((43, 42, 76))
                 affichage_fin_manche(partie, ecran)
         #web

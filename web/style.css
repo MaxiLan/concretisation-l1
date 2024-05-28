@@ -7,6 +7,10 @@ main{
   margin-bottom:225px;
 }
 
+a{
+  color:#EEE2DE;
+}
+
 body {
   min-height:100vh;
   margin: 0px;
