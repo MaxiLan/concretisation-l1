@@ -17,6 +17,7 @@ class Partie:
         self.robot=robot
         self.score = [0 for _ in range(nb_joueurs)]
 
+
     def actualise_carte_en_main(self,ecran):
         """
         Recouvre l'emplacement "carte en main"
@@ -26,6 +27,7 @@ class Partie:
         img = pygame.image.load(self.carte_en_main)
         img = pygame.transform.scale(img, (self.pioche.cartes[0].largeur, self.pioche.cartes[0].hauteur))
         ecran.blit(img, (x, y))
+        
 
     def fin_partie(self):
         """

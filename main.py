@@ -17,33 +17,6 @@ async def main():
     while relance_partie:
         fin_partie = False
 
-        #plein_ecran = input("Voulez-vous jouer en plein écran ? (0/N) : ")
-        
-        # if plein_ecran=='o' or plein_ecran=='O':
-        #     pygame.init()
-        #     clock = pygame.time.Clock()
-        #     ecran = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
-        # else:
-        #     HAUTEUR = max(1000, int(input("Hauteur de la fenêtre (min 1000)")))
-        #     LARGEUR = max(1500, int(input("Largeur de la fenêtre (min 1500)")))
-        #     pygame.init()
-        #     clock = pygame.time.Clock()
-        #     ecran = pygame.display.set_mode((LARGEUR, HAUTEUR))
-        """
-        <<<<<<< HEAD
-            pygame.display.init()
-            pygame.font.init()
-            pygame.display.set_icon(pygame.image.load("images/icon.png"))
-            clock = pygame.time.Clock()
-            plein_ecran = input("Voulez-vous jouer en plein écran ? (0/N) : ")
-            
-            if plein_ecran=='o' or plein_ecran=='O':
-                ecran = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
-            else:
-                HAUTEUR = max(1000, int(input("Hauteur de la fenêtre (min 1000)")))
-                LARGEUR = max(1500, int(input("Largeur de la fenêtre (min 1500)")))
-        =======
-        """
         HAUTEUR=1000
         LARGEUR=1500
         pygame.init()
@@ -72,17 +45,19 @@ async def main():
 
 
         while not fin_partie:
+
+            #permet de changer de couleur si le jeu est lancé dans un navigateur
             if sys.platform=="emscripten":
                 platform.document.body.style.background="#3d3d3d"
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     fin_partie = True
             
             relance_partie, fin_partie = await manche.manche(partie, ecran)
             
-            #web
             await asyncio.sleep(0)
-        #web
+
         await asyncio.sleep(0)
         pygame.quit()
 

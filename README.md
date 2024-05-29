@@ -21,13 +21,10 @@ Prérequis :
 Pour lancer le jeu, il y a 2 manières : 
 
 ### Méthode1  
-1. Téléchargez tous les fichiers du dépôt (le dossier /web et le .gitignore ne sont pas nécéssaire)  
+1. Téléchargez tous les fichiers du dépôt (le dossier /web, .github et le .gitignore ne sont pas nécéssaires)  
    ```git clone https://github.com/MaxiLan/concretisation-l1```
 2. Exécutez le fichier `main.py`  
-   ```python3 main.py```
-3. Le programme vous demandera si vous voulez jouer en plein écran,  
-   Si oui, entrez "o" ou "O", sinon "n"/"N", et choisissez la taille de la fenêtre.
-
+   ```python3 main.py``` ou ```python main.py```   
 4. Profitez ! (il est fortement conseiller d'utiliser une souris plutôt que le pavé tactile)
 
 ### Méthode 2  

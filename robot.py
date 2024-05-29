@@ -6,6 +6,7 @@ import pygame
 class Robot(joueur.Joueur):
 
     def __init__(self,strategie,nom):
+        #la classe hérite de la classe Joueur
         super().__init__(nom)
         self.strategie=strategie #strategie est une classe 
         self.ind_carte_cachee=[]

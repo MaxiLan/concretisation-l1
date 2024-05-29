@@ -5,6 +5,7 @@ class Strategie_n2:
     """
     Utilise la probabilité qu'une carte apparaisse
     """
+    
     def __init__(self):
         self.colonne_en_cours=[]
         self.carte_a_suppr = []
@@ -61,7 +62,7 @@ class Strategie_n2:
 
     def evol_score_colonne(self,jeu_actuel):
         """ 
-            calcule le score colonne par colonne
+        Calcule le score colonne par colonne
         """
         for colonne in range(4):
             somme_col=0
@@ -76,7 +77,7 @@ class Strategie_n2:
 
     def evol_nb_cartes(self,partie):
         """
-            met a jour a chaque tour le nombre de cartes non découvertes
+        Met a jour a chaque tour le nombre de cartes non découvertes
         """
         self.carte_cachee=len(partie.pioche.carte)
 
@@ -99,7 +100,7 @@ class Strategie_n2:
 
     def proba_constr_col(self,carte,jeu_actuel,partie):
         """
-            calcule la probabilité de réussir à réaliser la colonne au coup suivant
+        Calcule la probabilité de réussir à réaliser la colonne au coup suivant
         """
         proba_c_pioche=0
         self.evol_nb_cartes(partie)

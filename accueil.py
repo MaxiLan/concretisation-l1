@@ -3,13 +3,16 @@ import partie
 import asyncio
 import sys
 import platform
-#web
+
+
 async def affiche_accueil(ecran):
     """
     Affiche le titre et permet de choisir le nombre de joueur
     """
+    #permet de changer les couleurs dans la page web
     if sys.platform=="emscripten":
         platform.document.body.style.background="#2b2a4c"
+
     nb_joueurs = 2
     nb_robots = 0
     niveau = 2
@@ -64,7 +67,7 @@ def affiche_elements(ecran, nb_joueurs, nb_robots, niveau):
     pygame.draw.rect(ecran, "white", rect, 2)
     ecran.blit(objet_font1.render("Cliquer pour commencer", True, "white"), (L-450, H-70))
 
-    #nb joueurs
+    #nombre de joueurs
     objet_font2 = pygame.font.Font(None, 70)
     ecran.blit(objet_font2.render(str(nb_joueurs), True, "white"), (milieu_l - 15, 400))
     ecran.blit(objet_font1.render("Nombre de joueurs :", True, "white"), (milieu_l-169, 330))
@@ -165,5 +168,6 @@ async def click(ecran, nb_joueurs, nb_robots, niveau):
                 click_souris = True
                 pygame.time.wait(250)
                 return nb_joueurs, True, nb_robots, niveau
+                
         await asyncio.sleep(0)
             

@@ -9,7 +9,6 @@ import sys
 import platform
 
 
-#web
 async def actions_tour(joueur,partie, ecran):
     """
     Gère toutes les actions du tour 
@@ -146,9 +145,6 @@ async def actions_tour(joueur,partie, ecran):
         if isinstance(joueur,robot.Robot):
             await asyncio.sleep(0.9)
 
-            #pygame.time.wait(900)
-
-
         click_defausse = False
         #on attend le choix du joueur (jouer sur son jeu ou sur la défausse)
         while not (click_carte or click_defausse): 
@@ -224,7 +220,6 @@ async def actions_tour(joueur,partie, ecran):
                     #on retourne une carte selectionnnée par le joueur
                     return await retourne_cartes(joueur, ecran,partie)
 
-            #web
             await asyncio.sleep(0)
     #si le joueur clique sur la loupe 
     elif (LARGEUR-80< pos[0] < LARGEUR-30) and (30 < pos[1] < 80):
