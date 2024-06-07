@@ -10,6 +10,10 @@ import asyncio
 import sys
 import platform
 
+import random
+from datetime import datetime
+random.seed(datetime.now().timestamp())
+
 
 async def main():
     relance_partie = True
