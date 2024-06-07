@@ -28,8 +28,8 @@ Pour lancer le jeu, il y a 2 manières :
 4. Profitez ! (il est fortement conseiller d'utiliser une souris plutôt que le pavé tactile)
 
 ### Méthode 2  
-1. Ouvrez notre page web (dossier /web)  
-2. Allez sur la page d'accueil  
+1. Télécharger le dossier /web
+2. Ouvrez le fichier index.html    
 3. Cliquez sur le bouton "Jouer"
 4. Une page s'ouvrira alors, et vous pourrez jouer !
 
